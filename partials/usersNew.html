@@ -1,0 +1,31 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Add new user </h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+		<form role="form">
+		  <div class="form-group">
+		    <label for="todoInput">Add user</label>
+		    <input type="text" class="form-control" ng-model="newUser.name" id="todoInput" placeholder="Name of user">
+		  </div>
+
+		  <button ng-click="addUser(newUser.name)" class="btn btn-default">
+		  	Add user
+		  </button>
+		</form>
+		<div class="alert alert-success" role="alert" ng-show="successMsgVisible">User successfully added.</div>
+      </div>
+    </div>
+
+  </div> 
+</div>
+
+
