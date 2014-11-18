@@ -4,13 +4,59 @@ angular.module('Wbpms')
   .controller('ProjectCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {	
         
-        $scope.successMsgVisible = false;	
+      $scope.projects = [];
+
+      $scope.projectModel = {
+        description: '',
+        point: ''
+      }
+      
+        $scope.loginModel = {
+            username : '',
+            password : '',
+            name : '',
+            surname : '',
+            email : '',
+            gender : '',
+            email : '',
+            role : '',
+            changepwd : false,
+        }      
         
       // declaration !AND! call (see parenthesis at end of function)
-      // of a function that fetches the todos from the server
+      // of a function that fetches the projects from the server
       var init = function() {
-		// Initialization function that gets the projects from the server	  
-      };
+        $http.get('/api/projects/get_all_user_projects/loginModel.email')
+          .success(function(data, status, header, config) {
+            
+            // the server should return a json array which contains all the projects
+            $scope.projectModel = data;
+          })
+          .error(function(data, status) {
+            $log.debug('Error while fetching projects from server');  
+          });
+          
+        var payload = {
+            action : 'get_all_user_projects',
+            username : loginModel.email
+        }
+
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+
+        // send the payload to the server
+        $http.post('/api/projects', payload)
+          .success(function(data, status, header, config) {
+            $log.debug('Success fetching projects from server');
+             $scope.projectModel = data;
+          })
+          .error(function(data, status) {
+            $log.debug('Error while fetching projects from server');
+          }); 
+          
+          $scope.projectModel = [1,2,3,4,5];          
+          
+      }();          
+        
 	  
 	  $scope.addProject = function(nameProject) {
 		// Add a new project
@@ -33,7 +79,7 @@ angular.module('Wbpms')
 		
       }	  
 	  
-	  $scope.removeProject = function(nameproject) {
+	  /*$scope.removeProject = function(nameproject) {
 		// Remove a new project
 		
         var payload = {
@@ -184,7 +230,7 @@ angular.module('Wbpms')
             $log.debug('Error while trying to Remove a member from a project');
           });		
 		
-      }		  
+      }*/		  
         
     }
   ]);
