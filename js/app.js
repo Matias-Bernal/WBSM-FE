@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/login', {
-        templateUrl: 'partials/login.html',
+        templateUrl: '/partials/login.html',
         controller: 'SessionCtrl'
       })
       .when('/home', {
@@ -34,7 +34,7 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'WorkItemCtrl'
       })
       .when('/projects/members', {
-        templateUrl: 'partials/memberss.html',
+        templateUrl: 'partials/members.html',
         controller: 'MemberCtrl'
       })
       .when('/search', {
