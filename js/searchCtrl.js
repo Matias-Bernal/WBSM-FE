@@ -6,6 +6,7 @@ angular.module('Wbpms')
         
         
         $scope.searchUser{
+            url: ''
         }
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
@@ -17,7 +18,7 @@ angular.module('Wbpms')
         //search global other user. pre-condition: User is login  
         $scope.searchGlobalOtherUser = function(user,keyword){
             
-           $http.get('/api/search/'+user+keyword)
+           $http.get('/api/search/'+user'/'+keyword)
           .success(function(data, status, header, config) {
             
             // the server should return a json array which contains all the todos
@@ -28,8 +29,6 @@ angular.module('Wbpms')
           });
         
         }
-        
-        
-       
+         
         
   ]);

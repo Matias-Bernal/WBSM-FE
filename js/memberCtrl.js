@@ -4,16 +4,19 @@ angular.module('Wbpms')
   .controller('MemberCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
         
-        $scope.newMember = {
-            eMailMember :''
+        $scope.newUser = {
+            name: '',
+            eMailMember :'',
+            point:'',
+            owner: false,
         }
         
-        $scope.members = []; //members of the project
+        $scope.members = []; //members
     
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
-      var init = function(idProject) {
-          $http.get('/api/projects/'+idProject)
+      var init = function(projectId) {
+          $http.get('/api/projects/'+projectId)
           .success(function(data, status, header, config) {
             
             // the server should return a json array which contains all the todos
@@ -23,44 +26,45 @@ angular.module('Wbpms')
             $log.debug('Error while fetching todos from server');
           });
           
-          $http.get('/api/projects/members'+idProject)
-          .success(function(data, status, header, config) {
-            
-            // the server should return a json array which contains all the todos
-            $scope.teamMembers = data;
-          })
-          .error(function(data, status) {
-            $log.debug('Error while fetching todos from server');
-          });
-          
       };
         
-        //function view project member
+        //Function view project members
         
-        $scope.viewProjectMember = function (idMember){
-        
-        
-        }
-        
-        //function add a member in the list the members
-        $scope.addNewMember = function(idProject,idMember) {
-        $log.debug("Add member " + emailMember);
+        $scope.getMembers = function (projectNameId){
+        $log.debug("View project member " + projectId);
 
-        $http.post('/api/project/'+idProject+'/'+idMember)
+        $http.post('/api/project/'+projectId)
           .success(function(data, status, header, config) {
-            $log.debug('Success add member');
+            $log.debug('Success get member');
+            $scope.members = data;
  
           })
           .error(function(data, status) {
-            $log.debug('Error while trying to remove todo item on server');
+            $log.debug('Error while trying get project user on server');
+          });
+        
+        }
+        
+        //Function add a member in the project list
+        $scope.addNewMember = function(eMail) {
+        $log.debug("Add member " + eMail);
+
+        $http.post('/api/project/'+eMail)
+          .success(function(data, status, header, config) {
+            $log.debug('Success add member');
+            $scope.newUser = data;
+ 
+          })
+          .error(function(data, status) {
+            $log.debug('Error while trying to add user on server');
           });
         }
         
-        //function remove a member from the project
-        $scope.removeMember = function(idProject,idMember) {
-        $log.debug("Removing Member " + idMember);
+        //Function remove a member from the project
+        $scope.removeMember = function(projectId,emailMember) {
+        $log.debug("Removing member " + eMail);
 
-        $http.delete('/api/project/'+idProject+'/'+idMember)
+        $http.delete('/api/project/'+projectId+'/'+emailMember)
           .success(function(data, status, header, config) {
             $log.debug('Success removing member');
             
@@ -76,12 +80,19 @@ angular.module('Wbpms')
           });
         }
         
-        //function promove owner
-        $scope.promoveOwner = function(){
+        //Function promote owner
+        $scope.promoteOwner = function(owner){
         
+            $scope.owner = true;
         
         }
         
+        //Function owner member downgrade
+        $scope.ownerMemberDowngrade = function(owner){
+            
+            $scope.owner = false;
+            
+        }
         
         
         
