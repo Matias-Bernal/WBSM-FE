@@ -49,7 +49,7 @@ angular.module('Wbpms')
             point: 1
           }
           
-          $scope.projectModel.push [1] = auxiliar;          
+          $scope.projectModel.push [0] = auxiliar;          
           
       }();          
         
