@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app = >
+<head>
+
+<style type="text/css">
+
+
+#pestanas {
+    float: top;
+    font-size: 3ex;
+    font-weight: bold;
+}
+ 
+#pestanas ul{
+    margin-left: -40px;    
+}
+ 
+#pestanas li{
+    list-style-type: none;
+    float: left;
+    text-align: center;
+    margin: 0px 2px -2px -0px;
+    background: darkgrey;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px solid bisque;
+    border-bottom: dimgray;
+    padding: 0px 20px 0px 20px;
+}
+ 
+#pestanas a:link{
+    text-decoration: none;
+    color: bisque;
+}
+ 
+#contenidopestanas{
+    clear: both;  
+    background: dimgray;
+    padding: 20px 0px 20px 20px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border: 2px solid bisque;
+    width: 1025px;
+}
+</style>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+    <script type="text/javascript" src="js/cambiarPestanna.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <title></title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+</head>
+<body>
+ 
+    <div class="contenedor">
+       <div ng-include="'partials/navbar.html'"></div> 
+        <div id="pestanas"> 
+           <div class="navbar" style="margin-bottom: 0px">
+            <ul class="nav navbar-nav">
+                <li><a href="../partials/#/navbar.html">Home</a></li>
+                <li><a href='../partials/#/todos.html'>Project</a></li>
+            </ul>
+        </div>
+ 
+        <!--<body onload="javascript:cambiarPestanna(pestanas,pestana1);"> --> 
+ 
+        <div id="contenidopestanas">
+            <div ng-controller = "sessionCtrl">
+                <ul> 
+                  <li> work item 1</li>
+                  <li> work item 2</li>
+                  <li> work item 3</li>
+                </ul>
+            </div>
+            <div ng-controller = "todosCtrl">
+                Contenido de la pestaña 2
+            </div>
+    </div>
+</body>
+</html>
+</pre>
