@@ -26,15 +26,6 @@ angular.module('Wbpms')
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the projects from the server
       var init = function() {
-        $http.get('/api/projects/get_all_user_projects/loginModel.email')
-          .success(function(data, status, header, config) {
-            
-            // the server should return a json array which contains all the projects
-            $scope.projectModel = data;
-          })
-          .error(function(data, status) {
-            $log.debug('Error while fetching projects from server');  
-          });
           
         var payload = {
             action : 'get_all_user_projects',
