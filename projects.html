@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="Wbpms">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/project.css" />     
+
+<script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>        
+<script type="text/javascript" src="js/vendor/bootstrap.js"></script>    
+<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>        
+<script type='text/javascript' src="js/vendor/angular.js"></script>
+<script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
+<script type="text/javascript" src="js/vendor/angular-resource.js"></script>
+<script type="text/javascript" src="js/vendor/angular-route.js"></script>
+<script type="text/javascript" src="js/projectCtrl.js"></script>    
+    
+<title> WBPMS </title>
+    
+</head>
+<body ng-controller="ProjectCtrl" ng-init="init()">      
+    
+    <div align="center" ng-include="'partials/search.html'"> </div>    
+    <div id="div1" class="container">       
+        <div class="row">
+            <div class="col-md-1 col-md-offset">
+		      <table id="div1" class="table" border="2">
+		          <tr>
+		              <th>Project</th>
+		              <th>Points</th>
+		          </tr>
+		          <tr ng-repeat="projectModel in projects">
+                    <td>{{projects.description}}</td>
+		            <td>{{projects.point}}</td>
+		          </tr>
+                  
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>
+				  <tr><td>1</td><td>2</td></tr>                  
+
+		      </table>
+            </div>
+        </div>
+    </div> <!-- end of container -->    
+    <div align="center" ng-include="'partials/piePagina.html'"> </div>        
+</body>

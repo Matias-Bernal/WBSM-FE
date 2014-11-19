@@ -11,7 +11,7 @@ angular.module('Wbpms')
         point: ''
       }
       
-        $scope.loginModel = {
+/*        $scope.loginModel = {
             username : '',
             password : '',
             name : '',
@@ -21,13 +21,13 @@ angular.module('Wbpms')
             email : '',
             role : '',
             changepwd : false,
-        }      
+        } */     
         
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the projects from the server
       var init = function() {
           
-        var payload = {
+/*        var payload = {
             action : 'get_all_user_projects',
             username : loginModel.email
         }
@@ -42,9 +42,14 @@ angular.module('Wbpms')
           })
           .error(function(data, status) {
             $log.debug('Error while fetching projects from server');
-          }); 
+          }); */
           
-          $scope.projectModel = [1,2,3,4,5];          
+          var auxiliar = {
+            description: project1,
+            point: 1
+          }
+          
+          $scope.projectModel.push [1] = auxiliar;          
           
       }();          
         
