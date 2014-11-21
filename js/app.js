@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/login', {
-        templateUrl: '/partials/login.html',
+        templateUrl: 'partials/login.html',
         controller: 'SessionCtrl'
       })
       .when('/home', {
