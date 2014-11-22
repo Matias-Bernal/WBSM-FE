@@ -1,0 +1,77 @@
+	/****************************************
+	*	Estilos de las pestanas		*
+	****************************************/
+
+.carpeta	{/*	contenidos de las carpetas	*/
+	border		: 1px solid gray;
+	position	: relative;
+	top: 8px	;
+	padding-top	: 1em;
+	z-index		: 0;
+}
+
+.pestana	{/*	pestanas	*/
+	display		: inline;
+	margin		: 3px 1px;
+	padding		: 4px;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	position	: relative;
+	top		: 6px; 
+}
+
+/*  outset gray */
+
+.pestana a	{/*	enlace de la pestana	*/
+	text-decoration: none;
+    color: black;
+	/*color		: black;
+	border		: 0; */
+}
+
+/****************************************************************
+	*	Estilos discriminados de las pestanas normales		*
+	****************************************************************/
+
+#intro, #html, #css, #javascript, #generador, #normal_1, #normal_2, #normal_3	{
+	background-color: #eeeeee;
+}
+
+.on	{
+	border: solid;
+	background-color: #eeeeee;
+	border-color: dimgray;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	border-bottom: 0;
+	z-index: 100;
+}
+
+.off	{
+	background-color: #cccccc;
+	z-index: 0;
+}
+
+	/****************************************************************
+	*	Estilos discriminados de las pestanas coloreadas	*
+	****************************************************************/
+
+#color_1, #Pcolor_1	{
+	background-color: yellow;
+}
+#color_2, #Pcolor_2	{
+	background-color: lime;
+}
+#color_3, #Pcolor_3	{
+	background-color: pink;
+}
+
+.si	{
+	border-style: inset;
+	border-bottom: 0;
+	z-index: 100;
+}
+
+.no	{
+	z-index: 0;
+}

@@ -42,7 +42,7 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'SearchCtrl'
       })
       .otherwise({
-        redirectTo: '/login'
+        redirectTo: '/projects'
       });
     }
   ]);
