@@ -1,17 +1,29 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('ProjectCtrl', ['$scope', '$http', '$log',
+  .controller('projectCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {	
         
-      $scope.projects = [];
+        $scope.projects = [{
+            description:'project1',
+            point:'100',
+            }, {
+            description:'project2',
+            point:'200',},
+            {
+            description:'project3',
+            point:'300',},
+            {
+            description:'project4',
+            point:'400',},
+        ]
 
       $scope.projectModel = {
         description: '',
         point: ''
       }
       
-        $scope.loginModel = {
+/*        $scope.loginModel = {
             username : '',
             password : '',
             name : '',
@@ -21,22 +33,13 @@ angular.module('Wbpms')
             email : '',
             role : '',
             changepwd : false,
-        }      
+        } */     
         
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the projects from the server
       var init = function() {
-        $http.get('/api/projects/get_all_user_projects/loginModel.email')
-          .success(function(data, status, header, config) {
-            
-            // the server should return a json array which contains all the projects
-            $scope.projectModel = data;
-          })
-          .error(function(data, status) {
-            $log.debug('Error while fetching projects from server');  
-          });
           
-        var payload = {
+/*        var payload = {
             action : 'get_all_user_projects',
             username : loginModel.email
         }
@@ -51,14 +54,21 @@ angular.module('Wbpms')
           })
           .error(function(data, status) {
             $log.debug('Error while fetching projects from server');
-          }); 
+          }); */        
           
-          $scope.projectModel = [1,2,3,4,5];          
-          
-      }();          
+      }();    
+                           
+        //Function view user projects
+        
+        $scope.getMembers = function (userEmailId){
+        $log.debug("View user project " + userId);
+
+        $http.post('/api/project/'+userId)
+
+      };                           
         
 	  
-	  $scope.addProject = function(nameProject) {
+/*	  $scope.addProject = function(nameProject) {
 		// Add a new project
 		
         var payload = {
@@ -77,7 +87,7 @@ angular.module('Wbpms')
             $log.debug('Error while trying to add new project');
           });		
 		
-      }	  
+      }	 */ 
 	  
 	  /*$scope.removeProject = function(nameproject) {
 		// Remove a new project

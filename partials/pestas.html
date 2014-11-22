@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>
+	 Sistema de Pestanas generado desde http://www.caricatos.net/sistemaPestanas.
+ Pestana del tipo: normales
+</title>
+<script src='../js/pestas.js' type='text/javascript' charset='ISO-8859-1'></script>
+<link rel='stylesheet' type='text/css' href='../css/pestas.css' charset='ISO-8859-1'/>
+<script type='text/javascript' charset='ISO-8859-1' >
+var pestas = {
+	on: 'on',
+	off: 'off',
+	items: ['pesta0', 'pesta1']
+}
+window.onload = function() {inicializaPestanas(pestas, 'pesta0')};
+</script >
+<style type='text/css' charset='ISO-8859-1' >
+.carpeta {background-color: #eeeeee;}
+</style >
+</head>
+<body>
+<div id='pestas' >
+<dt id='Ppesta0' class='pestana on' ><a href='#pesta0' id='_pesta0' >Home</a></dt>
+<dt id='Ppesta1' class='pestana off' ><a href='#pesta1' id='_pesta1' >Project</a></dt>
+<!--<dd id='pesta0' class='carpeta' style='display: block'>item normal 1</dd>
+<dd id='pesta1' class='carpeta' style='display: block'>item normal 2</dd>-->
+</div>
+</body>
+</html>
