@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 
-
+<!-- Esto lo comento guille
 <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
+-->
 <!--<link rel="stylesheet" type="text/css" href="../css/project.css" /> -->    
 <!-- <link rel="stylesheet" type="text/css" href="css/signin.css"> -->
+
+<link rel="stylesheet" href="css/vendor/bootstrap.css">
+<link rel="stylesheet" href="css/vendor/wbpms.css">
 
 <script type='text/javascript' src="js/vendor/angular.js"></script>
 <script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
@@ -21,10 +25,12 @@
 <!-- <script type="text/javascript" src="app/undo.js"></script> -->    
     
 <title> WBPMS </title>
-    
+
+<div class="ng-scope" ng-include="'partials/header.html'"></div>
 </head>
+
 <body ng-controller="memberCtrl" ng-init="init()">      
-   <div  > 
+   <div > 
         <div align="center" ng-include="'partials/search.html'"> </div>    
         <div class="container">
             <div class="row">
@@ -54,3 +60,4 @@
         </div> <!-- end of container --> 
     </div>
 </body>
+<div class="ng-scope" ng-include="'partials/footer.html'"></div>
