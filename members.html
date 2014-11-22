@@ -3,30 +3,24 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Esto lo comento guille
-<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
--->
-<!--<link rel="stylesheet" type="text/css" href="../css/project.css" /> -->    
-<!-- <link rel="stylesheet" type="text/css" href="css/signin.css"> -->
-
 <link rel="stylesheet" href="css/vendor/bootstrap.css">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">    
 <link rel="stylesheet" href="css/vendor/wbpms.css">
 
 <script type='text/javascript' src="js/vendor/angular.js"></script>
 <script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
 <script type="text/javascript" src="js/vendor/angular-resource.js"></script>
+<script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>         
 <script type="text/javascript" src="js/vendor/bootstrap.js"></script>   
 <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/vendor/angular-route.js"></script>  
-<script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>     
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/memberCtrl.js"></script>
-<!-- <script type="text/javascript" src="app/undo.js"></script> -->    
     
 <title> WBPMS </title>
 
 <div class="ng-scope" ng-include="'partials/header.html'"></div>
+<div class="ng-scope" ng-include="'pestanas.html'" ></div>            
 </head>
 
 <body ng-controller="memberCtrl" ng-init="init()">      
