@@ -1,32 +1,157 @@
+<div ng-include="'partials/header.html'"></div>
 <!-- page content -->
 <article>
-    <aside>
-        <!-- sign up button -->
-        <div id="singup" class="signup">
-            <button type="button" class="btn btn-lg btn-primary">Sing Up</button>
+    <!-- sign up button -->
+    <div class="container">
+        <div class="row">
+            <div id="description" class="col-lg-2 col-lg-offset-10">
+                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Sing Up</button>
+            </div>
         </div>
-    </aside>
-    <!-- description section -->
-    <div id="description" class="description">
-        <div class="well">
-            <p>
-                WBPMS is a Web Based Project Management System easy to management your projects.
-            </p>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <!-- description section -->
+            <div id="description" class="col-lg-4 col-lg-offset-2">
+                <div class="well">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                 </div>
+            </div>
+            <div id="singin" class="col-lg-3">
+                <form class="form-signin" role="form" id="1181323992">
+                    <h5> Username </h5>
+                    <label for="inputEmail" class="sr-only">Username</label>
+                    <input type="username" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+                    <h5> Password </h5>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    <a href="htttp://www.google.com" style="float: right;">Forget Password?</a>
+                    <br>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- div infomation-->
+    <div class="container">
+        <div class="row">
+            <div id="information" class="col-lg-7 col-lg-offset-2">
+                <div class="alert alert-danger" id="alert-danger" role="alert" style="display: none;">
+                    <strong>Invalid username or password!</strong> check username/password combination and try again.
+                </div>
+                <div class="alert alert-warning" role="alert" style="display: none;">
+                    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                </div>
+                <div class="alert alert-info" role="alert" style="display: none;">
+                    <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                </div>
+                <div class="alert alert-success" role="alert" style="display: none;">
+                    <strong>Well done!</strong> You successfully read this important alert message.
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="singin" class="singin">
-        <form class="form-signin" role="form" id="1181323992">
-            <h2 class="form-signin-heading">Sign in</h2>
-            <h3> Username </h3>
-            <label for="inputEmail" class="sr-only">Username</label>
-            <input type="username" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
-            <h3> Password </h3>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <br>
-            <a href="htttp://www.google.com">Forget Password?</a>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Sing Up</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Name</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Surname</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Surname">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Email</span>
+                            </div>  
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Gender</span>
+                            </div>  
+                            <div class="col-lg-4">
+                                <span class="input-group-addon">
+                                    <input type="radio">
+                                    Male
+                                </span>
+                                <span class="input-group-addon">
+                                    <input type="radio">
+                                    Female
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">Role</span>
+                            </div>  
+                            <div class="col-lg-4">
+                                <select class="form-control">
+                                  <option>Role 1</option>
+                                  <option>Role 2</option>
+                                  <option>Role 3</option>
+                                  <option>Role 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">Photo</span>
+                            </div>  
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-primary btn-sm btn-file btn-block">
+                                    Browse…<input type="file" multiple="">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container"> 
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-sm btn-primary btn-block">Done</button>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-sm btn-success btn-block">Clear</button>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-sm btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </article>
+<div ng-include="'partials/footer.html'"></div>

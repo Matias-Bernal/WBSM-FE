@@ -8,82 +8,19 @@
 
 		<!-- css and js files that are from frameworks, here Bootstrap and Angualr -->
         <link rel="stylesheet" href="css/vendor/bootstrap.css">
+        <link rel="stylesheet" href="css/vendor/wbpms.css">
+
 		<script src="js/vendor/jquery-2.1.1.js"></script>
 	 	<script src="js/vendor/bootstrap.js"></script>
 		<script src="js/vendor/angular.js"></script> 
 		<script src="js/vendor/angular-cookies.js"></script> 
 		<script src="js/vendor/angular-resource.js"></script> 
 		<script src="js/vendor/angular-route.js"></script>
-
-		<!-- css and js files that we develop as part of this app -->
+        <script src="js/wbpms.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/sessionCtrl.js"></script>
-        
-    <style>
-        
-        div.logo{
-            color: white;
-            float: left;
-        }
-        
-        div.namesystem{
-            color: white;
-            float: left;
-        }
-        
-        div.signup{
-            color: white;
-            float: right;
-        }
-        
-        div.signin{
-            color: white;
-            float: left;
-        }
-        
-        div.description{
-            min-height: 50%;
-            max-height: 50%;
-            min-width: 50%;
-            max-width: 50%
-            float: left;
-        }
-        
-        nav {
-            background-color:black;
-            min-height: 50px;
-            max-height: 50px;
-        }
-        
-        footer {
-            background-color:black;
-            color: white;
-            min-height: 50px;
-            max-height: 50px;
-            text-align: center;
-            vertical-align: center;
-        }
-    </style>
-        
-	
     </head>
     <body ng-app="Wbpms">
-        <!-- top banner -->
-        <header>
-            <nav>
-                <div id="logo" class="logo">
-                    <img src="/img/logo.png" />
-                </div>
-                <div id="name_sytem" class="namesystem">
-                    <h3 class="text-muted">Project Management System</h3>
-                </div>
-            </nav>
-        </header>
-        <!-- bottom baner -->
-        <footer>
-            <p>'(ɔ)' Copyleft 2014 Project Management System.</p>
-        </footer>
-        <div ng-view>
-        </div>
+        <div ng-view></div>
     </body>
 </html>
