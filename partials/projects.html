@@ -1,8 +1,8 @@
-<div ng-include="'partials/header.html'"></div>
-<!-- page content -->
-<article>
-   <div  > 
-        <div align="center" ng-include="'partials/search.html'"> </div>    
+<div class="ng-scope" ng-include="'header.html'"></div>
+<div class="ng-scope" ng-include="'pestanas.html'" ></div>  
+<article>       
+   <div> 
+        <div align="center" ng-include="'search.html'"> </div>    
         <div class="container">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
@@ -14,7 +14,7 @@
               <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                   <tr>
-                    <th>Description</th>
+                    <th>Project</th>
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
@@ -25,6 +25,6 @@
               </div>
               </div>
         </div> <!-- end of container --> 
-    </div>\      
+    </div>
 </article>
-<div ng-include="'partials/footer.html'"></div>
+<div class="ng-scope" ng-include="'footer.html'" ></div>

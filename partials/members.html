@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html ng-app="Wbpms">
-<head>
-<meta charset="UTF-8">
-
-<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
-<!--<link rel="stylesheet" type="text/css" href="../css/project.css" /> -->    
-<!-- <link rel="stylesheet" type="text/css" href="css/signin.css"> -->
-
-<script type='text/javascript' src="js/vendor/angular.js"></script>
-<script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
-<script type="text/javascript" src="js/vendor/angular-resource.js"></script>
-<script type="text/javascript" src="js/vendor/angular-route.js"></script>  
-<script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>    
-<script type="text/javascript" src="js/vendor/bootstrap.js"></script>    
-<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/memberCtrl.js"></script>
-<!-- <script type="text/javascript" src="app/undo.js"></script> -->    
-    
-<title> WBPMS </title>
-    
-</head>
-<body ng-controller="memberCtrl" ng-init="init()">      
-   <div  > 
-        <div align="center" ng-include="'partials/search.html'"> </div>    
+<div class="ng-scope" ng-include="'header.html'"></div>
+<div class="ng-scope" ng-include="'pestanas.html'" ></div>    
+<article>    
+   <div > 
+        <div align="center" ng-include="'search.html'"> </div>    
         <div class="container">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
@@ -52,4 +30,5 @@
               </div>
         </div> <!-- end of container --> 
     </div>
-</body>
+</article>    
+<div class="ng-scope" ng-include="'footer.html'"></div>

@@ -17,6 +17,8 @@ angular.module('Wbpms')
             description:'project4',
             point:'400',},
         ]
+                           
+        init();
 
       $scope.projectModel = {
         description: '',
