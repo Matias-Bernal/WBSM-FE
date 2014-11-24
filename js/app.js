@@ -22,7 +22,7 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'HomeCtrl'
       })
       .when('/projects', {
-        templateUrl: 'projects.html',
+        templateUrl: 'partials/projects.html',
         controller: 'ProjectCtrl'
       })
       .when('/projects/iterations', {

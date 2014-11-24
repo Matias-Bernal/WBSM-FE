@@ -12,7 +12,7 @@ angular.module('Wbpms')
             email : '',
             gender : '',
             role : '',
-            changepwd : false,
+            changepwd : false
         }
         
         $scope.newUser = {
@@ -20,7 +20,7 @@ angular.module('Wbpms')
             new_user_surname : '',
             new_user_email : '',
             new_user_gender : '',
-            new_user_role : '',
+            new_user_role : ''
         }
         
         $scope.forgetPasswordEmail = '';
@@ -41,9 +41,9 @@ angular.module('Wbpms')
             $scope.newUser.changepwd = false;
         }
     
-        $scope.logIn = function(loginModel) {
+        $scope.logIn = function(username,password) {
             // construct the payload that we will send as part of the post request
-            var payload = {
+/*            var payload = {
                 action : 'login',
                 username : loginModel.username,
                 password : loginModel.password
@@ -59,7 +59,10 @@ angular.module('Wbpms')
             })
             .error(function(data, status) {
                 $log.debug('Error while trying login user');
-            });
+            });*/
+            alert(username);
+            alert(password);
+            window.location.href = '#/home';
        }
 
        $scope.singUp = function(newUser) {
