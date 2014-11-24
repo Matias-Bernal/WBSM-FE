@@ -1,29 +1,27 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('projectCtrl', ['$scope', '$http', '$log',
+  .controller('ProjectCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {	
         
         $scope.projects = [{
             description:'project1',
-            point:'100',
-            }, {
+            point:'100'}, 
+            {
             description:'project2',
-            point:'200',},
+            point:'200'},
             {
             description:'project3',
-            point:'300',},
+            point:'300'},
             {
             description:'project4',
-            point:'400',},
-        ]
+            point:'400'}
+        ];
                            
-        init();
-
-      $scope.projectModel = {
-        description: '',
-        point: ''
-      }
+        $scope.projectModel = {
+            description: '',
+            point: ''
+        }
       
 /*        $scope.loginModel = {
             username : '',
@@ -57,20 +55,18 @@ angular.module('Wbpms')
           .error(function(data, status) {
             $log.debug('Error while fetching projects from server');
           }); */        
-          
-      }();    
+      };    
                            
         //Function view user projects
         
-        $scope.getMembers = function (userEmailId){
+	  
+/*      $scope.getMembers = function (userEmailId){
         $log.debug("View user project " + userId);
-
         $http.post('/api/project/'+userId)
 
       };                           
         
-	  
-/*	  $scope.addProject = function(nameProject) {
+	  $scope.addProject = function(nameProject) {
 		// Add a new project
 		
         var payload = {

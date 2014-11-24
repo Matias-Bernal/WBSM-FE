@@ -15,31 +15,31 @@ app.config(['$routeProvider', '$locationProvider',
     $routeProvider
       .when('/login', {
         templateUrl: 'partials/login.html',
-        controller: 'sessionCtrl'
+        controller: 'SessionCtrl'
       })
       .when('/home', {
         templateUrl: 'partials/home.html',
-        controller: 'homeCtrl'
+        controller: 'HomeCtrl'
       })
       .when('/projects', {
         templateUrl: 'projects.html',
-        controller: 'projectCtrl'
+        controller: 'ProjectCtrl'
       })
       .when('/projects/iterations', {
         templateUrl: 'partials/iterations.html',
-        controller: 'iterationCtrl'
+        controller: 'IterationCtrl'
       })
       .when('/projects/iterations/work_items', {
         templateUrl: 'partials/work_items.html',
-        controller: 'workItemCtrl'
+        controller: 'WorkItemCtrl'
       })
       .when('/projects/members', {
         templateUrl: 'partials/members.html',
-        controller: 'memberCtrl'
+        controller: 'MemberCtrl'
       })
       .when('/search', {
         templateUrl: 'partials/search.html',
-        controller: 'searchCtrl'
+        controller: 'SearchCtrl'
       })
       .otherwise({
         redirectTo: '/login'

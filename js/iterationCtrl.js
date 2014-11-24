@@ -4,29 +4,28 @@ angular.module('Wbpms')
   .controller('IterationCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
         
-      $scope.newIteration{
-           idProject:''
+      $scope.newIteration = {
+           idProject:'',
            idIteration: ''
+      }
         
-        }
-        
-        $scope.iterations[]; //iterations of the project
+      $scope.iterations = []; //iterations of the project
 
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
       var init = function(idProject) {
       	  $http.get('/api/projects/'+idProject)
-      	  .success(function(data, status, header, config)) {
+      	  .success(function(data, status, header, config) {
 
-      // the server should return a json array wich contains all the iterations
-      $scope.iterations = data
+          // the server should return a json array wich contains all the iterations
+          $scope.iterations = data
 
-      })
-  	  .error(function(data, status){	
-        $log.debug('Error while fetching iterations from server');
-      });
+          })
+          .error(function(data, status){	
+            $log.debug('Error while fetching iterations from server');
+          });
       
-      $http.get('/api/projects/iterations'+idProject)
+          $http.get('/api/projects/iterations'+idProject)
           .success(function(data, status, header, config) {
             
             // the server should return a json array which contains all the iterations
