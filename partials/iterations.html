@@ -3,7 +3,32 @@
 <article>    
    <div > 
         <div ng-include="'partials/search.html'"></div>    
-        Iterations Under Construction...
+        <div class="container">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <h2>Iterations - Project name</h2>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <table class="table">
+                  <tr>
+                    <th>Tilde</th>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Points</th>
+                  </tr>
+                  <tr ng-repeat="iteration in iterations" >
+                    <td>{{iteration.owner}}</td>
+                    <td>{{iteration.idIteration}}</td>
+                    <td>{{iteration.title}}</td>
+                    <td>{{iteration.point}}</td>
+                  </tr>
+                </table>
+              </div>
+              </div>
+        </div> <!-- end of container --> 
     </div>
 </article>    
 <div ng-include="'partials/footer.html'"></div>

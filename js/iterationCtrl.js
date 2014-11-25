@@ -3,13 +3,42 @@
 angular.module('Wbpms')
   .controller('IterationCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
+
+       $scope.iterations = [
+            {
+                idIteration:'001',
+                title:'Iteration 001',
+                point:'00/00',
+                owner: false
+            },
+            {
+                idIteration:'002',
+                title:'Iteration 002',
+                point:'00/00',
+                owner: false
+            },
+            {
+                idIteration:'003',
+                title:'Iteration 003',
+                point:'00/00',
+                owner: false
+            },
+            {
+                idIteration:'004',
+                title:'Iteration 004',
+                point:'00/00',
+                owner: false
+            }
+        ];
         
       $scope.newIteration = {
-           idProject:'',
-           idIteration: ''
+           idIteration: '',
+           title: '',
+           point: '',
+           owner: false
       }
         
-      $scope.iterations = []; //iterations of the project
+    /*  $scope.iterations = []; //iterations of the project
 
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
@@ -35,8 +64,12 @@ angular.module('Wbpms')
             $log.debug('Error while fetching iterations from server');
           });
           
-      };   
+      };   */
 
+      $scope.init = function() {
+
+
+      }
       $scope.getAllProjectIterations = function() {
       	 //shows all iterations of a project
       	    
