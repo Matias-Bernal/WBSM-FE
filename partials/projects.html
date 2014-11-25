@@ -1,6 +1,14 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div> 
-<article>       
+<article>      
+    <!-- sign up button -->
+   <div class="container">
+        <div class="row">
+            <div id="description" class="col-lg-2 col-lg-offset-10">
+                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Create Project</button>
+            </div>
+        </div>
+   </div>        
    <div> 
         <div ng-include="'partials/search.html'"></div>    
         <div class="container">
@@ -18,7 +26,8 @@
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
-                    <td>{{project.description}}</td>
+                    <td><input type="button" onclick="location.href='#/projects/iterations'"></input>{{project.description}}                                                   <input type="button" onclick="location.href='#/projects/members'"></input>
+                    </td>
                     <td>{{project.point}}</td>
                   </tr>
                 </table>
@@ -26,5 +35,42 @@
               </div>
         </div> <!-- end of container --> 
     </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">New Project</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">Title:</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" ng-model="newProject.name" placeholder="Project Name" required="" autofocus="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container"> 
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-sm btn-primary btn-block" ng-click=addProject(nameProject)>Done</button>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-sm btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 </article>
 <div ng-include="'partials/footer.html'"></div>
