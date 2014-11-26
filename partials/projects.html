@@ -1,7 +1,7 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div> 
 <article>      
-    <!-- sign up button -->
+    <!-- Create Project button -->
    <div class="container">
         <div class="row">
             <div id="description" class="col-lg-2 col-lg-offset-10">
@@ -24,11 +24,14 @@
                   <tr>
                     <th>Project</th>
                     <th>Points</th>
+                    <th>Iterations</th>
+                    <th>Members</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
-                    <td><input type="button" onclick="location.href='#/projects/iterations'"></input>{{project.description}}                                                   <input type="button" onclick="location.href='#/projects/members'"></input>
-                    </td>
+                    <td>{{project.description}}</td>
                     <td>{{project.point}}</td>
+                    <td><input type="button" onclick="location.href='#/projects/iterations'"></input></td>
+                    <td><input type="button" onclick="location.href='#/projects/members'"></input></td>
                   </tr>
                 </table>
               </div>
@@ -46,31 +49,25 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-2">
-                                <span class="input-group-addon">Title:</span>
-                            </div>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" ng-model="newProject.name" placeholder="Project Name" required="" autofocus="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="container"> 
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <button type="button" class="btn btn-sm btn-primary btn-block" ng-click=addProject(nameProject)>Done</button>
-                            </div>
-                            <div class="col-lg-2">
-                                <button type="button" class="btn btn-sm btn-danger btn-block" data-dismiss="modal">Cancel</button>
-                            </div>
+                                <form class="form-signin" ng-submit="addProject(nameProject)" role="form" id="1181323992">
+                                    <h5> Title </h5>
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="projectModel.description" placeholder="Name" required="" autofocus="">
+                                    <br>
+                                    <br>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Done</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-sm btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                </form>                                 
+                            </div>                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
 </article>
 <div ng-include="'partials/footer.html'"></div>
