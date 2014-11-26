@@ -1,7 +1,17 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div>
     
-<article>    
+<article>  
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10">
+                <button type="button" class="btn btn-lg btn-primary">+</button>
+            </div>
+            <div class="col-lg-2 col-lg-offset-10">
+                <button type="button" class="btn btn-lg btn-danger">-</button>
+            </div>
+        </div>
+   </div>     
    <div > 
         <div ng-include="'partials/search.html'"></div>    
         <div class="container">
@@ -15,13 +25,26 @@
               <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                   <tr>
-                    <th>Tilde</th>
+                    <th>
+                        <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                        </label>
+                        </div>
+                    </th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="member in members" >
-                    <td>{{member.owner}}</td>
+                    <td>
+                        <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="member.owner">
+                             {{member.owner}}
+                        </label>
+                        </div>
+                    </td>
                     <td>{{member.name}}</td>
                     <td>{{member.eMailMember}}</td>
                     <td>{{member.point}}</td>

@@ -25,7 +25,7 @@
                  </div>
             </div>
             <div id="singin" class="col-lg-3">
-                <form class="form-signin" role="form" id="1181323992">
+                <form class="form-signin" ng-submit="logIn(loginModel)" role="form" id="1181323992">
                     <h5> Username </h5>
                     <input type="username" id="inputUsername" class="form-control" ng-model="loginModel.username" placeholder="Username" required="" autofocus="">
                     <h5> Password </h5>
@@ -33,7 +33,7 @@
                     <a href="htttp://www.google.com" style="float: right;">Forget Password?</a>
                     <br>
                     <br>
-                    <input class='btn btn-lg btn-primary btn-block' type='button' ng-click='logIn(loginModel.username,loginModel.password)' value='Sign in' />
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>
             </div>
         </div>
@@ -42,17 +42,29 @@
     <div class="container">
         <div class="row">
             <div id="information" class="col-lg-7 col-lg-offset-2">
-                <div class="alert alert-danger" id="alert-danger" role="alert" style="display: none;">
+                <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="logInErrorMsgVisible">
                     <strong>Invalid username or password!</strong> check username/password combination and try again.
                 </div>
-                <div class="alert alert-warning" role="alert" style="display: none;">
-                    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                <div class="alert alert-success" role="alert" data-ng-if="logInSuccessMsgVisible">
+                    <strong>Well done!</strong> you successfully logged.
                 </div>
-                <div class="alert alert-info" role="alert" style="display: none;">
-                    <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="signUpErrorMsgVisible">
+                    <strong>Invalid Sign Up Data!</strong> check this data and try again.
                 </div>
-                <div class="alert alert-success" role="alert" style="display: none;">
-                    <strong>Well done!</strong> You successfully read this important alert message.
+                <div class="alert alert-success" role="alert" data-ng-if="signUpSuccessMsgVisible">
+                    <strong>Well done!</strong> we will send a confirmation email.
+                </div>
+                <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="logOutErrorMsgVisible">
+                    <strong>Log Out Error!</strong> try again.
+                </div>
+                <div class="alert alert-success" role="alert" data-ng-if="logOutSuccessMsgVisible">
+                    <strong>Well done!</strong> you successfully log out.
+                </div>
+                <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="forgetPasswordErrorMsgVisible">
+                    <strong>Invalid password!</strong> check password and try again.
+                </div>
+                <div class="alert alert-success" role="alert" data-ng-if="forgetPasswordSuccessMsgVisible">
+                    <strong>Well done!</strong> we will send a email with a new password.
                 </div>
             </div>
         </div>
@@ -69,10 +81,34 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-2">
+                                <span class="input-group-addon">*Username</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" ng-model="newUser.new_user_username" placeholder="Username" required="" autofocus="">
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Password</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="password" class="form-control" ng-model="newUser.new_user_password" placeholder="Password" required="" autofocus="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <span class="input-group-addon">*Confirm Password</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="password" class="form-control" ng-model="newUser.new_user_confirm_password" placeholder="Password" required="" autofocus="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
                                 <span class="input-group-addon">*Name</span>
                             </div>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" ng-model="newUser.name" placeholder="Name">
+                                <input type="text" class="form-control" ng-model="newUser.new_user_name" placeholder="Name" required="" autofocus="">
                             </div>
                         </div>
                         <div class="row">
@@ -80,7 +116,7 @@
                                 <span class="input-group-addon">*Surname</span>
                             </div>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" placeholder="Surname">
+                                <input type="text" class="form-control" ng-model="newUser.new_user_surname" placeholder="Surname" required="" autofocus="">
                             </div>
                         </div>
                         <div class="row">
@@ -88,7 +124,7 @@
                                 <span class="input-group-addon">*Email</span>
                             </div>  
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control" ng-model="newUser.new_user_email" placeholder="Email" required="" autofocus="">
                             </div>
                         </div>
                         <div class="row">
@@ -97,11 +133,11 @@
                             </div>  
                             <div class="col-lg-4">
                                 <span class="input-group-addon">
-                                    <input type="radio">
+                                    <input type="radio" ng-model="newUser.new_user_gender" value="male">
                                     Male
                                 </span>
                                 <span class="input-group-addon">
-                                    <input type="radio">
+                                    <input type="radio" ng-model="newUser.new_user_gender" value="female">
                                     Female
                                 </span>
                             </div>
@@ -111,11 +147,12 @@
                                 <span class="input-group-addon">Role</span>
                             </div>  
                             <div class="col-lg-4">
-                                <select class="form-control">
-                                  <option>Role 1</option>
-                                  <option>Role 2</option>
-                                  <option>Role 3</option>
-                                  <option>Role 4</option>
+                                <select class="form-control" ng-model="newUser.new_user_role">
+                                  <option>Developer</option>
+                                  <option>Project Manager</option>
+                                  <option>Quality Assurance</option>
+                                  <option>Business Analyst</option>
+                                  <option>Other</option>
                                 </select>
                             </div>
                         </div>
@@ -135,7 +172,7 @@
                     <div class="container"> 
                         <div class="row">
                             <div class="col-lg-2">
-                                <button type="button" class="btn btn-sm btn-primary btn-block" ng-click=signIn(newUser)>Done</button>
+                                <button type="button" class="btn btn-sm btn-primary btn-block">Done</button>
                             </div>
                             <div class="col-lg-2">
                                 <button type="button" class="btn btn-sm btn-success btn-block">Clear</button>

@@ -22,6 +22,10 @@ angular.module('Wbpms')
             description: '',
             point: ''
         }
+        
+        $scope.newProject = {
+            new_project_name : ''
+        }        
       
 /*        $scope.loginModel = {
             username : '',
@@ -64,12 +68,16 @@ angular.module('Wbpms')
         $log.debug("View user project " + userId);
         $http.post('/api/project/'+userId)
 
-      };                           
+      };
+*/      
         
 	  $scope.addProject = function(nameProject) {
 		// Add a new project
+          
+          alert("Project has been created!");
+          window.location.href = '#/projects';          
 		
-        var payload = {
+/*        var payload = {
             action : 'addProject',
             name : nameproject
         }
@@ -84,8 +92,9 @@ angular.module('Wbpms')
           .error(function(data, status) {
             $log.debug('Error while trying to add new project');
           });		
+*/           
 		
-      }	 */ 
+      }	 
 	  
 	  /*$scope.removeProject = function(nameproject) {
 		// Remove a new project
