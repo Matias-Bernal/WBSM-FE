@@ -5,17 +5,20 @@ angular.module('Wbpms')
     function ($scope, $http, $log) {	
         
         $scope.projects = [{
-            description:'project1',
+            description:'Project1',
             point:'100'}, 
             {
-            description:'project2',
+            description:'Project2',
             point:'200'},
             {
-            description:'project3',
+            description:'Project3',
             point:'300'},
             {
-            description:'project4',
-            point:'400'}
+            description:'Project4',
+            point:'400'},
+            {
+            description:'Project5',
+            point:'500'}            
         ];
                            
         $scope.projectModel = {
@@ -26,68 +29,55 @@ angular.module('Wbpms')
         $scope.newProject = {
             new_project_name : ''
         }        
-      
-/*        $scope.loginModel = {
-            username : '',
-            password : '',
-            name : '',
-            surname : '',
-            email : '',
-            gender : '',
-            email : '',
-            role : '',
-            changepwd : false,
-        } */     
+
+        $scope.newNameProject = {
+            old_project_name : '',
+            new_new_project_name : ''
+        }             
+
+        $scope.delProject = {
+            project_name : ''
+        }        
         
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the projects from the server
       var init = function() {
           
 /*        var payload = {
-            action : 'get_all_user_projects',
-            username : loginModel.email
+            username : _loginModel.email
         }
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/projects', payload)
+        $http.post('/api/projects/{user_email_id}', payload)
           .success(function(data, status, header, config) {
             $log.debug('Success fetching projects from server');
              $scope.projectModel = data;
           })
           .error(function(data, status) {
             $log.debug('Error while fetching projects from server');
-          }); */        
+          }); 
+*/        
       };    
-                           
-        //Function view user projects
+                   
         
-	  
-/*      $scope.getMembers = function (userEmailId){
-        $log.debug("View user project " + userId);
-        $http.post('/api/project/'+userId)
-
-      };
-*/      
-        
-	  $scope.addProject = function(nameProject) {
-		// Add a new project
-          
+	  $scope.addProject = function(_newProject) {
+		// Add a new project          
           alert("Project has been created!");
           window.location.href = '#/projects';          
 		
-/*        var payload = {
-            action : 'addProject',
-            name : nameproject
-        }
+/*        
+            var payload = {
+                name : _newProject.new_project_name
+            }        
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
+        $http.post('/api/projects', payload)
           .success(function(data, status, header, config) {
-            $log.debug('Success add project');
+            $log.debug('Success adding new project');
           })
           .error(function(data, status) {
             $log.debug('Error while trying to add new project');
@@ -95,159 +85,55 @@ angular.module('Wbpms')
 */           
 		
       }	 
-	  
-	  /*$scope.removeProject = function(nameproject) {
-		// Remove a new project
-		
+
+    $scope.renameProject = function(_oldNameProject, _newNameProject) {
+    // Rename a new project
+          alert("Project has been renowned!");
+          window.location.href = '#/projects';          
+    
+/*    
         var payload = {
-            action : 'removeProject',
-            name : nameproject
+            oldname : _oldNameProject.old_project_name,
+            newname : _newNameProject.new_new_project_name
         }
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
+        $http.post('/api/project_ctrl/{project_name_id}', payload)
+          .success(function(data, status, header, config) {
+            $log.debug('Success rename project');
+          })
+          .error(function(data, status) {
+            $log.debug('Error while trying to rename new project');
+          });   
+*/          
+    
+      }        
+	  
+	  $scope.removeProject = function(_delProject) {
+		// Remove a new project
+          alert("Project has been deleted!");
+          window.location.href = '#/projects';      
+		
+/*    
+        var payload = {
+            name : _delProject.project_name
+        }
+
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+
+        // send the payload to the server
+        $http.post('/api/project_ctrl/{project_name_id}', payload)
           .success(function(data, status, header, config) {
             $log.debug('Success remove project');
           })
           .error(function(data, status) {
             $log.debug('Error while trying to remove new project');
           });			
+*/          
 		
-      }	  	  
-	  
-	  $scope.renameProject = function(oldnameproject, newnameproject) {
-		// Rename a new project
-		
-        var payload = {
-            action : 'renameProject',
-            oldname : oldnameproject,
-			newname : newnameproject
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success rename project');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to rename new project');
-          });		
-		
-      }	  	 
-
-	  $scope.getAllUserProjects = function(userEmail) {
-		// Get all the projects of a user
-		
-        var payload = {
-            action : 'getAllUserProject',
-            email : userEmail
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success get all the projects of a user');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to get all the projects of a user');
-          });		
-		
-      }	  	 	
-
-	  $scope.getAllProjectMembers = function(memberId, ownerId) {
-		// Get all the members and owners of a project
-		
-        var payload = {
-            action : 'getAllProjectMembers',
-            members : memberId,
-			owners : ownerId
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success get all the members and owners of a project');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to get all the members and owners of a project');
-          });		
-		
-      }	  	
-
-	  $scope.getAllProjectOwners = function(nameProject) {
-		// Get all the owners of a project
-		
-        var payload = {
-            action : 'getAllProjectOwners',
-            name : nameProject
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success get all the owners of a project');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to get all the owners of a project');
-          });		
-		
-      }	  	
-
-	  $scope.addMemberToProject = function(nameProject, userEmail, isOwner) {
-		// Add a member or an owner to a project
-		
-        var payload = {
-            action : 'getAllProjectOwners',
-            name : nameProject,
-			email : userEmail,
-			isOwner : isOwner
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success Add a member or an owner to a project');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to Add a member or an owner to a project');
-          });		
-		
-      }	  	
-
-	  $scope.removeMemberFromProject = function(nameProject, userEmailRemoved, userEmailRemover) {
-		// Remove a member from a project
-		
-        var payload = {
-            action : 'getAllProjectOwners',
-            name : nameProject,
-			removed : userEmailRemoved,
-			remover : userEmailRemover
-        }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        // send the payload to the server
-        $http.post('/api/project_ctrl', payload)
-          .success(function(data, status, header, config) {
-            $log.debug('Success Remove a member from a project');
-          })
-          .error(function(data, status) {
-            $log.debug('Error while trying to Remove a member from a project');
-          });		
-		
-      }*/		  
+      }	
         
     }
   ]);

@@ -1,20 +1,22 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div> 
 <article>      
-    <!-- Create Project button -->
+    <!-- Create Project, Rename Project and Delete Project button's -->
    <div class="container">
         <div class="row">
-            <div id="description" class="col-lg-2 col-lg-offset-10">
-                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Create Project</button>
-            </div>
+            <div class="col-lg-6 col-lg-offset-7">
+                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal1">Create Project</button>
+                <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#myModal2">Rename Project</button>                
+                <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#myModal3">Delete Project</button>                     
+            </div>          
         </div>
-   </div>        
+   </div>
    <div> 
         <div ng-include="'partials/search.html'"></div>    
         <div class="container">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                <h2>Projects - Project name</h2>
+                <h2>Projects</h2>
               </div>
             </div>
 
@@ -24,14 +26,14 @@
                   <tr>
                     <th>Project</th>
                     <th>Points</th>
-                    <th>Iterations</th>
-                    <th>Members</th>
+                    <th>View Project Information</th>
+                    <th>View Project Work Item</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
                     <td>{{project.description}}</td>
                     <td>{{project.point}}</td>
-                    <td><input value="Iterations" type="button" onclick="location.href='#/projects/iterations'"></input></td>
-                    <td><input value="Members" type="button" onclick="location.href='#/projects/members'"></input></td>
+                    <td><input value="View Project Information" type="button" onclick="location.href='#/projects/iterations'"></input></td>
+                    <td><input value="View Project Work Item" type="button" onclick="location.href='#/projects/iterations/work_items'"></input></td>
                   </tr>
                 </table>
               </div>
@@ -39,8 +41,8 @@
         </div> <!-- end of container --> 
     </div>
     
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- Modal Create Project -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +61,7 @@
                                             <button class="btn btn-lg btn-primary btn-block" type="submit">Done</button>
                                         </div>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-sm btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                            <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
                                         </div>
                                 </form>                                 
                             </div>                           
@@ -69,5 +71,67 @@
             </div>
         </div>
     </div>
+    <!-- Modal Rename Project -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Rename Project</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <form class="form-signin" ng-submit="renameProject(oldnameProject,newnameProject)" role="form" id="1181323995">
+                                    <h5> Old Name </h5>
+                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="projectModel.oldName" placeholder="Old Name" required="" autofocus=""></input>
+                                    <h5> New Name </h5>
+                                        <input type="newnameProject" id="newNameProject" class="form-control" ng-model="projectModel.newName" placeholder="New Name" required="" autofocus=""></input>                                        
+                                    <br>
+                                    <br>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Done</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                </form>                                 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete Project -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Delete Project</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <form class="form-signin" ng-submit="removeProject(nameProject)" role="form" id="1181323998">
+                                    <h5> Name Project </h5>
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="projectModel.description" placeholder="Name" required="" autofocus="">
+                                    <br>
+                                    <br>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Done</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                </form>                                 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
 </article>
 <div ng-include="'partials/footer.html'"></div>
