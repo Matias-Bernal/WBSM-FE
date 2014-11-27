@@ -4,15 +4,13 @@
 <article>  
     <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-lg-offset-10">
-                <button type="button" class="btn btn-lg btn-primary">+</button>
-            </div>
-            <div class="col-lg-2 col-lg-offset-10">
-                <button type="button" class="btn btn-lg btn-danger">-</button>
+            <div class="col-lg-4 col-lg-offset-10">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+</button>
+                <button type="button" class="btn btn-danger" data-toggle="tab">-</button>
             </div>
         </div>
    </div>     
-   <div > 
+   <div> 
         <div ng-include="'partials/search.html'"></div>    
         <div class="container">
             <div class="row">
@@ -53,6 +51,29 @@
               </div>
               </div>
         </div> <!-- end of container --> 
+    </div>
+    
+    <!--Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Add member</h4>  
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label" >Email:</label>
+                            <input type="text" class="form-control" id="recipient-name" placeholder="email@">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+                    <button type="button" class="btn btn-primary">Send invite</button>
+                </div>
+            </div>
+        </div>
     </div>
 </article>    
 <div ng-include="'partials/footer.html'"></div>
