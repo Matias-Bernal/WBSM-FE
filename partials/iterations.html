@@ -2,25 +2,43 @@
 <div ng-include="'partials/pestanas.html'"></div>    
 <article>    
    <div > 
-        <div ng-include="'partials/search.html'"></div>    
         <div class="container">
-            <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                <h2>Iterations - Project name</h2>
-              </div>
+                <h2>Project {{description}} - Iterations</h2>
+                <h4>Project Description line 01</h4>
+                <h4>Project Description line 02</h4>
+           <div class="row">  
+                <div class="col-md-10 col-lg-offset-10">
+                   <button type="button" class="btn btn-primary" data-toggle=" modal" data-target="#exampleModal">+</button>
+                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2" >-</button>
+                </div> 
             </div>
+        </div>
 
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                   <tr>
-                    <th>Tilde</th>
+                    <th>
+                        <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                        </label>
+                        </div>
+                    </th>
                     <th>Id</th>
                     <th>Title</th>
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="iteration in iterations" >
-                    <td>{{iteration.owner}}</td>
+                    <td>
+                        <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="iteration.owner">
+                             {{member.owner}}
+                        </label>
+                        </div>
+                    </td>
                     <td>{{iteration.idIteration}}</td>
                     <td>{{iteration.title}}</td>
                     <td>{{iteration.point}}</td>
