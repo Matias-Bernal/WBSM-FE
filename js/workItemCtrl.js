@@ -4,30 +4,30 @@ angular.module('Wbpms')
   .controller('WorkItemCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
       
-      $scope.iterations = [
+      $scope.workItems = [
             {
                 idWorkItem:'001',
-                title:'Iteration 001',
+                title:'Work Item 001',
                 point:'00/00'
             },
             {
                 idWorkItem:'002',
-                title:'Iteration 002',
+                title:'Work Item 002',
                 point:'00/00'
             },
             {
                 idWorkItem:'003',
-                title:'Iteration 003',
+                title:'Work Item 003',
                 point:'00/00'
             },
             {
                 idWorkItem:'004',
-                title:'Iteration 004',
+                title:'Work Item 004',
                 point:'00/00'
             }
         ];
         
-      $scope.newIteration = {
+      $scope.newWorkItem = {
            idWorkItem: '',
            title: '',
            point: ''
@@ -40,7 +40,7 @@ angular.module('Wbpms')
 
       };
         
-     
+   /*  
      $scope.getWorkItemInfo = function(idWorkItem) {
        //the server should return a json with work_item info
 
@@ -83,7 +83,7 @@ angular.module('Wbpms')
      $scope.getAllWorkItemLinks = function(idWorkItem) {
     // the server should return a json array with all links about
     // a certain work_item
-     }
+     } */
 
         
     }
