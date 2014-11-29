@@ -2,7 +2,7 @@
 
 angular.module('Wbpms')
   .controller('SessionCtrl', ['$scope', '$http', '$log',
-    function ($scope, $http, $log) {
+    function ($scope, $http, $log, $location) {
         
         $scope.loginModel = {
             username : '',
@@ -58,8 +58,8 @@ angular.module('Wbpms')
     
         $scope.logIn = function(_loginModel) {
             // construct the payload that we will send as part of the post request
-/*          var payload = {
-                username : _loginModel.username,
+            var payload = {
+                email : _loginModel.username,
                 password : _loginModel.password
             }
 
@@ -69,6 +69,15 @@ angular.module('Wbpms')
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
+                // alert(data.username);
+                // alert(data.password);
+                // alert(data.name);
+                // alert(data.surname);
+                // alert(data.email);
+                // alert(data.gender);
+                // alert(data.role);
+                // alert(data.changepwd);
+
                 $scope.loginModel = data;
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
@@ -96,9 +105,9 @@ angular.module('Wbpms')
                 //Forget Password info messagges //
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = false;
-            });*/
+            });
             //$scope.logInErrorMsgVisible = true;
-            window.location.href = '#/home';
+            //location.href = '#/home';
        }
 
        $scope.singUp = function(_newUser) {
