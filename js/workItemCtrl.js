@@ -4,6 +4,35 @@ angular.module('Wbpms')
   .controller('WorkItemCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
       
+      $scope.iterations = [
+            {
+                idWorkItem:'001',
+                title:'Iteration 001',
+                point:'00/00'
+            },
+            {
+                idWorkItem:'002',
+                title:'Iteration 002',
+                point:'00/00'
+            },
+            {
+                idWorkItem:'003',
+                title:'Iteration 003',
+                point:'00/00'
+            },
+            {
+                idWorkItem:'004',
+                title:'Iteration 004',
+                point:'00/00'
+            }
+        ];
+        
+      $scope.newIteration = {
+           idWorkItem: '',
+           title: '',
+           point: ''
+      }  
+
 
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
