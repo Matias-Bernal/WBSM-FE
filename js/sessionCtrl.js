@@ -5,27 +5,29 @@ angular.module('Wbpms')
     function ($scope, $http, $log, $location) {
         
         $scope.loginModel = {
-            username : '',
+            email : '',
             password : '',
             name : '',
             surname : '',
-            email : '',
             gender : '',
             role : '',
             changepwd : false
         }
         
         $scope.newUser = {
-            new_user_username : '',
+            new_user_email : '',
             new_user_password : '',
             new_user_confirm_password : '',
             new_user_name : '',
             new_user_surname : '',
-            new_user_email : '',
             new_user_gender : '',
             new_user_role : '',
         }
         
+        $scope.roles = {  
+            "values": ["Developer", "Project Manager", "Quality Assurance", "Business Analyst","Other"] 
+        };
+
         $scope.loggedUser = false;
         $scope.forgetPasswordEmail = '';
        
@@ -48,10 +50,11 @@ angular.module('Wbpms')
 
         // Function login user.
         $scope.clear = function() {
-            $scope.newUser.new_user_username = '';
+            $scope.newUser.new_user_email = '';
+            $scope.newUser.new_user_password = '',
+            $scope.newUser.new_user_confirm_password = '',
             $scope.newUser.new_user_name = '';
             $scope.newUser.new_user_surname = '';
-            $scope.newUser.new_user_email = '';
             $scope.newUser.new_user_gender = '';
             $scope.newUser.new_user_role = '';
         }
@@ -59,25 +62,21 @@ angular.module('Wbpms')
         $scope.logIn = function(_loginModel) {
             // construct the payload that we will send as part of the post request
             var payload = {
-                email : _loginModel.username,
+                email : _loginModel.email,
                 password : _loginModel.password
             }
-
             $log.debug("Sending payload: " + JSON.stringify(payload));
-
             // send the payload to the server
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
-                // alert(data.username);
-                // alert(data.password);
-                // alert(data.name);
-                // alert(data.surname);
-                // alert(data.email);
-                // alert(data.gender);
-                // alert(data.role);
-                // alert(data.changepwd);
-
+                    alert(data.password);
+                    alert(data.name);
+                    alert(data.surname);
+                    alert(data.email);
+                    alert(data.gender);
+                    alert(data.role);
+                    alert(data.changepwd);
                 $scope.loginModel = data;
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
@@ -106,18 +105,15 @@ angular.module('Wbpms')
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = false;
             });
-            //$scope.logInErrorMsgVisible = true;
-            //location.href = '#/home';
        }
 
        $scope.singUp = function(_newUser) {
        // construct the payload that we will send as part of the post request
             var payload = {
-                username : _newUser.new_user_username,
+                email : _newUser.new_user_email,
                 password : _newUser.new_user_password,
                 name : _newUser.new_user_name,
                 surname : _newUser.new_user_surname,
-                email : _newUser.new_user_email,
                 gender : _newUser.new_user_gender,
                 role : _newUser.new_user_role,
                 photo : 'img/users_avatars/'+_newUser.new_user_username+'.png'
@@ -188,7 +184,11 @@ angular.module('Wbpms')
        }
        
        $scope.forgetPassword = function(userEmail) {
-            $http.post('/api/sessions')
+            var payload = {
+                email : userEmail,
+            }
+
+            $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success send password email');
                 $scope.logInSuccessMsgVisible = false;
