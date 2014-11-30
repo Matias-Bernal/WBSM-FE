@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div id="description" class="col-lg-2 col-lg-offset-10">
-                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Sign Up</button>
+                <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Sign Up</button>
             </div>
         </div>
     </div>
@@ -76,8 +76,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Sing Up</h3>
@@ -88,7 +88,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Email</span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" ng-model="newUser.new_user_email" placeholder="someone@example.com" required="" autofocus="">
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Password</span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <input type="password" class="form-control" ng-model="newUser.new_user_password" placeholder="Password" required="" autofocus="">
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Confirm Password</span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <input type="password" class="form-control" ng-model="newUser.new_user_confirm_password" placeholder="Password" required="" autofocus="">
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Name</span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" ng-model="newUser.new_user_name" placeholder="Name" required="" autofocus="">
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Surname</span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" ng-model="newUser.new_user_surname" placeholder="Surname" required="" autofocus="">
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">*Gender</span>
                             </div>  
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <span class="input-group-addon">
                                     <input type="radio" ng-model="newUser.new_user_gender" value="male">
                                     Male
@@ -143,7 +143,7 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">Role</span>
                             </div>  
-                            <div class="col-lg-4">
+                            <div class="col-lg-7">
                                 <select class="form-control" ng-model="newUser.new_user_role" ng-options="rol for rol in roles.values"></select>
                             </div>
                         </div>
@@ -151,10 +151,23 @@
                             <div class="col-lg-2">
                                 <span class="input-group-addon">Photo</span>
                             </div>  
-                            <div class="col-lg-4">
-                                <button type="button" class="btn btn-primary btn-sm btn-file btn-block">
-                                    Browse…<input type="file" multiple="">
-                                </button>
+                            <div class="col-lg-7">
+                                <form enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <input id="avatar-upload" type="file" multiple=false data-preview-file-type="any">
+                                    </div>
+                                </form>
+                                <script>
+                                    $("#avatar-upload").fileinput({
+                                        initialPreview: ["<img src='img/male.png' class='file-preview-image'>",
+                                                         "<img src='img/female.png' class='file-preview-image'>"
+                                                        ],
+                                        overwriteInitial: false,
+                                        maxFileSize: 3000,
+                                        maxFilesNum: 3,
+                                        allowedFileTypes: ['image']
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -162,13 +175,13 @@
                 <div class="modal-footer">
                     <div class="container"> 
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="singUp(newUser)">Done</button>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <button type="button" class="btn btn-sm btn-success btn-block" ng-click="clear()">Clear</button>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <button type="button" class="btn btn-sm btn-danger btn-block" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -177,7 +190,5 @@
             </div>
         </div>
     </div>
-
-
 </article>
 <div ng-include="'partials/footer.html'"></div>

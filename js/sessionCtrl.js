@@ -70,13 +70,14 @@ angular.module('Wbpms')
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
+                    alert(JSON.stringify(data));
+                    alert(data.email);
                     alert(data.password);
                     alert(data.name);
                     alert(data.surname);
-                    alert(data.email);
                     alert(data.gender);
                     alert(data.role);
-                    alert(data.changepwd);
+                    //alert(data.changepwd);
                 $scope.loginModel = data;
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
