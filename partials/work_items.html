@@ -3,13 +3,14 @@
 <article>    
    <div > 
         <div class="container">
-              <div class="col-md-10 col-md-offset-1">
-                <h2>Iteration Number - Work Items</h2>
-           <div class="row">  
-                <div class="col-md-10 col-lg-offset-10">
-                   <button type="button" class="btn btn-primary" data-toggle=" modal" data-target="#exampleModal">+</button>
-                </div> 
-            </div>
+            <div class="row">
+                  <div class="col-md-10 col-md-offset-1">
+                    <h3>Iteration Number - Work Items</h3>
+                  </div>                 
+                  <div class="col-md-10 col-lg-offset-10">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal8">+</button>
+                  </div>
+            </div>     
         </div>
 
             <div class="row">
@@ -30,5 +31,30 @@
               </div>
         </div> <!-- end of container --> 
     </div>
+<!--Modal Modify Information of Work-->
+    <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Work Item Information(Under Construction)</h4>  
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                            <div class="col-lg-1">
+                                <span class="input">Title</span>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Work Item Example" required="" autofocus="">
+                            </div>
+                  </div>  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">Done</button>
+                   <button type="button" class="btn btn-danger" data-dismiss="modal" data-target="#exampleModal5" >X</button>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
 </article>    
 <div ng-include="'partials/footer.html'"></div>
