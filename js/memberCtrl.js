@@ -93,7 +93,7 @@ angular.module('Wbpms')
         }
         
         //Function add a member in the project list
-        $scope.addNewMember = function(eMail) {
+        $scope.addMemberToProjects = function(eMail) {
             $log.debug("Add member " + eMail);
 
             $http.post('/api/project/'+eMail)
@@ -109,7 +109,7 @@ angular.module('Wbpms')
         }
         
         //Function remove a member from the project
-        $scope.removeMember = function(projectId,emailMember) {
+        $scope.removeMemberToProjects = function(projectId,emailMember) {
             $log.debug("Removing member " + eMail);
 
             $http.delete('/api/project/'+projectId+'/'+emailMember)

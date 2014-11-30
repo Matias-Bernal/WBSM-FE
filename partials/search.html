@@ -1,6 +1,40 @@
-<!--<div ng-include="'partials/header.html'"></div>
-<div ng-include="'partials/pestanas.html'"></div>
-<div ng-include="'partials/footer.html'"></div>-->
-<div>
+<!--<div ng-include="'partials/header.html'"></div>-->
+<!--<div ng-include="'partials/pestanas.html'"></div>-->
+<div >
     <a href='#/projects' data-toggle="tab"><button type="submit">Back projects</button></a>
 </div>
+
+<!--list to members o workItems search-->
+<!--<div>
+    <div class="container">
+     <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                  <tr>
+                    <th>Element searched</th>
+                  </tr>
+                  <tr ng-repeat="globalSearch in Search" >
+                    <td >{{globalSearch.idSearch}}</td> uando haga un click te debe llevar a home o a workItem
+                  </tr>
+            </table>
+         </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'partials/footer.html'"></div>-->
+<!--list to workItem search
+<div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                  <tr>
+                    <th>Id Work Item</th>
+                  </tr>
+                  <tr ng-repeat="workItem in workItems" >
+                    <td>{{workItem.idWorkItem}}</td>
+                  </tr>
+            </table>
+        </div>
+    </div>
+</div>-->
