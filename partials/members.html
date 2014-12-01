@@ -37,7 +37,7 @@
                     <td>
                         <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="member.owner">
+                            <input type="checkbox" value="member.owner" ng-click=promote_owner()>
                              {{member.owner}}
                         </label>
                         </div>
@@ -55,23 +55,23 @@
     <!--Modal Add member-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Add member</h4>  
+            <form class="form-signin" ng-submit="add_member_to_projects()" role="form" id="1181323992">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Add member</h4>  
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label" >Email:</label>
+                                <input type="text" class="form-control" id="recipient-name"  placeholder="email@" required="" autofocus="">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+                            <button type="submit" class="btn btn-primary " >Send invite</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label" >Email:</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="email@">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-                    <button type="button" class="btn btn-primary">Send invite</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <!--Modal delete member-->
@@ -86,7 +86,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Ok</button>
+                    <button type="button" class="btn btn-primary" ng-click= remove_member_from_project()>Ok</button>
                 </div>
             </div>
         </div>

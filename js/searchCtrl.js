@@ -36,7 +36,7 @@ angular.module('Wbpms')
           .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri redirection
             $scope.globalSearch = data;
-          });
+          })
           .error(function(data, status) {
             $log.debug('Error user not found');
           });

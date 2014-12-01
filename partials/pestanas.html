@@ -2,12 +2,16 @@
   <ul class="nav nav-tabs">
     <li><a href='#/home' data-toggle="tab">Home</a></li>
     <li><a href='#/projects' data-toggle="tab">Projects</a></li>
-    <form class="navbar-form navbar-left">
+    <form method="get" action="#/search">    
         <div>
-          <div class="col-lg-2 col-lg-offset-8">
-<!-- El input del search probablemente sea de tipo "search" y no redireccione a ningun otra página-->
-            <a href='#/search' data-toggle="tab"><input type="text" class="form-control" placeholder="Search:"></input></a>
-          </div>
+            <div class="col-lg-2 col-lg-offset-4">
+                <div class="input-group">
+                <input type="search" class="form-control" placeholder="Search:"></input>
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+                </div>
+            </div><!-- /input-group -->
         </div>
   </form>
   </ul>

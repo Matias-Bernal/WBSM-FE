@@ -4,7 +4,7 @@ angular.module('Wbpms')
   .controller('MemberCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
         
-
+        $scope.id_project;
         $scope.members = [
             {
                 name:'marcelo',
@@ -39,18 +39,6 @@ angular.module('Wbpms')
             owner: false
         }
 
-      /*  $scope.members = []; //members
-        
-         var $scope.auxiliar = [{
-            owner: 'false',
-            name: 'matias',
-            eMailMember :'aaa@gamil.com',
-            point:'100'
-            
-           }];*/
-
-        //$scope.members = []; //members
-
     
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
@@ -71,72 +59,111 @@ angular.module('Wbpms')
           });*/   
       };
         
-        //Function view project members
         
-        $scope.getMembers = function (projectNameId){
-            $log.debug("View project member " + projectId);
-            $http.post('/api/project/'+projectId);
-        }
-        
-        //Function view project members
-        
-        $scope.getMembers = function (projectNameId){
-            $log.debug("View project member " + projectId);
-            $http.post('/api/project/'+projectId)
-                .success(function(data, status, header, config) {
-                    $log.debug('Success get member');
-                    $scope.members = data;
-                })
-                .error(function(data, status) {
-                    $log.debug('Error while trying get project user on server');
-                });
-        }
-        
-        //Function add a member in the project list
-        $scope.addMemberToProjects = function(eMail) {
-            $log.debug("Add member " + eMail);
+         //Function add a member in the project list
+        $scope.add_member_to_projects = function() {
+            alert("member agree to project");
+            window.location.href = '#/projects/members';  
+            
+           /* var payload = {
+                project_name_id: id_project,
+                user_email_id: eMailMember
+            }
+            
+            $log.debug("Add member");
 
-            $http.post('/api/project/'+eMail)
+            $http.post('/api/project/', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Success add member');
+                $log.debug('Success: Member ' <$scope.name> 'added successfully from ' <$scope.id_project>''),
                 $scope.newUser = data;
 
               })
-          .error(function(data, status) {
-            $log.debug('Error while trying to add user on server');
-          });
+              .error(function(data, status) {
+                $log.debug(data.error);
+              });*/
             
         }
         
+        //Function view project members 
+        $scope.get_all_project_members = function() {
+            
+            alert("get members to project");
+            window.location.href = '#/projects/members';
+            
+            /*var payload = {
+                project_name_id: id_project,
+            }
+            
+            $log.debug("View project member");
+            $http.post('/api/project/', payload)
+                .success(function(data, status, header, config) {
+                    $log.debug('Success get members');
+                    $scope.members = data;
+                })
+                .error(function(data, status) {
+                    $log.debug(data.error);
+                });*/
+        }
+        
+       
+        
         //Function remove a member from the project
-        $scope.removeMemberToProjects = function(projectId,emailMember) {
-            $log.debug("Removing member " + eMail);
-
-            $http.delete('/api/project/'+projectId+'/'+emailMember)
-              .success(function(data, status, header, config) {
-                $log.debug('Success removing member');
-
-                 // find the element in the data array and remove it
+        $scope.remove_member_from_project = function() {
+            
+            alert("member remove to project");
+            window.location.href = '#/projects/members';
+        /*    
+             var payload = {
+                project_name_id: id_project,
+                user_email_id: eMailMember
+            }
+            
+            $log.debug("Removing member");
+            
+             // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
-                    if($scope.members[i].id_member === idMember) {
+                    if($scope.members[i].eMailMember === user_email_id) {
                         $scope.members.splice(i, 1);
                     }
                 }
+
+            $http.delete('/api/project/{{projcet_name_id}}/{{user_email_id}}')
+              .success(function(data, status, header, config) {
+                $log.debug('Success removing member');   
               })
               .error(function(data, status) {
-                $log.debug('Error while trying to remove todo item on server');
-              });
+                $log.debug(data.error);
+              });*/
         }
         
         //Function promote owner
-        $scope.promoteOwner = function(owner){    
-            $scope.owner = true;
-        }
+        $scope.promote_owner = function(){ 
+            alert("member promote owner to project");
+            window.location.href = '#/projects/members';
+            
+           /*  var payload = {
+                project_name_id: id_project,
+                user_email_id: eMailMember
+            }
+            $log.debug("Promote owner");
+
+            $http.post('/api/project/', payload)
+              .success(function(data, status, header, config) {
+                $log.debug('Success:New owner added successfully to  <$scope.id_project>')
+                    if($scope.members.owner == false) {
+                        $scope.members = true;
+                    } else {
+                        $scope.members = false;
+                    }
+
+              })
+          .error(function(data, status) {
+            $log.debug(data.error);
+               
+          });
+        }*/
         
-        //Function owner member downgrade
-        $scope.ownerMemberDowngrade = function(owner){
-            $scope.owner = false; 
-        }
        
     }
-  ]);
+
+    }]);
