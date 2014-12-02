@@ -6,25 +6,25 @@ angular.module('Wbpms')
 
         $scope.usuario = UserData;      
         
-        // $scope.projects = [{
-        //     description:'Project1',
-        //     point:'100'}, 
-        //     {
-        //     description:'Project2',
-        //     point:'200'},
-        //     {
-        //     description:'Project3',
-        //     point:'300'},
-        //     {
-        //     description:'Project4',
-        //     point:'400'},
-        //     {
-        //     description:'Project5',
-        //     point:'500'}            
-        // ];
+        $scope.projects = [{
+            description:'Project1',
+            point:'100'}, 
+            {
+            description:'Project2',
+            point:'200'},
+            {
+            description:'Project3',
+            point:'300'},
+            {
+            description:'Project4',
+            point:'400'},
+            {
+            description:'Project5',
+            point:'500'}            
+        ];
 
         // we store all data in the data array
-        $scope.projects = [];
+        //$scope.projects = [];
                            
         $scope.projectModel = [{
             description: '',
