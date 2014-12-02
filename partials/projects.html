@@ -1,6 +1,6 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div> 
-<article>      
+<article ng-init="init()">      
     <!-- Create Project Button -->
    <div class="container">
         <div class="row">
@@ -67,13 +67,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-4">
-                                <form class="form-signin" ng-submit="addProject(newProject.new_project_name)" role="form" id="addProject">
+                                <form class="form-signin" role="form" id="addProject">
                                     <h5> Title </h5>
                                         <input type="nameProject" id="inputNameProject" class="form-control" ng-model="newProject.new_project_name" placeholder="Name" required="" autofocus="">
                                     <br>
                                     <br>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal">Done</button>
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="addProject(newProject.new_project_name)">Done</button>
                                         </div>
                                         <div class="col-lg-6">
                                             <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>

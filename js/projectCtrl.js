@@ -49,16 +49,16 @@ angular.module('Wbpms')
       var init = function() {
           
         var payload = {
-            username : usuario.email
+            username : UserData.email
         }
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.get('/api/projects/{usuario.email}', payload)
+        $http.get('/api/projects/UserData.email}', payload)
           .success(function(data, status, header, config) {
             $log.debug('Success fetching projects from server');
-             $scope.projects = data;
+             $scope.projects = data.success;
             if(data.length > 0) {
               $scope.projectModel.description = $scope.projects[0];
             }             
@@ -70,7 +70,7 @@ angular.module('Wbpms')
       };    
                    
         
-	  $scope.addProject = function(nameProject) {
+	  $scope.addProject = function(projectName) {
 		// Add a new project          
         //  alert("Project has been created!");
         //  window.location.href = '#/projects';          
@@ -82,13 +82,16 @@ angular.module('Wbpms')
 
         var payload = $scope.newProject;
 
-        $log.debug("Sending payload: " + JSON.stringify(payload));
+        //$log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/projects', payload)
+        $http.post('/api/projects/{newProject.new_project_name}', payload)
           .success(function(data, status, header, config) {
             $log.debug('Success adding new project');
-          })
+            $scope.projects.push(data)
+            alert("Se agrego proyecto con exito!!!")
+          })          
+
           .error(function(data, status) {
             $log.debug('Error while trying to add new project');
           });		
