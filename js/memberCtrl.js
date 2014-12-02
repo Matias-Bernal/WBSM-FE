@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('MemberCtrl', ['$scope', '$http', '$log',
-    function ($scope, $http, $log) {
+  .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' ,
+    function ($scope, $http, $log, UserData) {
         
-        $scope.id_project;
-        $scope.members = [
+       /* $scope.members = [
             {
                 name:'marcelo',
                 eMailMember:'qqq@gmail.com',
@@ -16,7 +15,7 @@ angular.module('Wbpms')
                 name:'matias',
                 eMailMember:'qqq@gmail.com',
                 point:'300',
-                owner: false
+                owner: true
             },
             {
                 name:'nico',
@@ -31,7 +30,11 @@ angular.module('Wbpms')
                 owner: false
             }
         ];
-
+*/
+        
+        $scope.id_project = UserData;
+        $scope.members = [];
+        
         $scope.newUser = {
             name: '',
             eMailMember :'',
@@ -42,21 +45,25 @@ angular.module('Wbpms')
     
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
-
-      $scope.init = function() {
-         /* $http.get('/api/projects/'+projectId)
-
-      var init = function(projectId) {
-          $http.get('/api/projects/'+projectId)
+      
+      var init = function() {
+          
+          var payload = {
+            username : id_project.email
+        }
+          
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+          $http.get('/api/projects/{id_project.email}', payload)
 
           .success(function(data, status, header, config) {
             
             // the server should return a json array which contains all the todos
             $scope.members = data;
+               
           })
           .error(function(data, status) {
             $log.debug('Error while fetching todos from server');
-          });*/   
+          });   
       };
         
         
@@ -64,18 +71,18 @@ angular.module('Wbpms')
         $scope.add_member_to_projects = function() {
             alert("member agree to project");
             window.location.href = '#/projects/members';  
+            $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});
             
            /* var payload = {
                 project_name_id: id_project,
                 user_email_id: eMailMember
-            }
+            }*/
             
-            $log.debug("Add member");
+           /* $log.debug("Add member");
 
-            $http.post('/api/project/', payload)
+            $http.post('/api/projects/')
               .success(function(data, status, header, config) {
                 $log.debug('Success: Member ' <$scope.name> 'added successfully from ' <$scope.id_project>''),
-                $scope.newUser = data;
 
               })
               .error(function(data, status) {
@@ -95,7 +102,7 @@ angular.module('Wbpms')
             }
             
             $log.debug("View project member");
-            $http.post('/api/project/', payload)
+            $http.post('/api/projects/', payload)
                 .success(function(data, status, header, config) {
                     $log.debug('Success get members');
                     $scope.members = data;
@@ -112,6 +119,8 @@ angular.module('Wbpms')
             
             alert("member remove to project");
             window.location.href = '#/projects/members';
+            
+            $scope.members = _.filter($scope.members, function(param){return !param.owner;});
         /*    
              var payload = {
                 project_name_id: id_project,
@@ -127,7 +136,7 @@ angular.module('Wbpms')
                     }
                 }
 
-            $http.delete('/api/project/{{projcet_name_id}}/{{user_email_id}}')
+            $http.delete('/api/projects/{{projcet_name_id}}/{{user_email_id}}')
               .success(function(data, status, header, config) {
                 $log.debug('Success removing member');   
               })
@@ -147,7 +156,7 @@ angular.module('Wbpms')
             }
             $log.debug("Promote owner");
 
-            $http.post('/api/project/', payload)
+            $http.post('/api/projects/', payload)
               .success(function(data, status, header, config) {
                 $log.debug('Success:New owner added successfully to  <$scope.id_project>')
                     if($scope.members.owner == false) {

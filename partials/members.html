@@ -37,7 +37,7 @@
                     <td>
                         <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="member.owner" ng-click=promote_owner()>
+                            <input type="checkbox" ng-model="member.owner" ng-click=promote_owner()>
                              {{member.owner}}
                         </label>
                         </div>
@@ -62,13 +62,19 @@
                     </div>
                     <div class="modal-body">
                             <div class="form-group">
-                                <label for="recipient-name" class="control-label" >Email:</label>
-                                <input type="text" class="form-control" id="recipient-name"  placeholder="email@" required="" autofocus="">
+                                <label for="recipient-name" class="control-label" >Name:</label>
+                                <input type="text" ng-model="adder.name" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                 <label for="recipient-name" class="control-label" >Email:</label>
+                                <input type="text" ng-model="adder.email" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                 <label for="recipient-name" class="control-label" >points:</label>
+                                <input type="text" ng-model="adder.point" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                 <label for="recipient-name" class="control-label" >owner:</label>
+                                <input type="text" ng-model="adder.owner" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
                             </div>
                     </div>
                     <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-                            <button type="submit" class="btn btn-primary " >Send invite</button>
+                            <button type="submit" class="btn btn-primary" ng-click="add_member_to_projects()" data-dismiss="modal">Send invite</button>
                     </div>
                 </div>
             </form>
@@ -86,7 +92,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" ng-click= remove_member_from_project()>Ok</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
