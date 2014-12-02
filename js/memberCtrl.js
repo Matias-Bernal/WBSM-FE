@@ -71,25 +71,24 @@ angular.module('Wbpms')
         
          //Function add a member in the project list
         $scope.add_member_to_projects = function() {
-            alert("member agree to project");
-            window.location.href = '#/projects/members';  
-            $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});
+            //alert("member agree to project");
+            //window.location.href = '#/projects/members';  
             
-           /* var payload = {
-                project_name_id: id_project,
-                user_email_id: eMailMember
+            
+            /*var payload = {
+                project_name_id: idProject.id_project,
+                user_email_id: eMailUser.email
             }*/
             
-           /* $log.debug("Add member");
-
-            $http.post('/api/projects/')
+//            $log.debug("Sending payload: " + JSON.stringify(payload));
+            $http.post('/api/projects/{project_name_id}/{user_email_id}')
               .success(function(data, status, header, config) {
-                $log.debug('Success: Member ' <$scope.name> 'added successfully from ' <$scope.id_project>''),
-
+                $log.debug('Success: Member  <$scope.user_email_id> added successfully from  <$scope.project_name_id>'),
+                    $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});
               })
               .error(function(data, status) {
                 $log.debug(data.error);
-              });*/
+              });
             
         }
         
