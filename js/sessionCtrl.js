@@ -3,7 +3,7 @@
 angular.module('Wbpms')
   .controller('SessionCtrl', ['$scope', '$http', '$log', 'UserData',
     function ($scope, $http, $log, UserData) {
-        
+
         $scope.loginModel = UserData;
 
         $scope.newUser = {
@@ -39,9 +39,6 @@ angular.module('Wbpms')
         // declaration !AND! call (see parenthesis at end of function)
         // of a function that fetches the todos from the server
         $scope.init = function() {
-            if($scope.loggedUser){
-                window.location.href = '#/home';  
-            }
         };
 
         // Function login user.
@@ -66,7 +63,14 @@ angular.module('Wbpms')
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
-                $scope.loginModel = data.success;
+                
+                $scope.loginModel.name = data.name;
+                $scope.loginModel.surname = data.surname;
+                $scope.loginModel.email = data.email;
+                $scope.loginModel.password = data.password;
+                $scope.loginModel.role = data.role;
+                $scope.loginModel.gender = data.gender;
+                
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
                 //Sign Up info messagges //
