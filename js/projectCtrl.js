@@ -1,30 +1,35 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('ProjectCtrl', ['$scope', '$http', '$log',
-    function ($scope, $http, $log) {	
+  .controller('ProjectCtrl', ['$scope', '$http', '$log', 'UserData',
+    function ($scope, $http, $log, UserData) {	
+
+        $scope.usuario = UserData;      
         
-        $scope.projects = [{
-            description:'Project1',
-            point:'100'}, 
-            {
-            description:'Project2',
-            point:'200'},
-            {
-            description:'Project3',
-            point:'300'},
-            {
-            description:'Project4',
-            point:'400'},
-            {
-            description:'Project5',
-            point:'500'}            
-        ];
+        // $scope.projects = [{
+        //     description:'Project1',
+        //     point:'100'}, 
+        //     {
+        //     description:'Project2',
+        //     point:'200'},
+        //     {
+        //     description:'Project3',
+        //     point:'300'},
+        //     {
+        //     description:'Project4',
+        //     point:'400'},
+        //     {
+        //     description:'Project5',
+        //     point:'500'}            
+        // ];
+
+        // we store all data in the data array
+        $scope.projects = [];
                            
-        $scope.projectModel = {
+        $scope.projectModel = [{
             description: '',
             point: ''
-        }
+        }];
         
         $scope.newProject = {
             new_project_name : ''
@@ -43,22 +48,25 @@ angular.module('Wbpms')
       // of a function that fetches the projects from the server
       var init = function() {
           
-/*        var payload = {
-            username : _loginModel.email
+        var payload = {
+            username : usuario.email
         }
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/projects/{user_email_id}', payload)
+        $http.get('/api/projects/{usuario.email}', payload)
           .success(function(data, status, header, config) {
             $log.debug('Success fetching projects from server');
-             $scope.projectModel = data;
+             $scope.projects = data;
+            if(data.length > 0) {
+              $scope.projectModel.description = $scope.projects[0];
+            }             
           })
           .error(function(data, status) {
             $log.debug('Error while fetching projects from server');
           }); 
-*/        
+        
       };    
                    
         
