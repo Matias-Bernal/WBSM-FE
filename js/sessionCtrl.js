@@ -4,18 +4,8 @@ angular.module('Wbpms')
   .controller('SessionCtrl', ['$scope', '$http', '$log', 'UserData',
     function ($scope, $http, $log, UserData) {
         
-        $scope.usuario = UserData;
+        $scope.loginModel = UserData;
 
-        $scope.loginModel = {
-            email : '',
-            password : '',
-            name : '',
-            surname : '',
-            gender : '',
-            role : '',
-            changepwd : false
-        };
-        
         $scope.newUser = {
             new_user_email : '',
             new_user_password : '',
@@ -48,7 +38,11 @@ angular.module('Wbpms')
 
         // declaration !AND! call (see parenthesis at end of function)
         // of a function that fetches the todos from the server
-        var init = function() {};
+        $scope.init = function() {
+            if($scope.loggedUser){
+                window.location.href = '#/home';  
+            }
+        };
 
         // Function login user.
         $scope.clear = function() {
@@ -72,9 +66,7 @@ angular.module('Wbpms')
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
-                //$scope.loginModel = data;
-                alert(JSON.stringify(data));
-                $scope.usuario.email = _loginModel.email;
+                $scope.loginModel = data.success;
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
                 //Sign Up info messagges //
@@ -86,6 +78,7 @@ angular.module('Wbpms')
                 //Forget Password info messagges //
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = false;
+                $scope.loggedUser = true;
                 window.location.href = '#/home';
             })
             .error(function(data, status) {
@@ -163,6 +156,7 @@ angular.module('Wbpms')
                 //Forget Password info messagges //
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = false;
+                $scope.loggedUser = false;
             })
             .error(function(data, status) {
                 $log.debug('Error while trying logout user');
