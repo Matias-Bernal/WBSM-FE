@@ -62,15 +62,17 @@ angular.module('Wbpms')
       };    
                    
         
-	  $scope.addProject = function(_newProject) {
+	  $scope.addProject = function(nameProject) {
 		// Add a new project          
-          alert("Project has been created!");
-          window.location.href = '#/projects';          
+        //  alert("Project has been created!");
+        //  window.location.href = '#/projects';          
 		
-/*        
-            var payload = {
-                name : _newProject.new_project_name
-            }        
+        
+        //    var payload = {
+        //        name : _newProject.new_project_name
+        //    }       
+
+        var payload = $scope.newProject;
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
@@ -82,7 +84,7 @@ angular.module('Wbpms')
           .error(function(data, status) {
             $log.debug('Error while trying to add new project');
           });		
-*/           
+           
 		
       }	 
 
