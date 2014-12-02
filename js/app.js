@@ -56,5 +56,11 @@ app.factory('UserData', function(){
       gender : '',
       role : '',
       changepwd : false
+        }
+});
+
+app.factory('ProjectData', function(){
+    return {
+      id_project: ''
     }
 });

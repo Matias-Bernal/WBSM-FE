@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' ,
-    function ($scope, $http, $log, UserData) {
+  .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' , 'ProjectData' ,
+    function ($scope, $http, $log, UserData, ProjectData) {
         
        /* $scope.members = [
             {
@@ -32,7 +32,8 @@ angular.module('Wbpms')
         ];
 */
         
-        $scope.id_project = UserData;
+        $scope.idProject = ProjectData;
+        $scope.eMailUser = UserData;
         $scope.members = [];
         
         $scope.newUser = {
@@ -49,11 +50,12 @@ angular.module('Wbpms')
       var init = function() {
           
           var payload = {
-            username : id_project.email
-        }
+              project_name_id: idProject.id_project
+          }
+        
           
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-          $http.get('/api/projects/{id_project.email}', payload)
+       $log.debug("Sending payload: " + JSON.stringify(payload));
+          $http.get('/api/projects/'+ payload)
 
           .success(function(data, status, header, config) {
             
