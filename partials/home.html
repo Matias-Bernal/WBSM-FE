@@ -2,31 +2,52 @@
 <div ng-include="'partials/pestanas.html'"></div>    
 <article>
 <div>   
-   	 	<div class="row">
-   	 	    <div class= "col-md-1 col-md-offset-1">
-             <img src="img/male-64.png" class="img-thumbnail" style="
-             float">
-            </div> 
-             User Full Name <br>
-             user@project.com             
-        </div>
-    <div class="container">
+  <div class="row">
+    <div class= "col-md-1 col-md-offset-1">
+      <img src="img/male.png" class="img-thumbnail" style="float">
+      </div> 
+        {{usuario.surname}} <br>
+        {{usuario.email}}             
+      </div>
+      <div class="container">
+        <div class="col-lg-8">
+          <h2>My Work Open Items</h2>
+			     <div class="panel panel-primary">
+			       <div class="panel-heading">
+			         <h4>Open Items + Not Done</h4>
+			       </div>
+ 			       <div class="panel-body">
+			       	 <ul>
+  		         	<li>Project 01    00/00 <br>
+                      Iteration 01    00/00 <br>
+                         Work_Item 01    00/00
+                </li>
+  		   		  	<li>Project 02    00/00</li>
+  		 			   	<li>Project 03    00/00</li>
+  		         </ul>
+ 			       </div>
+           </div>
+ 		    </div>
         <div class="col-lg-4">
-        	My Work Open Items
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4>Open Items + Not Done</h4>
-				</div>
- 				<div class="panel-body">
-					<ul>
-  						<li>Project 01    00/00</li>
-  						<li>Project 02    00/00</li>
-  						<li>Project 03    00/00</li>
-  					</ul>
- 				</div>
-            </div>
- 		</div>
- 	</div>	
+          <h2>Team Members</h2>
+           <div class="panel panel-primary">
+             <div class="panel-heading">
+               <h4>Contacts</h4>
+             </div>
+             <div class="panel-body">
+               <ul>
+                <li>Project 01    00/00<br>
+                      Member 01    00/00 <br>
+                        Member 02    00/00
+                </li>
+                <li>Project 02    00/00</li>
+                <li>Project 03    00/00</li>
+               </ul>
+             </div>
+           </div>
+        </div>        
+      </div>	
+  </div>
 </div>
 
 </article>    
