@@ -4,7 +4,6 @@ angular.module('Wbpms')
   .controller('IterationCtrl', ['$scope', '$http', '$log',
     function ($scope, $http, $log) {
 
-       $scope.id_project;
        $scope.iterations = [
             {
                 idIteration:'001',
@@ -40,13 +39,13 @@ angular.module('Wbpms')
            owner: false 
         }
 
-        $scope.clear = function() {
+    /*    $scope.clear = function() {
             $scope.newIteration.new_idIteration: '';
             $scope.newIteration.new_title: '';
-            $scope.newIteration.new_point: '',
-            $scope.newIteration.new_owner: '';
+            $scope.newIteration.new_point: '';
+            $scope.newIteration.new_owner: ''
         }
-        
+        */
        
     
 
@@ -69,13 +68,13 @@ angular.module('Wbpms')
       $scope.init = function() {
 
 
-      }
+      };
 
-      
+
       $scope.getAllProjectIterations = function() {
       	 //shows all iterations of a project
       	 alert("get members to project");
-            window.location.href = '#/projects/members';
+            window.location.href = '#/projects/iterations';
             
             /*var payload = {
                 nameProject : id_project,
@@ -97,7 +96,7 @@ angular.module('Wbpms')
         alert("iteration agree to project");
         window.location.href = '#/projects/iterations';
 
-        var payload = {
+      /*  var payload = {
                 nameProject: id_project
             }
 
@@ -106,14 +105,15 @@ angular.module('Wbpms')
         // send the payload to the server
         $http.post('/api/project/', payload)
           .success(function(data, status, header, config) {
-            $log.debug('Success!!: '<$scope.title> 'added successfully to ' <$scope.nameProject>),
+            $log.debug('Success!!: '<$scope.title> 'added successfully to ' <$scope.nameProject>);
             $scope.newIteration = data;
           })
           .error(function(data, status) {
             $log.debug(data.error);
-          }); 
+          }); */
 
       }
+
 
       $scope.delete_iteration = function(nameProject, idIteration) {
       	// deletes an iteration of a project
@@ -124,9 +124,7 @@ angular.module('Wbpms')
                 idIteration: id_iteration
             } 
 
-      	$http.delete('/api/project/'+idProject+'/'+idIteration)
-          .success(function(data, status, header, config) {
-            $log.debug('Success removing iteration');
+          $log.debug("Removing iteration")      	
             
              // find the element in the data array and remove it
             for(var i =0; i < $scope.iterations.length; i++) {
@@ -144,6 +142,6 @@ angular.module('Wbpms')
             $log.debug(data.error);
           });
       }
-        
-    }
-  ]);
+    
+
+   }]);
