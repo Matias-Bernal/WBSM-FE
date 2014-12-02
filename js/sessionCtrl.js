@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('SessionCtrl', ['$scope', '$http', '$log',
-    function ($scope, $http, $log, $location) {
+  .controller('SessionCtrl', ['$scope', '$http', '$log', 'UserData',
+    function ($scope, $http, $log, UserData) {
         
+        $scope.usuario = UserData;
+
         $scope.loginModel = {
             email : '',
             password : '',
@@ -12,7 +14,7 @@ angular.module('Wbpms')
             gender : '',
             role : '',
             changepwd : false
-        }
+        };
         
         $scope.newUser = {
             new_user_email : '',
@@ -21,8 +23,8 @@ angular.module('Wbpms')
             new_user_name : '',
             new_user_surname : '',
             new_user_gender : '',
-            new_user_role : '',
-        }
+            new_user_role : ''
+        };
         
         $scope.roles = {  
             "values": ["Developer", "Project Manager", "Quality Assurance", "Business Analyst","Other"] 
@@ -64,21 +66,15 @@ angular.module('Wbpms')
             var payload = {
                 email : _loginModel.email,
                 password : _loginModel.password
-            }
+            };
             $log.debug("Sending payload: " + JSON.stringify(payload));
             // send the payload to the server
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success login user');
-                    alert(JSON.stringify(data));
-                    alert(data.email);
-                    alert(data.password);
-                    alert(data.name);
-                    alert(data.surname);
-                    alert(data.gender);
-                    alert(data.role);
-                    //alert(data.changepwd);
-                $scope.loginModel = data;
+                //$scope.loginModel = data;
+                alert(JSON.stringify(data));
+                $scope.usuario.email = _loginModel.email;
                 $scope.logInSuccessMsgVisible = true;
                 $scope.logInErrorMsgVisible = false;
                 //Sign Up info messagges //
@@ -156,31 +152,31 @@ angular.module('Wbpms')
             $http.post('/api/sessions')
             .success(function(data, status, header, config) {
                 $log.debug('Success logout user');
-                    $scope.logInSuccessMsgVisible = false;
-                    $scope.logInErrorMsgVisible = false;
-                    //Sign Up info messagges //
-                    $scope.signUpSuccessMsgVisible = false;
-                    $scope.signUpErrorMsgVisible = false;
-                    //Log Out info messagges //
-                    $scope.logOutSuccessMsgVisible = true;
-                    $scope.logOutErrorMsgVisible = false;
-                    //Forget Password info messagges //
-                    $scope.forgetPasswordSuccessMsgVisible = false;
-                    $scope.forgetPasswordErrorMsgVisible = false;
+                $scope.logInSuccessMsgVisible = false;
+                $scope.logInErrorMsgVisible = false;
+                //Sign Up info messagges //
+                $scope.signUpSuccessMsgVisible = false;
+                $scope.signUpErrorMsgVisible = false;
+                //Log Out info messagges //
+                $scope.logOutSuccessMsgVisible = true;
+                $scope.logOutErrorMsgVisible = false;
+                //Forget Password info messagges //
+                $scope.forgetPasswordSuccessMsgVisible = false;
+                $scope.forgetPasswordErrorMsgVisible = false;
             })
             .error(function(data, status) {
                 $log.debug('Error while trying logout user');
-                    $scope.logInSuccessMsgVisible = false;
-                    $scope.logInErrorMsgVisible = false;
-                    //Sign Up info messagges //
-                    $scope.signUpSuccessMsgVisible = false;
-                    $scope.signUpErrorMsgVisible = false;
-                    //Log Out info messagges //
-                    $scope.logOutSuccessMsgVisible = false;
-                    $scope.logOutErrorMsgVisible = true;
-                    //Forget Password info messagges //
-                    $scope.forgetPasswordSuccessMsgVisible = false;
-                    $scope.forgetPasswordErrorMsgVisible = false;
+                $scope.logInSuccessMsgVisible = false;
+                $scope.logInErrorMsgVisible = false;
+                //Sign Up info messagges //
+                $scope.signUpSuccessMsgVisible = false;
+                $scope.signUpErrorMsgVisible = false;
+                //Log Out info messagges //
+                $scope.logOutSuccessMsgVisible = false;
+                $scope.logOutErrorMsgVisible = true;
+                //Forget Password info messagges //
+                $scope.forgetPasswordSuccessMsgVisible = false;
+                $scope.forgetPasswordErrorMsgVisible = false;
             });
        }
        
@@ -188,7 +184,6 @@ angular.module('Wbpms')
             var payload = {
                 email : userEmail,
             }
-
             $http.post('/api/sessions', payload)
             .success(function(data, status, header, config) {
                 $log.debug('Success send password email');
