@@ -27,15 +27,15 @@
                   <tr ng-repeat="project in projects" >
                     <td>{{project.description}}</td>
                     <td>{{project.point}}</td>
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='#/projects/iterations'">
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(nameProject)">
                             <i class="fa fa-tasks"></i>
                         </button>
                     </td>         
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align"       onclick="location.href='#/projects/iterations/work_items'">
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(nameProject)">
                             <i class="fa fa-newspaper-o"></i>
                         </button>
                     </td> 
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='#/projects/members'">
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(nameProject)">
                             <i class="fa fa-users"></i>
                         </button>
                     </td> 

@@ -1,30 +1,32 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('ProjectCtrl', ['$scope', '$http', '$log', 'UserData',
-    function ($scope, $http, $log, UserData) {	
+  .controller('ProjectCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData',
+    function ($scope, $http, $log, UserData, ProjectData) {	
 
-        $scope.usuario = UserData;      
+        $scope.usuario = UserData;  
+
+        $scope.proyecto = ProjectData;            
         
-        // $scope.projects = [{
-        //     description:'Project1',
-        //     point:'100'}, 
-        //     {
-        //     description:'Project2',
-        //     point:'200'},
-        //     {
-        //     description:'Project3',
-        //     point:'300'},
-        //     {
-        //     description:'Project4',
-        //     point:'400'},
-        //     {
-        //     description:'Project5',
-        //     point:'500'}            
-        // ];
+        $scope.projects = [{
+            description:'Project1',
+            point:'100'}, 
+            {
+            description:'Project2',
+            point:'200'},
+            {
+            description:'Project3',
+            point:'300'},
+            {
+            description:'Project4',
+            point:'400'},
+            {
+            description:'Project5',
+            point:'500'}            
+        ];
 
         // we store all data in the data array
-        $scope.projects = [];
+        //$scope.projects = [];
                            
         $scope.projectModel = [{
             description: '',
@@ -137,6 +139,33 @@ angular.module('Wbpms')
          
 		
         }	
+
+        $scope.goToIterations = function(nameProject) {
+        // Go to Iterations 
+    
+          $scope.proyecto.id_project = nameProject; 
+
+          window.location.href = '#/projects/iterations';          
+    
+        }         
+
+        $scope.goToWorkItems = function(nameProject) {
+        // Go to Work Items 
+    
+          $scope.proyecto.id_project = nameProject; 
+
+          window.location.href = '#/projects/iterations/work_items';          
+    
+        }  
+
+        $scope.goToMembers = function(nameProject) {
+        // Go to Members 
+    
+          $scope.proyecto.id_project = nameProject; 
+
+          window.location.href = '#/projects/members';          
+    
+        }                      
         
     }
   ]);
