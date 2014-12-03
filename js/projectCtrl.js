@@ -6,25 +6,25 @@ angular.module('Wbpms')
 
         $scope.usuario = UserData;      
         
-        $scope.projects = [{
-            description:'Project1',
-            point:'100'}, 
-            {
-            description:'Project2',
-            point:'200'},
-            {
-            description:'Project3',
-            point:'300'},
-            {
-            description:'Project4',
-            point:'400'},
-            {
-            description:'Project5',
-            point:'500'}            
-        ];
+        // $scope.projects = [{
+        //     description:'Project1',
+        //     point:'100'}, 
+        //     {
+        //     description:'Project2',
+        //     point:'200'},
+        //     {
+        //     description:'Project3',
+        //     point:'300'},
+        //     {
+        //     description:'Project4',
+        //     point:'400'},
+        //     {
+        //     description:'Project5',
+        //     point:'500'}            
+        // ];
 
         // we store all data in the data array
-        //$scope.projects = [];
+        $scope.projects = [];
                            
         $scope.projectModel = [{
             description: '',
@@ -46,7 +46,7 @@ angular.module('Wbpms')
         
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the projects from the server
-      var init = function() {
+      $scope.init = function() {
           
         var payload = {
             username : UserData.email
@@ -55,7 +55,7 @@ angular.module('Wbpms')
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.get('/api/projects/UserData.email}', payload)
+        $http.get('/api/projects/members/'+UserData.email, payload)        
           .success(function(data, status, header, config) {
             $log.debug('Success fetching projects from server');
              $scope.projects = data.success;
@@ -76,16 +76,16 @@ angular.module('Wbpms')
         //  window.location.href = '#/projects';          
 		
         
-        //    var payload = {
-        //        name : _newProject.new_project_name
-        //    }       
+            var payload = {
+                name : projectName
+            }       
 
-        var payload = $scope.newProject;
+        //var payload = $scope.newProject;
 
         //$log.debug("Sending payload: " + JSON.stringify(payload));
 
         // send the payload to the server
-        $http.post('/api/projects/{newProject.new_project_name}', payload)
+        $http.post('/api/projects/'+projectName, payload)
           .success(function(data, status, header, config) {
             $log.debug('Success adding new project');
             $scope.projects.push(data)
