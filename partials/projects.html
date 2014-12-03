@@ -97,15 +97,15 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-4">
-                                <form class="form-signin" ng-submit="renameProject(oldnameProject,newnameProject)" role="form" id="1181323995">
+                                <form class="form-signin" role="form" id="renameProject">
                                     <h5> Old Name </h5>
-                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="projectModel.oldName" placeholder="Old Name" required="" autofocus=""></input>
+                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="newNameProject.old_project_name" placeholder="Old Name" required="" autofocus=""></input>
                                     <h5> New Name </h5>
-                                        <input type="newnameProject" id="newNameProject" class="form-control" ng-model="projectModel.newName" placeholder="New Name" required="" autofocus=""></input>                                        
+                                        <input type="newnameProject" id="newNameProject" class="form-control" ng-model="newNameProject.new_new_project_name" placeholder="New Name" required="" autofocus=""></input>                                        
                                     <br>
                                     <br>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal">Done</button>
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="renameProject(newNameProject.old_project_name,newNameProject.new_new_project_name)">Done</button>
                                         </div>
                                         <div class="col-lg-6">
                                             <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
@@ -129,13 +129,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-4">
-                                <form class="form-signin" ng-submit="removeProject(nameProject)" role="form" id="1181323998">
+                                <form class="form-signin" role="form" id="1181323998">
                                     <h5> Name Project </h5>
-                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="projectModel.description" placeholder="Name" required="" autofocus="">
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="delProject.project_name" placeholder="Name" required="" autofocus="">
                                     <br>
                                     <br>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal">Done</button>
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="removeProject(delProject.project_name)">Done</button>
                                         </div>
                                         <div class="col-lg-6">
                                             <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
