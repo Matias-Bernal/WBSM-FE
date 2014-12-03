@@ -36,13 +36,13 @@ angular.module('Wbpms')
         // Get all projects of a User
           
           var payload = {
-              user_email_id : usuario.email
+              user_email_id : $scope.usuario.email
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.get('/api/projects/members/'+usuario.email, payload)        
+          $http.get('/api/projects/members/'+$scope.usuario.email, payload)        
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data;
