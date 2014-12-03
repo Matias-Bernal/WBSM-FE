@@ -8,25 +8,25 @@ angular.module('Wbpms')
 
         $scope.proyecto = ProjectData;            
         
-        $scope.projects = [{
-            description:'Project1',
-            point:'100'}, 
-            {
-            description:'Project2',
-            point:'200'},
-            {
-            description:'Project3',
-            point:'300'},
-            {
-            description:'Project4',
-            point:'400'},
-            {
-            description:'Project5',
-            point:'500'}            
-        ];
+        // $scope.projects = [{
+        //     description:'Project1',
+        //     point:'100'}, 
+        //     {
+        //     description:'Project2',
+        //     point:'200'},
+        //     {
+        //     description:'Project3',
+        //     point:'300'},
+        //     {
+        //     description:'Project4',
+        //     point:'400'},
+        //     {
+        //     description:'Project5',
+        //     point:'500'}            
+        // ];
 
         // we store all data in the data array
-        //$scope.projects = [];
+        $scope.projects = [];
                            
         $scope.projectModel = [{
             description: '',
@@ -53,13 +53,13 @@ angular.module('Wbpms')
         // Get all projects of a User
           
           var payload = {
-              user_email_id : UserData.email
+              user_email_id : usuario.email
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.get('/api/projects/members/'+UserData.email, payload)        
+          $http.get('/api/projects/members/'+usuario.email, payload)        
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data;
@@ -71,7 +71,7 @@ angular.module('Wbpms')
               $log.debug('Error while fetching projects from server');
             }); 
         
-        };    
+        }    
 
         
         $scope.addProject = function(projectName) {
@@ -135,10 +135,10 @@ angular.module('Wbpms')
             })
             .error(function(data, status) {
               $log.debug('Error while trying to remove new project');
-            });			
-         
+            });		         
 		
         }	
+        
 
         $scope.goToIterations = function(nameProject) {
         // Go to Iterations 
