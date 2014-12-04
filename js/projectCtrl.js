@@ -60,12 +60,13 @@ angular.module('Wbpms')
 
           // send the payload to the server
           $http.get('/api/projects/members/'+$scope.usuario.email, payload)        
+          //$http.get('/api/users/projects/'+$scope.usuario.email, payload)           
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data;
                 if(data.length > 0) {
                   $scope.projectModel.description = $scope.projects[0];
-                }             
+                }   
             })
             .error(function(data, status) {
               $log.debug('Error while fetching projects from server');
@@ -87,6 +88,7 @@ angular.module('Wbpms')
           $http.post('/api/projects', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success adding new project');
+              alert("The new Project is added");
               $scope.projects.push(data)
             })          
 
@@ -98,19 +100,20 @@ angular.module('Wbpms')
 
 
         $scope.renameProject = function(oldnameProject,newnameProject) {
-        // Rename a new project           
+        // Rename a new project 
     
           var payload = {
-              oldname : oldnameProject,
-              newname : newnameProject
+              old_project_name : oldnameProject,
+              new_project_name : newnameProject
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.post('api/projects/update', payload)
+          $http.post('api/projects/'+oldnameProject, payload)
             .success(function(data, status, header, config) {
               $log.debug('Success rename project');
+              alert("The Project was renamed");              
             })
             .error(function(data, status) {
               $log.debug('Error while trying to rename new project');
@@ -120,18 +123,19 @@ angular.module('Wbpms')
 
 	  
         $scope.removeProject = function(delnameProject) {
-		    // Remove a new project		
+		    // Remove a new project	
     
           var payload = {
-              name : delnameProject
+              project_name_id : delnameProject
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.delete('api/projects', payload)
+          $http.delete('api/projects/'+delnameProject, payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove project');
+              alert("The Project was deleted");                
             })
             .error(function(data, status) {
               $log.debug('Error while trying to remove new project');
@@ -140,28 +144,28 @@ angular.module('Wbpms')
         }	
 
 
-        $scope.goToIterations = function(nameProject) {
+        $scope.goToIterations = function(projectId) {
         // Go to Iterations 
     
-          $scope.proyecto.id_project = nameProject; 
+          $scope.proyecto.id_project = projectId; 
 
           window.location.href = '#/projects/iterations';          
     
         }         
 
-        $scope.goToWorkItems = function(nameProject) {
+        $scope.goToWorkItems = function(projectId) {
         // Go to Work Items 
     
-          $scope.proyecto.id_project = nameProject; 
+          $scope.proyecto.id_project = projectId; 
 
           window.location.href = '#/projects/iterations/work_items';          
     
         }  
 
-        $scope.goToMembers = function(nameProject) {
+        $scope.goToMembers = function(projectId) {
         // Go to Members 
     
-          $scope.proyecto.id_project = nameProject; 
+          $scope.proyecto.id_project = projectId; 
 
           window.location.href = '#/projects/members';          
     

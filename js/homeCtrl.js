@@ -43,6 +43,7 @@ angular.module('Wbpms')
 
           // send the payload to the server
           $http.get('/api/projects/members/'+$scope.usuario.email, payload)        
+          //$http.get('/api/users/projects/'+$scope.usuario.email, payload)          
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data;
