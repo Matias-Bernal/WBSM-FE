@@ -121,18 +121,16 @@ angular.module('Wbpms')
             alert("member remove to project");
             window.location.href = '#/projects/members';*/
             
-            $scope.members = _.filter($scope.members, function(param){return !param.owner;});
-            
              var payload = {
-                project_name_id: id_project,
-                user_email_id: eMailMember
+                project_name_id: $scope.idProject.id_project,
+                user_email_id: $scope.eMailUser.email
             }
             
             $log.debug("Sending payload: " + JSON.stringify(payload));
             
              // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
-                    if($scope.members[i].eMailMember === user_email_id) {
+                    if($scope.members[i].eMailMember === payload.user_email_id) {
                         $scope.members.splice(i, 1);
                     }
                 }
