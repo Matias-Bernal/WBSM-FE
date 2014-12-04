@@ -1,7 +1,7 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div>
     
-<article>  
+<article ng-init="init()">  
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-10">
@@ -63,13 +63,13 @@
                     <div class="modal-body">
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label" >Name:</label>
-                                <input type="text" ng-model="adder.name" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                <input type="text" ng-model="adder.name" class="form-control" id="recipient-name"  placeholder="Name" required autofocus="">
                                  <label for="recipient-name" class="control-label" >Email:</label>
-                                <input type="text" ng-model="adder.email" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                <input type="text" ng-model="adder.email" class="form-control" id="recipient-name"  placeholder="Email@" required autofocus="">
                                  <label for="recipient-name" class="control-label" >points:</label>
-                                <input type="text" ng-model="adder.point" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                <input type="text" ng-model="adder.point" class="form-control" id="recipient-name"  placeholder="Points" required autofocus="">
                                  <label for="recipient-name" class="control-label" >owner:</label>
-                                <input type="text" ng-model="adder.owner" class="form-control" id="recipient-name"  placeholder="email@" required autofocus="">
+                                <input type="text" ng-model="adder.owner" class="form-control" id="recipient-name"  placeholder="True|False" required autofocus="">
                             </div>
                     </div>
                     <div class="modal-footer">
