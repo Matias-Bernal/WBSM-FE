@@ -5,19 +5,15 @@ angular.module('Wbpms')
     function ($scope, $http, $log) {
         
         
-    $scope.globalSearch = [{
-        idSearch: 'workItem1'
-    },
-    {
-        idSearch: 'workItem2'
-    },{
-        idSearch: 'member1'
+    $scope.globalSearchUser = [{
+        idUser:'jimmy'
     }
     ];
+    $scope.globalSearchWorkItem = [{
+        idWorkItem: 'jimmy2'
+    }];
+        
     
-    $scope.globalSearchWorkItem = {
-        idWorkItem: ''
-    }
     // declaration !AND! call (see parenthesis at end of function)
     // of a function that fetches the todos from the server
     var init = function() {
@@ -25,26 +21,30 @@ angular.module('Wbpms')
     }
                 
     //search global other user. pre-condition: User is login  
-    $scope.globalOtherUserSearch = function(idWord, keyword){
-        
-        var payload = {
-                password: keyword
+    $scope.globalOtherUserSearch = function(){
+        alert('usa controlador')
+        $scope.globalSearchUser.push($scope.searchs)
+        /*var payload = {
+                keyword: key
             }
 
         $http.post('/api/search/users', payload)
           .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri redirection
-            $scope.globalSearch = data;
+            alert('find the user');
+            $scope.globalSearchUser.search.push(data)
+            //$scope.globalSearchUser = data;
           })
           .error(function(data, status) {
             $log.debug(data.error);
-          });
+          });*/
     }
     
     //search global work item. pre-condition: User is login 
      $scope.globalWorkItemSearch = function(){
-         
-         var payload = {
+         alert('usa controlador2')
+         $scope.globalSearchWorkItem.push($scope.searchs)
+        /* var payload = {
                 password : keyword
             }
          
@@ -52,10 +52,11 @@ angular.module('Wbpms')
         $http.post('/api/search/workitem', payload)
           .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri to redirection
+            alert('find the workItem');
             $scope.globalSearchWorkItem = data;
           })
           .error(function(data, status) {
             $log.debug('Error workItem not found');
-          });
+          });*/
     }
 }]);

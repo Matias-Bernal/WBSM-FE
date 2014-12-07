@@ -47,14 +47,14 @@ angular.module('Wbpms')
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
       
-      var init = function() {
+      var init = function(projectName) {
           
           var payload = {
-              project_name_id: idProject.id_project
+              project_name_id: projectName
           }
           
        $log.debug("Sending payload: " + JSON.stringify(payload));
-          $http.get('/api/projects/members'+ payload)
+          $http.get('/api/projects/members', payload)
 
           .success(function(data, status, header, config) {
             
@@ -71,24 +71,26 @@ angular.module('Wbpms')
       };
         
          //Function add a member in the project list
-        $scope.add_member_to_projects = function() {
+        $scope.add_member_to_projects = function(idProject,eMailUser) {
           /*  alert("member agree to project");
             window.location.href = '#/projects/members';  */
               
             var payload = {
-                project_name_id: $scope.idProject.id_project,
-                user_email_id: $scope.eMailUser.email
+                project_name_id: idProject,
+                user_email_id: eMailUser
             }
             
            $log.debug("Sending payload: " + JSON.stringify(payload));
-            $http.post('/api/projects/members', payload)
+            $http.post('/api/projects/members/add', payload)
               .success(function(data, status, header, config) {
                 $log.debug('Success: New member <eMailMember> added successfully to <id_project>'),
+                    alert("The new member is added");
                     $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});
                     //$scope.members.push(data);
               })
               .error(function(data, status) {
                 $log.debug(data.error);
+                 alert("The new member is not added");
 //                $log.debug('Error while trying to add new member to the project');
               });
             
@@ -116,14 +118,14 @@ angular.module('Wbpms')
         }*/
         
         //Function remove a member from the project
-        $scope.remove_member_from_project = function() {
+        $scope.remove_member_from_project = function(projectName,eMail) {
            /* 
             alert("member remove to project");
             window.location.href = '#/projects/members';*/
             
              var payload = {
-                project_name_id: $scope.idProject.id_project,
-                user_email_id: $scope.eMailUser.email
+                project_name_id: projectName,
+                user_email_id: eMail
             }
             
             $log.debug("Sending payload: " + JSON.stringify(payload));
@@ -134,9 +136,10 @@ angular.module('Wbpms')
                         $scope.members.splice(i, 1);
                     }
                 }
-            $http.delete('/api/projects/members', payload)
+            $http.delete('/api/projects', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Member Member removed successfully from project');   
+                $log.debug('Member Member removed successfully from project'); 
+                 alert("The new member is removed");
               })
               .error(function(data, status) {
                 $log.debug(data.error);
@@ -144,22 +147,23 @@ angular.module('Wbpms')
         }
         
         //Function promote owner
-        $scope.promote_owner = function(){ 
+        $scope.promote_owner = function(projectName,eMail){ 
           /*  alert("member promote owner to project");
             window.location.href = '#/projects/members';*/
             
              var payload = {
-                project_name_id: id_project,
-                user_email_id: eMailMember
+                project_name_id: projectName,
+                user_email_id: eMail
             }
             $log.debug("Promote owner");
 
-            $http.post('api/projects/members/promote', payload)
+            $http.post('api/projects/'+project_name_id+'/owners/'+user_email_id, payload)
                 .success(function(data, status, header, config) {
                 $log.debug('New wowner <owner> added successfully to <id_project>')
                     if($scope.members.owner == false) {
                         $scope.members = true;
                     };
+                 alert("The new member promote owner");
               })
                 .error(function(data, status) {
                     $log.debug(data.error);     
