@@ -44,7 +44,7 @@ angular.module('Wbpms')
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.get('/api/users/projects', payload)                  
+          $http.post('/api/users/getprojects/', payload)                  
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data[0].projects;
@@ -114,13 +114,13 @@ angular.module('Wbpms')
 		    // Remove a new project	
     
           var payload = {
-              project_name_id : delnameProject
+              project_name : delnameProject
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.delete('/api/projects', payload)
+          $http.post('/api/projects/delprojects/', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove project');         
               alert("The Project was deleted");                
