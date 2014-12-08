@@ -1,6 +1,6 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div>    
-<article>    
+<article ng-init="init()">    
    <div > 
         <div class="container">
               <div class="col-md-10 col-md-offset-1">
@@ -9,8 +9,8 @@
                 <h4>Project Description line 02</h4>
            <div class="row">  
                 <div class="col-md-10 col-lg-offset-10">
-                   <button type="button" class="btn btn-primary" data-toggle=" modal" data-target="#exampleModal">+</button>
-                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2" >-</button>
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button>
+                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">-</button>
                 </div> 
             </div>
         </div>
@@ -48,5 +48,33 @@
               </div>
         </div> <!-- end of container --> 
     </div>
+
+  <!--Modal Add iteration-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="form-signin" ng-submit="create_iteration()" role="form" id="1181323992">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Add Iteration</h4>  
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label" >Title:</label>
+                                <input type="text" /*ng-model="adder.name" */ class="form-control" id="recipient-name"  placeholder="Title of Iteration" required autofocus="">
+                                 
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" ng-click="create_iteration()" data-dismiss="modal">Done</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+                            
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
 </article>    
 <div ng-include="'partials/footer.html'"></div>
