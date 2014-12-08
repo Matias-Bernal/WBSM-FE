@@ -54,7 +54,7 @@ angular.module('Wbpms')
           }
           alert(JSON.stringify(payload));
           $log.debug("Sending payload: " + JSON.stringify(payload));
-          $http.get('/api/projects/members', payload)
+          $http.post('/api/projects/getmembers/', payload)
 
           .success(function(data, status, header, config) {
             alert("exito");
@@ -101,7 +101,7 @@ angular.module('Wbpms')
             }
             alert(JSON.stringify(payload));
             $log.debug("Sending payload: " + JSON.stringify(payload));
-            $http.get('/api/projects/members', payload)
+            $http.post('/api/projects/getmembers/', payload)
               .success(function(data, status, header, config) {
                 alert("exito");
                 // the server should return a json array which contains all the todos
@@ -123,16 +123,17 @@ angular.module('Wbpms')
             
             $log.debug("Sending payload: " + JSON.stringify(payload));
             
-             // find the element in the data array and remove it
+            
+            $http.delete('/api/projects/{project_name_id}/{user_email_id}', payload)
+              .success(function(data, status, header, config) {
+                $log.debug('Member Member removed successfully from project'); 
+                 alert("The new member is removed");
+                 // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
                     if($scope.members[i].eMailMember === payload.user_email_id) {
                         $scope.members.splice(i, 1);
                     }
                 }
-            $http.delete('/api/projects', payload)
-              .success(function(data, status, header, config) {
-                $log.debug('Member Member removed successfully from project'); 
-                 alert("The new member is removed");
               })
               .error(function(data, status) {
                 $log.debug(data.error);
