@@ -153,9 +153,10 @@
                                 <span class="input-group-addon">Photo</span>
                             </div>  
                             <div class="col-lg-8">
-                                <form enctype="multipart/form-data" submit="alert('hola');" >
+                                <form enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <input id="avatar-upload" type="file" name="file" ng-model="newUser.new_user_avatar" ng-file-select="uploadFile($file)" accept="image/*" >
+                                        <!-- <input id="avatar-upload" type="file" name="file" ng-model="newUser.new_user_avatar" ng-file-select="uploadFile($file)" accept="image/*" > -->
+                                        <input id="avatar-upload" type="file" accept="image/*" >
                                         <script>
                                         /* Initialize your widget via javascript as follows */
                                         $("#avatar-upload").fileinput({

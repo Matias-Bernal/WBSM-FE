@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('SessionCtrl', ['$scope', '$http', '$log', 'UserData', '$upload',
-    function ($scope, $http, $log, UserData, $upload) {
+  .controller('SessionCtrl', ['$scope', '$http', '$log', 'UserData', //'$upload',
+    function ($scope, $http, $log, UserData) {
 
         $scope.loginModel = UserData;
 
@@ -60,7 +60,7 @@ angular.module('Wbpms')
                 return false;
         }
     
-        $scope.uploadFile = function(file) {
+/*        $scope.uploadFile = function(file) {
             var fd = new FormData();
             //Take the first selected file
             fd.append("file", file[0]);
@@ -77,7 +77,7 @@ angular.module('Wbpms')
             .error(function(data, status) {
                 $log.debug('Error while trying upload file');
             });
-        };
+        };*/
 
         $scope.logIn = function(_loginModel) {
             // construct the payload that we will send as part of the post request
