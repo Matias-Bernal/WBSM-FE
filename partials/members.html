@@ -28,7 +28,7 @@
                             <input type="checkbox" value="" disabled>
                         </label>
                         </div>
-                    </th>
+                    </th> 
                     <th>Name</th>
                     <th>Email</th>
                     <th>Points</th>
@@ -38,13 +38,13 @@
                         <div class="checkbox">
                         <label>
                             <input type="checkbox" ng-model="member.owner" ng-click=promote_owner()>
-                             {{member.owner}}
+                             {{member.owner==0}}
                         </label>
                         </div>
                     </td>
                     <td>{{member.name}}</td>
-                    <td>{{member.eMailMember}}</td>
-                    <td>{{member.point}}</td>
+                    <td>{{member.user}}</td>
+                    <td>{{0}}</td>
                   </tr>
                 </table>
               </div>

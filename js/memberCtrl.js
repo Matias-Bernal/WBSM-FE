@@ -52,20 +52,20 @@ angular.module('Wbpms')
           var payload = {
               project_name_id: $scope.project.project_name
           }
-          alert(JSON.stringify(payload));
           $log.debug("Sending payload: " + JSON.stringify(payload));
           $http.post('/api/projects/getmembers/', payload)
 
           .success(function(data, status, header, config) {
-            alert("exito");
+            alert(JSON.stringify(data[0]));
+            alert(JSON.stringify(data[0].members));
             // the server should return a json array which contains all the todos
-            $scope.members = data;
+            $scope.members = data[0].members;
           })
           .error(function(data, status) {
             alert("error");
             $log.debug(data.error);
           });   
-      };
+      }
         
          //Function add a member in the project list
         $scope.add_member_to_projects = function(idProject,eMailUser) {
