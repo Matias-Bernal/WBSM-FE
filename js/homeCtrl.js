@@ -1,10 +1,17 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData',
-    function ($scope, $http, $log, UserData) {
+  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData) {
 	
-        $scope.usuario = UserData; 
+        //Global User Data
+        $scope.usuario = UserData;  
+
+        //Global Project Data
+        $scope.proyecto = ProjectData;  
+
+        //Global Iteration Data
+        $scope.iteracion = IterationData;          
 
         $scope.projects = [];        
 
@@ -42,14 +49,10 @@ angular.module('Wbpms')
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.get('/api/projects/members/'+$scope.usuario.email, payload)        
-          //$http.get('/api/users/projects/'+$scope.usuario.email, payload)          
+          $http.get('/api/users/projects', payload)                  
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
-              $scope.projects = data;
-                if(data.length > 0) {
-                  $scope.projectModel.nameP = $scope.projects[0];
-                }             
+              $scope.projects = data[0].projects;
             })
             .error(function(data, status) {
               $log.debug('Error while fetching projects from server');
@@ -129,7 +132,26 @@ angular.module('Wbpms')
               $log.debug('Error while fetching iterations from server');
             });             
         
-        }	  		
+        }	  
+
+        $scope.goToWorkItems = function(project_name, iteration_number) {
+        // Go to Work Items 
+    
+          $scope.proyecto.project_name = project_name; 
+          $scope.iteracion.id_iteration = iteration_number;          
+
+          window.location.href = '#/projects/iterations/work_items';          
+    
+        }  
+
+        $scope.goToMembers = function(project_name) {
+        // Go to Members 
+    
+          $scope.proyecto.project_name = project_name; 
+
+          window.location.href = '#/projects/members';          
+    
+        }  
         
     }
   ]);

@@ -1,5 +1,5 @@
 <div ng-include="'partials/header.html'"></div>
-<div ng-include="'partials/pestanas.html'"></div>    
+<div ng-include="'partials/pestanas.html'"></div>  
 <article ng-init="init()">
 <div>   
   <div class="row">
@@ -16,40 +16,40 @@
 			       <div class="panel-heading">
 			         <h4>Open Items + Not Done</h4>
 			       </div>
- 			       <div class="panel-body">
-			       	 <ul>
-  		         	<li>Project 01    00/00
-                  <ul>
-                      <li>Iteration 01    00/00
-                          <ul>
-                            <li>Work_Item 01    00/00</li>
-                          </ul>
-                      </li>   
-                  </ul>
-                </li>
-  		   		  	<li>Project 02    00/00</li>
-  		 			   	<li>Project 03    00/00</li>
-  		         </ul>
- 			       </div>
+             <div class="panel-body" style="width:730px; height:200px; overflow-y:scroll;">
+              <div class="btn-group-vertical" role="group" aria-label="...">
+                <div>
+                  <ul ng-repeat="project in projects">
+                    <li><a>{{project.project_name}} - {{project.points}}</a></li>     
+                      <ul ng-repeat="iteration in iterations">
+                        <li><a>{{iteration.name}} - {{iteration.points}}</a></li>                      
+                        <ul class="dropdown" ng-repeat="workItem in workItems">
+                          <li><a ng-click="goToWorkItems(project.project_name, workItem.name)">{{workItem.name}} - {{workItem.points}}</a></li>
+                        </ul>
+                      </ul>        
+                  </ul>                     
+                </div>
+              </div>
+             </div>
            </div>
  		    </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4">        
           <h2>Team Members</h2>
            <div class="panel panel-primary">
              <div class="panel-heading">
                <h4>Contacts</h4>
              </div>
-             <div class="panel-body">
-               <ul>
-                <li>Project 01    00/00
-                  <ul>
-                      <li>Member 01    00/00</li>
-                      <li>Member 02    00/00</li>
-                  </ul>
-                </li>
-                <li>Project 02    00/00</li>
-                <li>Project 03    00/00</li>
-               </ul>
+             <div class="panel-body" style="width:350px; height:200px; overflow-y:scroll;">
+              <div class="btn-group-vertical" role="group" aria-label="...">
+                <div>
+                  <ul ng-repeat="project in projects">
+                    <li><a>{{project.project_name}} - {{project.points}}</a></li>                      
+                      <ul class="dropdown" ng-repeat="member in members">
+                        <li><a ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</a></li>
+                      </ul>        
+                  </ul>                     
+                </div>
+              </div>
              </div>
            </div>
         </div>        

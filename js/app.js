@@ -65,3 +65,11 @@ app.factory('ProjectData', function(){
       project_name: ''
     }
 });
+
+app.factory('IterationData', function(){
+    return {
+      id_iteration : '',
+      title_iteration : '',
+      point_iteration : ''
+    }
+}); 
