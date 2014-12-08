@@ -59,14 +59,11 @@ angular.module('Wbpms')
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.get('/api/projects/members/'+$scope.usuario.email, payload)        
-          //$http.get('/api/users/projects/'+$scope.usuario.email, payload)           
+          $http.get('/api/users/projects', payload)                  
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
-              $scope.projects = data;
-                if(data.length > 0) {
-                  $scope.projectModel.description = $scope.projects[0];
-                }   
+              $scope.projects = data[0].projects;
+              alert(JSON.stringify(data));
             })
             .error(function(data, status) {
               $log.debug('Error while fetching projects from server');
@@ -88,7 +85,6 @@ angular.module('Wbpms')
           $http.post('/api/projects', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success adding new project');
-              alert("The new Project is added");
               $scope.projects.push(data)
             })          
 
@@ -144,28 +140,28 @@ angular.module('Wbpms')
         }	
 
 
-        $scope.goToIterations = function(projectId) {
+        $scope.goToIterations = function(project_name) {
         // Go to Iterations 
     
-          $scope.proyecto.id_project = projectId; 
+          $scope.proyecto.project_name = project_name; 
 
           window.location.href = '#/projects/iterations';          
     
         }         
 
-        $scope.goToWorkItems = function(projectId) {
+        $scope.goToWorkItems = function(project_name) {
         // Go to Work Items 
     
-          $scope.proyecto.id_project = projectId; 
+          $scope.proyecto.project_name = project_name; 
 
           window.location.href = '#/projects/iterations/work_items';          
     
         }  
 
-        $scope.goToMembers = function(projectId) {
+        $scope.goToMembers = function(project_name) {
         // Go to Members 
     
-          $scope.proyecto.id_project = projectId; 
+          $scope.proyecto.project_name = project_name; 
 
           window.location.href = '#/projects/members';          
     

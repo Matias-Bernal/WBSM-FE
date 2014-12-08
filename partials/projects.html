@@ -25,17 +25,17 @@
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
-                    <td>{{projectModel.description}}</td>
-                    <td>{{projectModel.point}}</td>
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(project.projectId)">
+                    <td>{{project.project_name}}</td>
+                    <td>{{project.points}}</td>
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(project.project_name)">
                             <i class="fa fa-tasks"></i>
                         </button>
                     </td>         
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(project.projectId)">
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(project.project_name)">
                             <i class="fa fa-newspaper-o"></i>
                         </button>
                     </td> 
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.projectId)">
+                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.project_name)">
                             <i class="fa fa-users"></i>
                         </button>
                     </td> 
@@ -99,7 +99,8 @@
                             <div class="col-lg-4">
                                 <form class="form-signin" role="form" id="renameProject">
                                     <h5> Old Name </h5>
-                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="newNameProject.old_project_name" placeholder="Old Name" required="" autofocus=""></input>
+                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="newNameProject.old_project_name" placeholder="Old Name" required="" autofocus=""
+                                        ></input>
                                     <h5> New Name </h5>
                                         <input type="newnameProject" id="newNameProject" class="form-control" ng-model="newNameProject.new_new_project_name" placeholder="New Name" required="" autofocus=""></input>                                        
                                     <br>
