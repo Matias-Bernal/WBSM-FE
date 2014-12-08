@@ -4,26 +4,11 @@ angular.module('Wbpms')
   .controller('ProjectCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData',
     function ($scope, $http, $log, UserData, ProjectData) {	
 
+        //Global User Data
         $scope.usuario = UserData;  
 
-        $scope.proyecto = ProjectData;            
-        
-        // $scope.projects = [{
-        //     description:'Project1',
-        //     point:'100'}, 
-        //     {
-        //     description:'Project2',
-        //     point:'200'},
-        //     {
-        //     description:'Project3',
-        //     point:'300'},
-        //     {
-        //     description:'Project4',
-        //     point:'400'},
-        //     {
-        //     description:'Project5',
-        //     point:'500'}            
-        // ];
+        //Global Project Data
+        $scope.proyecto = ProjectData;    
 
         // we store all data in the data array
         $scope.projects = [];
@@ -63,7 +48,6 @@ angular.module('Wbpms')
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
               $scope.projects = data[0].projects;
-              alert(JSON.stringify(data));
             })
             .error(function(data, status) {
               $log.debug('Error while fetching projects from server');
@@ -85,11 +69,13 @@ angular.module('Wbpms')
           $http.post('/api/projects', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success adding new project');
-              $scope.projects.push(data)
+              $scope.projects.push(data);
+              alert("The Project was added");                            
             })          
 
             .error(function(data, status) {
               $log.debug('Error while trying to add new project');
+              alert("Error adding project");              
             });	           
 		
         }	 
@@ -99,20 +85,21 @@ angular.module('Wbpms')
         // Rename a new project 
     
           var payload = {
-              old_project_name : oldnameProject,
-              new_project_name : newnameProject
+              project_name_id : oldnameProject,
+              new_project_name_id : newnameProject
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.post('api/projects/'+oldnameProject, payload)
+          $http.post('/api/projects/update', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success rename project');
               alert("The Project was renamed");              
             })
             .error(function(data, status) {
               $log.debug('Error while trying to rename new project');
+              alert("Error renaming project");               
             });             
     
         }        
@@ -128,13 +115,14 @@ angular.module('Wbpms')
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.delete('api/projects/'+delnameProject, payload)
+          $http.delete('/api/projects', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove project');
               alert("The Project was deleted");                
             })
             .error(function(data, status) {
               $log.debug('Error while trying to remove new project');
+              alert("Error deleting project");                
             });		         
 		
         }	

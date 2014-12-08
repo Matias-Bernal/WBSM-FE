@@ -18,28 +18,28 @@
             </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <table class="table">
+              <div class="col-md-10 col-md-offset-1" style="width:1000px; height:300px; overflow-y:scroll;">
+                <table class="table-project">
                   <tr>
                     <th width="300">Project</th>
-                    <th>Points</th>
+                    <th width="100">Points</th>
                   </tr>
                   <tr ng-repeat="project in projects" >
                     <td>{{project.project_name}}</td>
                     <td>{{project.points}}</td>
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(project.project_name)">
+                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(project.project_name)">
                             <i class="fa fa-tasks"></i>
                         </button>
                     </td>         
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(project.project_name)">
+                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(project.project_name)">
                             <i class="fa fa-newspaper-o"></i>
                         </button>
                     </td> 
-                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.project_name)">
+                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.project_name)">
                             <i class="fa fa-users"></i>
                         </button>
                     </td> 
-                    <td>
+                    <td width="100">
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
                             <i class="fa fa-edit"></i>
                         </button>                                          

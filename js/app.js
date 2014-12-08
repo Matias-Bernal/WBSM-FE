@@ -62,6 +62,6 @@ app.factory('UserData', function(){
 
 app.factory('ProjectData', function(){
     return {
-      id_project: ''
+      project_name: ''
     }
 });
