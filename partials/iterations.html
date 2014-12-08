@@ -4,7 +4,7 @@
    <div > 
         <div class="container">
               <div class="col-md-10 col-md-offset-1">
-                <h2>Project {{description}} - Iterations</h2>
+                <h2>Project: {{project.project_name}} - Iterations</h2>
                 <h4>Project Description line 01</h4>
                 <h4>Project Description line 02</h4>
            <div class="row">  
@@ -65,7 +65,7 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" ng-click="create_iteration()" data-dismiss="modal">Done</button>
+                            <button type="submit" class="btn btn-primary" ng-click="create_iteration(project.project_name)" data-dismiss="modal">Done</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
                             
                     </div>

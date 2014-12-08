@@ -4,99 +4,88 @@ angular.module('Wbpms')
   .controller('IterationCtrl', ['$scope', '$http', '$log','ProjectData',
     function ($scope, $http, $log, ProjectData) {
 
-       $scope.proyecto = ProjectData;
+       $scope.project = ProjectData;
+       $scope.iterations = [];
 
-       $scope.iterations = [
+      /* $scope.iterations  = [
             {
                 idIteration:'001',
                 title:'Iteration 001',
-                point:'00/00',
-                owner: false
+                point:'00/00'
             },
             {
                 idIteration:'002',
                 title:'Iteration 002',
-                point:'00/00',
-                owner: false
+                point:'00/00'
             },
             {
                 idIteration:'003',
                 title:'Iteration 003',
-                point:'00/00',
-                owner: false
+                point:'00/00'
             },
             {
                 idIteration:'004',
                 title:'Iteration 004',
-                point:'00/00',
-                owner: false
-            }
-        ];
+                point:'00/00'
+            }    
+        ]; */
         
         
       $scope.iterationModel = {
            idIteration: '',
            title: '',
-           point: '',
-           owner: false 
+           point: ''            
       }
-
-      $scope.newIteration = {
-            new_Iteration_name : ''
-        }        
 
       $scope.delIteration = {
             iteration_name : ''
         } 
-        
-       
-    
-
+            
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the iterations from the server
-      $scope.init = function() { /*
+      $scope.init = function() { 
         //Get all iterations of a project
         var payload = {
-          project_name : $scope.proyecto.project_name
+          project_name : $scope.project.project_name
+        }
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+        // send the payload to the server
+        $http.get('/api/projects/iterations', payload)
+           .success(function(data, status, header, config) {
+            alert(JSON.stringify(data));
+            $scope.iterations = data;
+            if(data.length > 0) {
+              $scope.iterationModel.idIteration = $scope.iterations[0];
+            }  
+          })   
+          .error(function(data, status) {
+            alert("ERROR"+ JSON.stringify(data));
+            $log.debug('Error while fetching iterations from server');
+          });  
+
+      }
+
+     /* 
+      $scope.getAllProjectIterations = function() {
+      	 //shows all iterations of a project
+      	  var payload = {
+          project_name : $scope.project.project_name
           }
 
         $log.debug("Sending payload: " + JSON.stringify(payload));
 
+        //alert(JSON.stringify(data)); 
           // send the payload to the server
-          $http.get('/api/projects/Iterations/', payload)        
+          $http.get('/api/projects/iterations', payload)
              .success(function(data, status, header, config) {
               $log.debug('Success fetching iterations from server');
-              $scope.iterations = data;
-                if(data.length > 0) {
-                  $scope.iterationModel.idIteration = $scope.iterations[0];
-                }   
-            })
+              $scope.iterations = data[0].iterations;
+              alert(JSON.stringify(data));  
+                })   
             .error(function(data, status) {
               $log.debug('Error while fetching iterations from server');
-            });  */
-
-      }
-
-      
-      $scope.getAllProjectIterations = function() {
-      	 //shows all iterations of a project
-      	 alert("get members to project");
-            window.location.href = '#/projects/members';
-            
-            /*var payload = {
-                project_name : id_project,
-            }
-            
-            $log.debug("View project Iterations");
-            $http.post('/api/project/', payload)
-                .success(function(data, status, header, config) {
-                    $log.debug('Success get iterations');
-                    $scope.iterations = data;
-                })
-                .error(function(data, status) {
-                    $log.debug(data.error);
-                });*/   
-      } 
+            });  
+      }  */
 
       $scope.create_iteration = function(nameProject) {  	
         //function add a iteration to the project
@@ -111,10 +100,11 @@ angular.module('Wbpms')
             .success(function(data, status, header, config) {
               $log.debug('Success adding new iteration');
               alert("The new Iteration is added");
-              $scope.iterations.push(data)
+              $scope.iterations.push(data);
             })          
 
             .error(function(data, status) {
+              alert("ERROR");
               $log.debug('Error while trying to add new iteration');
             });
 
@@ -137,6 +127,6 @@ angular.module('Wbpms')
             .error(function(data, status) {
               $log.debug('Error while trying to remove new iteration');
             }); 
-        
-    }
-  ]);
+        }
+
+  }]);
