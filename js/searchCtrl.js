@@ -21,11 +21,11 @@ angular.module('Wbpms')
     }
                 
     //search global other user. pre-condition: User is login  
-    $scope.globalOtherUserSearch = function(){
+    $scope.globalOtherUserSearch = function(key){
         alert('usa controlador')
-        $scope.globalSearchUser.push($scope.searchs)
-        /*var payload = {
-                keyword: key
+        //$scope.globalSearchUser.push($scope.searchs)
+        var payload = {
+                keyword: $scope.key
             }
 
         $http.post('/api/search/users', payload)
@@ -37,15 +37,15 @@ angular.module('Wbpms')
           })
           .error(function(data, status) {
             $log.debug(data.error);
-          });*/
+          });
     }
     
     //search global work item. pre-condition: User is login 
-     $scope.globalWorkItemSearch = function(){
+     $scope.globalWorkItemSearch = function(key){
          alert('usa controlador2')
-         $scope.globalSearchWorkItem.push($scope.searchs)
-        /* var payload = {
-                password : keyword
+         //$scope.globalSearchWorkItem.push($scope.searchs)
+         var payload = {
+                keyword: $scope.key 
             }
          
 
@@ -57,6 +57,6 @@ angular.module('Wbpms')
           })
           .error(function(data, status) {
             $log.debug('Error workItem not found');
-          });*/
+          });
     }
 }]);

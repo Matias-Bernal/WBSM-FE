@@ -3,22 +3,24 @@
       <ul class="nav nav-tabs">
         <li><a href='#/home' data-toggle="tab">Home</a></li>
         <li><a href='#/projects' data-toggle="tab">Projects</a></li>
-        <form method="get" action="#/search">    
-            <div >
-                <div class="col-lg-3 col-lg-offset-4">
-                    <div class="input-group">
-                    <input type="text" ng-model="searchs" class="form-control" placeholder="Search: User or WorkItem" ></input>
-                        <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" ng-click="globalOtherUserSearch()">
-                                  <i class="fa fa-search"></i>
-                                </button>
-                        </span>
-                    </div>
+        <div class="row">
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select Search <i class="fa fa-search"></i><span class="caret"></button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#/search" ng-click="globalOtherUserSearch(searchs)">Users:</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#/search" ng-click="globalWorkItemSearch(searchs)">WorkItem</a></li>
+                    </ul>
+                  </div><!-- /btn-group -->
+                  <input type="text" ng-model="searchs" class="form-control">
+                </span>
                 </div><!-- /input-group -->
-            </div>
-      </form>
+              </div><!-- /.col-lg-4 -->
+          </div>
       </ul>
-
+<!--          -->
       <div class="tab-content">
         <div id="home" class="tab-pane active">
         </div>
