@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                <h2>Members - Project: {{idProject.id_project}}</h2>
+                <h2>Members - Project: {{project.project_name}}</h2>
               </div>
             </div>
 
@@ -63,20 +63,22 @@
                     <div class="modal-body">
                         <form class="form-adder" role="form" data-toggle="validator">
                             <div class="form-group">
+<!--
                                 <label for="recipient-name" class="control-label" >Name:</label>
                                 <input type="text" ng-model="adder.name" class="form-control" id="recipient-name"  placeholder="Name" required autofocus="">
+-->
                                  <label for="recipient-name" class="control-label" >Email:</label>
-                                <input type="text" ng-model="adder.email" class="form-control" id="recipient-name"  placeholder="Email@" required autofocus="">
-                                 <label for="recipient-name" class="control-label" >points:</label>
-                                <input type="text" ng-model="adder.point" class="form-control" id="recipient-name"  placeholder="Points" required autofocus="">
-                                 <label for="recipient-name" class="control-label" >owner:</label>
-                                <input type="text" ng-model="adder.owner" class="form-control" id="recipient-name"  placeholder="True|False" required autofocus="">
+                                <input type="text" ng-model="adderEmail" class="form-control" id="recipient-name"  placeholder="Email@" required autofocus="">
+                             <!--    <label for="recipient-name" class="control-label" >points:</label>
+                                <input type="text" ng-model="adder.point" class="form-control" id="recipient-name"  placeholder="Points" required autofocus="">-->
+                                <!-- <label for="recipient-name" class="control-label" >owner:</label>
+                                <input type="text" ng-model="adder.owner" class="form-control" id="recipient-name"  placeholder="True|False" required autofocus="">-->
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-                            <button type="submit" class="btn btn-primary" ng-click="add_member_to_projects()" data-dismiss="modal">Send invite</button>
+                            <button type="submit" class="btn btn-primary" ng-click="add_member_to_projects(project.project_name,adderEmail)" data-dismiss="modal">Send invite</button>
                     </div>
                 </div>
             </form>

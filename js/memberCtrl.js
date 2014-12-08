@@ -32,7 +32,7 @@ angular.module('Wbpms')
         ];
 */
         
-        $scope.idProject = ProjectData;
+        $scope.project = ProjectData;
         $scope.eMailUser = UserData;
         $scope.members = [];
         
@@ -47,17 +47,17 @@ angular.module('Wbpms')
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
       
-      var init = function(projectName) {
+        $scope.init = function() {
           
           var payload = {
-              project_name_id: projectName
+              project_name_id: $scope.project.project_name
           }
           
        $log.debug("Sending payload: " + JSON.stringify(payload));
           $http.get('/api/projects/members', payload)
 
           .success(function(data, status, header, config) {
-            
+            alert(JSON.stringify(data));
             // the server should return a json array which contains all the todos
             $scope.members = data;
               if(data.length > 0) {
@@ -66,6 +66,7 @@ angular.module('Wbpms')
                
           })
           .error(function(data, status) {
+            alert(JSON.stringify(data));
             $log.debug(data.error);
           });   
       };
@@ -74,7 +75,8 @@ angular.module('Wbpms')
         $scope.add_member_to_projects = function(idProject,eMailUser) {
           /*  alert("member agree to project");
             window.location.href = '#/projects/members';  */
-              
+            alert($scope.idProject);
+            alert($scope.eMailUser);   
             var payload = {
                 project_name_id: idProject,
                 user_email_id: eMailUser
@@ -83,15 +85,17 @@ angular.module('Wbpms')
            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/add', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Success: New member <eMailMember> added successfully to <id_project>'),
-                    alert("The new member is added");
-                    $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});
-                    //$scope.members.push(data);
+                $log.debug('Success: New member <user_email_id> added successfully to <project_name_id>'),
+                alert("The new member is added");
+                if (data != null){ 
+                    $scope.members.push(data);
+                }
+//                    $scope.members.push({name: $scope.adder.name, eMailMember: $scope.adder.email, point: $scope.adder.point, owner: $scope.adder.owner});    
               })
               .error(function(data, status) {
-                $log.debug(data.error);
+                //$log.debug(data.error);
                  alert("The new member is not added");
-//                $log.debug('Error while trying to add new member to the project');
+                $log.debug('Error while trying to add new member to the project');
               });
             
         }
@@ -122,7 +126,7 @@ angular.module('Wbpms')
            /* 
             alert("member remove to project");
             window.location.href = '#/projects/members';*/
-            
+           
              var payload = {
                 project_name_id: projectName,
                 user_email_id: eMail
