@@ -53,7 +53,7 @@ angular.module('Wbpms')
               project_name_id: $scope.project.project_name
           }
           $log.debug("Sending payload: " + JSON.stringify(payload));
-          $http.post('/api/projects/getmembers/', payload)
+          $http.post('/api/projects/getmembers', payload)
 
           .success(function(data, status, header, config) {
             alert(JSON.stringify(data[0]));
@@ -101,7 +101,7 @@ angular.module('Wbpms')
             }
             alert(JSON.stringify(payload));
             $log.debug("Sending payload: " + JSON.stringify(payload));
-            $http.post('/api/projects/getmembers/', payload)
+            $http.post('/api/projects/getmembers', payload)
               .success(function(data, status, header, config) {
                 alert("exito");
                 // the server should return a json array which contains all the todos
@@ -124,7 +124,7 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             
             
-            $http.delete('/api/projects/{project_name_id}/{user_email_id}', payload)
+            $http.delete('/api/projects/remove', payload)
               .success(function(data, status, header, config) {
                 $log.debug('Member Member removed successfully from project'); 
                  alert("The new member is removed");
@@ -149,7 +149,7 @@ angular.module('Wbpms')
             }
             $log.debug("Promote owner");
 
-            $http.post('api/projects/'+project_name_id+'/owners/'+user_email_id, payload)
+            $http.post('api/projects/promote', payload)
                 .success(function(data, status, header, config) {
                 $log.debug('New wowner <owner> added successfully to <id_project>')
                     if($scope.members.owner == false) {
@@ -170,7 +170,7 @@ angular.module('Wbpms')
             }
             $log.debug("Downgrader owner");
 
-            $http.delete('api/projects/members/promote', payload)
+            $http.post('api/projects/members/downgrade', payload)
               .success(function(data, status, header, config) {
                 $log.debug('Downgrade owner <owner> successfully to <id_project>')
                     if($scope.members.owner == true) {
