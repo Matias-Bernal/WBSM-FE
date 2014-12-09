@@ -105,7 +105,7 @@ angular.module('Wbpms')
               .success(function(data, status, header, config) {
                 alert("exito");
                 // the server should return a json array which contains all the todos
-                $scope.members = data;
+                $scope.members = data[0].members;
               })
               .error(function(data, status) {
                 alert("error");
