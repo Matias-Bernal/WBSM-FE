@@ -20,9 +20,9 @@
               <div class="btn-group-vertical" role="group" aria-label="...">
                 <div>
                   <ul ng-repeat="project in projects">
-                    <li><a>{{project.project_name}} - {{project.points}}</a></li>     
+                    <li><a ng-click="loadIterations(project.project_name)">{{project.project_name}} - {{project.points}}</a></li>     
                       <ul ng-repeat="iteration in iterations">
-                        <li><a>{{iteration.name}} - {{iteration.points}}</a></li>                      
+                        <li><a ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.iteration_number}} - {{iteration.points}}</a></li>                      
                         <ul class="dropdown" ng-repeat="workItem in workItems">
                           <li><a ng-click="goToWorkItems(project.project_name, workItem.name)">{{workItem.name}} - {{workItem.points}}</a></li>
                         </ul>
@@ -43,7 +43,7 @@
               <div class="btn-group-vertical" role="group" aria-label="...">
                 <div>
                   <ul ng-repeat="project in projects">
-                    <li><a>{{project.project_name}} - {{project.points}}</a></li>                      
+                    <li><a ng-click="loadMembers(project.project_name)">{{project.project_name}} - {{project.points}}</a></li>                      
                       <ul class="dropdown" ng-repeat="member in members">
                         <li><a ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</a></li>
                       </ul>        

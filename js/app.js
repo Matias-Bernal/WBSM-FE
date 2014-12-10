@@ -62,7 +62,9 @@ app.factory('UserData', function(){
 
 app.factory('ProjectData', function(){
     return {
-      project_name: ''
+      project_name: '',
+      poins: '',
+      owner: ''
     }
 });
 

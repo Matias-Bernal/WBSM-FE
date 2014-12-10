@@ -30,22 +30,18 @@
                     <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToIterations(project.project_name)">
                             <i class="fa fa-tasks"></i>
                         </button>
-                    </td>         
-<!--                     <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(project.project_name)">
-                            <i class="fa fa-newspaper-o"></i>
-                        </button>
-                    </td>  -->
-                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.project_name)">
+                    </td>      
+                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToMembers(project.project_name, project.points, project.owner)">
                             <i class="fa fa-users"></i>
                         </button>
                     </td> 
                     <td width="100">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" ng-click="setRename(project.project_name)">
                             <i class="fa fa-edit"></i>
                         </button>                                          
                     </td>
                     <td>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" ng-click="setDelete(project.project_name)">
                             <i class="fa fa-times"></i>                           
                         </button>                         
                     </td>
@@ -99,7 +95,7 @@
                             <div class="col-lg-4">
                                 <form class="form-signin" role="form" id="renameProject">
                                     <h5> Old Name </h5>
-                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="newNameProject.old_project_name" placeholder="Old Name" required="" autofocus=""
+                                        <input type="oldnameProject" id="oldNameProject" class="form-control" ng-model="newNameProject.old_project_name" ng-readonly="newNameProject.old_project_name"
                                         ></input>
                                     <h5> New Name </h5>
                                         <input type="newnameProject" id="newNameProject" class="form-control" ng-model="newNameProject.new_new_project_name" placeholder="New Name" required="" autofocus=""></input>                                        
@@ -132,7 +128,7 @@
                             <div class="col-lg-4">
                                 <form class="form-signin" role="form" id="1181323998">
                                     <h5> Name Project </h5>
-                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="delProject.project_name" placeholder="Name" required="" autofocus="">
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="delProject.project_name" ng-readonly="delProject.project_name">
                                     <br>
                                     <br>
                                         <div class="col-lg-6">

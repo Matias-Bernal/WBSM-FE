@@ -17,7 +17,7 @@ angular.module('Wbpms')
 
         $scope.iterations = [];           
 
-        $scope.work_Items = [];        
+        $scope.workItems = [];        
 
         $scope.members = [];                            
 
@@ -33,77 +33,71 @@ angular.module('Wbpms')
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.post('/api/users/getprojects/', payload)                  
+          $http.post('/api/users/getprojects', payload)                  
             .success(function(data, status, header, config) {
               $log.debug('Success fetching projects from server');
-              $scope.projects = data[0].projects;             
-
-              for(var i =0; i < $scope.projects.length; i++) {
-
-                // List all iterations of each project
-                var payload2 = {
-                  project_name : $scope.projects[i].project_name
-                }
-
-                $log.debug("Sending payload: " + JSON.stringify(payload2));
-
-                // send the payload to the server
-                $http.post('/api/projects/iterations/getprojectiterations', payload2)                  
-                  .success(function(data, status, header, config) {
-                    $log.debug('Success fetching projects from server');
-                    $scope.iterations = data[0].iterations;                    
-
-                    for(var j =0; j < $scope.iterations.length; j++) {
-
-                      // List all members of each project
-                      var payload3 = {
-                        project_name : payload2.project_name,
-                        iteration_number : $scope.iterations[j].id_iteration
-                      }
-
-                      $log.debug("Sending payload: " + JSON.stringify(payload3));
-
-                      // send the payload to the server
-                      $http.post('api/projects/iterations/getworkitems', payload3)                  
-                        .success(function(data, status, header, config) {
-                          $log.debug('Success fetching projects from server');
-                          $scope.work_Items = data[0].work_Items;
-                      })
-                        .error(function(data, status) {
-                          $log.debug('Error while fetching projects from server');
-                      });  
-                    }
-
-                })
-                  .error(function(data, status) {
-                    $log.debug('Error while fetching projects from server');
-                });  
-
-                // List all members of each project
-                var payload4 = {
-                  project_name_id : $scope.projects[i].project_name
-                }
-
-                $log.debug("Sending payload: " + JSON.stringify(payload4));
-
-                // send the payload to the server
-                $http.post('/api/projects/getmembers/', payload4)                  
-                  .success(function(data, status, header, config) {
-                    $log.debug('Success fetching projects from server');
-                    $scope.iterations = data[0].iterations;
-                })
-                  .error(function(data, status) {
-                    $log.debug('Error while fetching projects from server');
-                });   
-
-              } 
-
-            })
+              $scope.projects = data[0].projects;   
+            })  
             .error(function(data, status) {
               $log.debug('Error while fetching projects from server');
             }); 
         
         }    
+
+        $scope.loadIterations = function(project_name){
+
+        // List all iterations of each project
+          var payload2 = {
+              project_name : project_name
+          };
+
+          // send the payload to the server
+          $http.post('/api/projects/iterations/getprojectiterations', payload2)                  
+            .success(function(data, status, header, config) {
+              $scope.iterations = data[0].iterations;
+            })  
+            .error(function(data, status) {
+              $log.debug('Error while fetching iterations from server');
+            });                
+
+        }
+
+        $scope.loadWorkItems = function(project_name, iteration_number){
+
+          // List all work Items of an iteration
+          var payload3 = {
+            project_name : project_name,
+            iteration_number : iteration_number
+          }
+
+          // send the payload to the server
+          $http.post('api/projects/iterations/getworkitems', payload3)                  
+            .success(function(data, status, header, config) {
+              $scope.workItems = data[0].workItems;
+          })
+            .error(function(data, status) {
+              $log.debug('Error while fetching work Items from server');
+          });                
+
+        }     
+
+        $scope.loadMembers = function(project_name){
+
+          // List all members of each project
+          var payload4 = {
+            project_name_id : project_name
+          }
+
+          // send the payload to the server
+          $http.post('/api/projects/getmembers', payload4)                  
+            .success(function(data, status, header, config) {
+              $scope.members = data[0].members;
+          })
+            .error(function(data, status) {
+              $log.debug('Error while fetching members from server');
+          });                
+
+        }   
 
         $scope.goToWorkItems = function(project_name, iteration_number) {
         // Go to Work Items 
