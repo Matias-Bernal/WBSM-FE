@@ -17,7 +17,7 @@ angular.module('Wbpms')
 
         $scope.iterations = [];           
 
-        $scope.workItems = [];        
+        $scope.workitems = [];        
 
         $scope.members = [];                            
 
@@ -30,16 +30,13 @@ angular.module('Wbpms')
               user_email_id : $scope.usuario.email
           }
 
-          $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
           $http.post('/api/users/getprojects', payload)                  
             .success(function(data, status, header, config) {
-              $log.debug('Success fetching projects from server');
               $scope.projects = data[0].projects;   
             })  
             .error(function(data, status) {
-              $log.debug('Error while fetching projects from server');
+              alert('Error while fetching projects from server');
             }); 
         
         }    
@@ -57,7 +54,7 @@ angular.module('Wbpms')
               $scope.iterations = data[0].iterations;
             })  
             .error(function(data, status) {
-              $log.debug('Error while fetching iterations from server');
+              alert('Error while fetching iterations from server');
             });                
 
         }
@@ -71,12 +68,12 @@ angular.module('Wbpms')
           }
 
           // send the payload to the server
-          $http.post('api/projects/iterations/getworkitems', payload3)                  
+          $http.post('/api/projects/iterations/getworkitems', payload3)                  
             .success(function(data, status, header, config) {
-              $scope.workItems = data[0].workItems;
+              $scope.workitems = data;
           })
             .error(function(data, status) {
-              $log.debug('Error while fetching work Items from server');
+              alert('Error while fetching work Items from server'); 
           });                
 
         }     
@@ -94,7 +91,7 @@ angular.module('Wbpms')
               $scope.members = data[0].members;
           })
             .error(function(data, status) {
-              $log.debug('Error while fetching members from server');
+              alert('Error while fetching members from server');
           });                
 
         }   

@@ -21,11 +21,11 @@
                 <div>
                   <ul ng-repeat="project in projects">
                     <li><a ng-click="loadIterations(project.project_name)">{{project.project_name}} - {{project.points}}</a></li>     
-                      <ul ng-repeat="iteration in iterations">
-                        <li><a ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.iteration_number}} - {{iteration.points}}</a></li>                      
-                        <ul class="dropdown" ng-repeat="workItem in workItems">
-                          <li><a ng-click="goToWorkItems(project.project_name, workItem.name)">{{workItem.name}} - {{workItem.points}}</a></li>
-                        </ul>
+                      <ul class="dropdown" ng-repeat="iteration in iterations">
+                        <li><a ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.points}}</a></li>                      
+                          <ul class="dropdown" ng-repeat="workitem in workitems">
+                            <li><a ng-click="goToWorkItems(project.project_name, workitem.name)">{{workitem.name}} - {{workitem.points}}</a></li>
+                          </ul>
                       </ul>        
                   </ul>                     
                 </div>
