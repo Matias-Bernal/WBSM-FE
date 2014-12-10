@@ -182,6 +182,7 @@ angular.module('Wbpms')
  
                 })
                 .error(function(data, status) {
+                    alert("error in Promote owner");
                     $log.debug(data.error);     
                 });
         }
@@ -203,6 +204,7 @@ angular.module('Wbpms')
                     }; 
               })
           .error(function(data, status) {
+            alert("error in downgrade owner");
             $log.debug(data.error);   
           });
         }
