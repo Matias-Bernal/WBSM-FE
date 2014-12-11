@@ -51,7 +51,8 @@ angular.module('Wbpms')
           // send the payload to the server
           $http.post('/api/projects/iterations/getprojectiterations', payload2)                  
             .success(function(data, status, header, config) {
-              $scope.iterations = data[0].iterations;
+              $scope.iterations.iterations = data[0].iterations;
+              $scope.iterations.project = project_name;              
             })  
             .error(function(data, status) {
               alert('Error while fetching iterations from server');
@@ -70,7 +71,9 @@ angular.module('Wbpms')
           // send the payload to the server
           $http.post('/api/projects/iterations/getworkitems', payload3)                  
             .success(function(data, status, header, config) {
-              $scope.workitems = data;
+              $scope.workitems.workitems = data;
+              $scope.workitems.project = project_name;                            
+              $scope.workitems.iteration = iteration_number;                                          
           })
             .error(function(data, status) {
               alert('Error while fetching work Items from server'); 
@@ -88,7 +91,8 @@ angular.module('Wbpms')
           // send the payload to the server
           $http.post('/api/projects/getmembers', payload4)                  
             .success(function(data, status, header, config) {
-              $scope.members = data[0].members;
+              $scope.members.members = data[0].members;
+              $scope.members.project = project_name;
           })
             .error(function(data, status) {
               alert('Error while fetching members from server');
