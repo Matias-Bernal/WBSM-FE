@@ -9,12 +9,12 @@
                   <div class="input-group-btn">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select Search <i class="fa fa-search"></i><span class="caret"></button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#/search" ng-click="globalOtherUserSearch(searchs)">Users:</a></li>
+                      <li><a href="#/search" ng-click="search_users(key)">Users:</a></li>
                       <li class="divider"></li>
-                      <li><a href="#/search" ng-click="globalWorkItemSearch(searchs)">WorkItem</a></li>
+                      <li><a href="#/search" ng-click="search_work_items(key)">WorkItem:</a></li>
                     </ul>
                   </div><!-- /btn-group -->
-                  <input type="text" ng-model="searchs" class="form-control" placeholder="Input the object to search">
+                  <input type="text" ng-model="key" class="form-control" placeholder="Input the object to search" required>
                 </span>
                 </div><!-- /input-group -->
               </div><!-- /.col-lg-4 -->
