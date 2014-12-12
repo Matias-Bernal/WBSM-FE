@@ -1,0 +1,75 @@
+<div ng-include="'partials/header.html'"></div>
+<div ng-include="'partials/pestanas.html'"></div> 
+
+<article ng-init="init()">  
+ <div>   
+  <div class="row">
+    <div class= "col-md-1 col-md-offset-1">
+      <img src="img/male.png" class="img-thumbnail" style="float">
+      </div> 
+        <h4>{{usuario.name}} {{usuario.surname}} <br><br>
+        {{usuario.email}}</h4>
+      </div>
+      <div class="container">
+        <div class="col-lg-8">
+          <h2>My Work Open Items</h2>
+			     <div class="panel panel-primary">
+			       <div class="panel-heading">
+			         <h4>Open Items + Not Done</h4>
+			       </div>
+ <!--            <div class="panel-body" style="width:730px; height:200px; overflow-y:scroll;">
+              <div class="btn-group-vertical" role="group" aria-label="...">
+                <div>
+                  <ul ng-repeat="project in projects">
+                    <li><span class="label label-info" ng-click="loadIterations(project.project_name)">{{project.project_name}} - {{project.points}}</span></li>     
+                      <ul class="dropdown" ng-if="iterations.project == project.project_name" ng-repeat="iteration in iterations.iterations">
+                        <li><span class="label label-success" ng-if="iterations.title != ''" ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.points}}</span></li>                      
+                          <ul class="dropdown" ng-if="workitems.project == project.project_name && workitems.iteration == iteration.iteration_number" ng-repeat="workitem in workitems.workitems">
+                            <li><span class="label label-warning" ng-if="workitem.name != ''" ng-click="goToWorkItems(project.project_name, iteration.iteration_number, iteration.title, iteration.points)">{{workitem.name}} - {{workitem.points}}</span></li>
+                          </ul>
+                      </ul>        
+                  </ul>   -->                  
+                </div>
+              </div>
+             </div>
+           </div>
+ 		    </div>
+        <div class="col-lg-4">        
+          <h2>Team Members</h2>
+           <div class="panel panel-primary">
+             <div class="panel-heading">
+               <h4>Contacts</h4>
+             </div>
+             <div class="panel-body" style="width:350px; height:200px; overflow-y:scroll;">
+              <div class="btn-group-vertical" role="group" aria-label="...">
+                <div>
+                 <!-- <ul ng-repeat="project in projects">
+                    <li><span class="label label-info" ng-model="nameproject" ng-click="loadMembers(project.project_name)">{{project.project_name}} - {{project.points}}</span></li>                      
+                      <ul class="dropdown" ng-if="members.project == project.project_name" ng-repeat="member in members.members">
+                        <li><span class="label label-success" ng-if="member.name != ''"  ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</span></li>
+                      </ul>        
+                  </ul> -->                    
+                </div>
+              </div>
+             </div>
+           </div>
+        </div>        
+      </div>	
+  </div>
+</div>
+    
+
+</article>    
+
+
+
+
+
+
+
+
+
+
+
+
+<div ng-include="'partials/footer.html'"></div>
