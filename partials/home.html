@@ -20,12 +20,12 @@
               <div class="btn-group-vertical" role="group" aria-label="...">
                 <div>
                   <ul ng-repeat="project in projects">
-                    <li><a>{{project.project_name}} - {{project.points}}</a></li>     
-                      <ul ng-repeat="iteration in iterations">
-                        <li><a>{{iteration.name}} - {{iteration.points}}</a></li>                      
-                        <ul class="dropdown" ng-repeat="workItem in workItems">
-                          <li><a ng-click="goToWorkItems(project.project_name, workItem.name)">{{workItem.name}} - {{workItem.points}}</a></li>
-                        </ul>
+                    <li><span class="label label-info" ng-click="loadIterations(project.project_name)">{{project.project_name}} - {{project.points}}</span></li>     
+                      <ul class="dropdown" ng-repeat="iteration in iterations.iterations">
+                        <li><span class="label label-success" ng-if="iterations.project == project.project_name" ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.points}}</span></li>                      
+                          <ul class="dropdown" ng-repeat="workitem in workitems.workitems">
+                            <li><span class="label label-warning" ng-if="workitems.project == project.project_name && workitems.iteration == iteration.iteration_number" ng-click="goToWorkItems(project.project_name, workitem.name)">{{workitem.name}} - {{workitem.points}}</span></li>
+                          </ul>
                       </ul>        
                   </ul>                     
                 </div>
@@ -43,9 +43,9 @@
               <div class="btn-group-vertical" role="group" aria-label="...">
                 <div>
                   <ul ng-repeat="project in projects">
-                    <li><a>{{project.project_name}} - {{project.points}}</a></li>                      
-                      <ul class="dropdown" ng-repeat="member in members">
-                        <li><a ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</a></li>
+                    <li><span class="label label-info" ng-model="nameproject" ng-click="loadMembers(project.project_name)">{{project.project_name}} - {{project.points}}</span></li>                      
+                      <ul class="dropdown" ng-repeat="member in members.members">
+                        <li><span class="label label-success" ng-if="members.project == project.project_name" ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</span></li>
                       </ul>        
                   </ul>                     
                 </div>

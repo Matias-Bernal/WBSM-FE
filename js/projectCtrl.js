@@ -41,16 +41,13 @@ angular.module('Wbpms')
               user_email_id : $scope.usuario.email
           }
 
-          $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
-          $http.post('/api/users/getprojects/', payload)                  
+          $http.post('/api/users/getprojects', payload)                  
             .success(function(data, status, header, config) {
-              $log.debug('Success fetching projects from server');
               $scope.projects = data[0].projects;
             })
             .error(function(data, status) {
-              $log.debug('Error while fetching projects from server');
+              alert('Error while fetching projects from server');
             }); 
         
         }    
@@ -63,18 +60,14 @@ angular.module('Wbpms')
               project_name : projectName
           }     
 
-          $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
           $http.post('/api/projects', payload)
             .success(function(data, status, header, config) {
-              $log.debug('Success adding new project');
               $scope.projects.push(data);
               alert("The Project was added");                            
             })          
 
             .error(function(data, status) {
-              $log.debug('Error while trying to add new project');
               alert("Error adding project");              
             });	           
 		
@@ -89,12 +82,9 @@ angular.module('Wbpms')
               new_project_name_id : newnameProject
           }
 
-          $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
           $http.post('/api/projects/update', payload)
             .success(function(data, status, header, config) {
-              $log.debug('Success rename project');
               alert("The Project was renamed");   
               for(var i =0; i < $scope.projects.length; i++) {
                 if($scope.projects[i].project_name === oldnameProject) {
@@ -104,7 +94,7 @@ angular.module('Wbpms')
               }           
             })
             .error(function(data, status) {
-              $log.debug('Error while trying to rename new project');
+              alert("Error renaming project");               
             });             
     
         }        
@@ -117,12 +107,9 @@ angular.module('Wbpms')
               project_name : delnameProject
           }
 
-          $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
-          $http.post('/api/projects/delprojects/', payload)
-            .success(function(data, status, header, config) {
-              $log.debug('Success remove project');         
+          $http.post('/api/projects/remove', payload)
+            .success(function(data, status, header, config) {        
               alert("The Project was deleted");                
               for(var i =0; i < $scope.projects.length; i++) {
                 if($scope.projects[i].project_name === delnameProject) {
@@ -132,7 +119,6 @@ angular.module('Wbpms')
               }              
             })
             .error(function(data, status) {
-              $log.debug('Error while trying to remove new project');
               alert("Error deleting project"); 
             });		         
 		
@@ -142,7 +128,7 @@ angular.module('Wbpms')
         $scope.goToIterations = function(project_name) {
         // Go to Iterations 
     
-          $scope.proyecto.project_name = project_name; 
+          $scope.proyecto.project_name = project_name;          
 
           window.location.href = '#/projects/iterations';          
     
@@ -157,14 +143,30 @@ angular.module('Wbpms')
     
         }  */
 
-        $scope.goToMembers = function(project_name) {
+        $scope.goToMembers = function(project_name, points, owner) {
         // Go to Members 
     
           $scope.proyecto.project_name = project_name; 
+          $scope.proyecto.points = points;            
+          $scope.proyecto.owner = owner;           
 
           window.location.href = '#/projects/members';          
     
-        }                      
+        }  
+
+        $scope.setDelete = function(project_name) {
+        // Set project name to Delete
+
+          $scope.delProject.project_name = project_name;
+
+        }
+
+        $scope.setRename = function(project_name) {
+        // Set project name to Delete
+
+          $scope.newNameProject.old_project_name = project_name;
+
+        }        
         
     }
   ]);
