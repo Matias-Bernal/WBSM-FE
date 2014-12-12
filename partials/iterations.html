@@ -10,12 +10,12 @@
            <div class="row">  
                 <div class="col-md-10 col-lg-offset-10">
                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button>
-                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">-</button>
                 </div> 
             </div>
         </div>
 
             <div class="row">
+              <div class="col-md-10 col-md-offset-1" style="width:1000px; height:300px; overflow-y:scroll;">
               <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                   <tr>
@@ -30,22 +30,33 @@
                     <th>Title</th>
                     <th>Points</th>
                   </tr>
-                  <tr ng-repeat="iteration in iterations" >
+                <tr ng-repeat="iterationT in iterations" >
                     <td>
                         <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="iteration.owner">
-                             {{member.owner}}
+                            <input type="checkbox">
+                            
                         </label>
                         </div>
                     </td>
-                    <td>{{iteration.idIteration}}</td>
-                    <td>{{iteration.title}}</td>
-                    <td>{{iteration.point}}</td>
-                  </tr>
+                    <td>{{iterationT.iteration_number}}</td>
+                    <td>{{iterationT.title}}</td>
+                    <td>{{iterationT.points}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                            <i class="fa fa-times"></i> 
+                        </button>                         
+                    </td>
+                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(iterationT)">
+                            <i class="fa fa-cubes"></i>
+
+                        </button>
+                    </td>
+                 </tr>
                 </table>
               </div>
               </div>
+          </div>    
         </div> <!-- end of container --> 
     </div>
 
@@ -71,6 +82,40 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal Delete Iteration -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Delete Iteration</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <form class="form-signin" role="form" id="1181323999">
+                                    <h5> Project Name </h5>
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="delIteration.project_name" placeholder="Project Name" required="" autofocus=""
+                                        ></input>
+                                    <h5> Iteration Number </h5>
+                                        <input type="nameIteration" id="inputNameIteration" class="form-control" ng-model="delIteration.iteration_number" placeholder="Iteration Number" required="" autofocus=""></input> 
+                                    <br>
+                                    <br>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="delete_iteration(delIteration.project_name, delIteration.iteration_number)">Done</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                </form>                                 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
