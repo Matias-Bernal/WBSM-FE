@@ -1,11 +1,11 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div>    
-<article>    
+<article ng-init="init()">    
    <div > 
         <div class="container">
             <div class="row">
                   <div class="col-md-10 col-md-offset-1">
-                    <h3>Iteration Number - Work Items</h3>
+                    <h3>Iteration: {{iteration.title_iteration || "esta vacio"}} - Work Items</h3>
                   </div>                 
                   <div class="col-md-10 col-lg-offset-10">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal8">+</button>
@@ -22,15 +22,40 @@
                     <th>Points</th>
                   </tr>
                   <tr ng-repeat="workItem in workItems" >
-                    <td>{{workItem.idWorkItem}}</td>
-                    <td>{{workItem.title}}</td>
-                    <td>{{workItem.point}}</td>
+                    <td>{{workItem.number}}</td>
+                    <td>{{workItem.name}}</td>
+                    <td>{{workItem.points}}</td>
                   </tr>
                 </table>
               </div>
               </div>
         </div> <!-- end of container --> 
     </div>
+
+<!--Modal add Work Item -->
+<div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="form-signin" ng-submit="create_work_item()" role="form" id="1181323992">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Add Work Item</h4>  
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label" >Title:</label>
+                                <input type="text" /*ng-model="adder.name" */ class="form-control" id="recipient-name"  placeholder="Title of Work Item" required autofocus="">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" ng-click="create_work_item(project.project_name_id, iteration.iteration_number)" data-dismiss="modal">Done</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+                            
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 <!--Modal Modify Information of Work-->
     <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -4,8 +4,10 @@ angular.module('Wbpms')
   .controller('WorkItemCtrl', ['$scope', '$http', '$log','ProjectData', 'IterationData',
     function ($scope, $http, $log, ProjectData, IterationData) {
 
-      $scope.iteration = IterationData;
       $scope.project = ProjectData;
+
+      $scope.iteration = IterationData;
+
       $scope.workItems = []; 
 
     /*  $scope.workItems = [
@@ -46,56 +48,63 @@ angular.module('Wbpms')
 
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the todos from the server
-      var init = function() {
+      $scope.init = function() {
 
         var payload = {
-          project_name = $scope.project.project_name,
-          iteration_number = $scope.iteration.id_iteration
+           project_name : $scope.project.project_name,
+           iteration_number : $scope.iteration.id_iteration
+        }
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+        // send the payload to the server
+        $http.post('/api/projects/iterations/getworkitems', payload)
+           .success(function(data, status, header, config) {
+            alert(JSON.stringify(data));
+            $scope.workItems = data;
+          })   
+          .error(function(data, status) {
+            alert("ERROR"+ JSON.stringify(data));
+          });
+
+      }
+        
+    
+     $scope.get_work_item_info = function(idWorkItem) {
+       //the server should return a json with work_item info
+       var payload = {
+          work_item_id : idWorkItem
         }
 
       $log.debug("Sending payload: " + JSON.stringify(payload));
         // send the payload to the server
-        $http.get('api/projects/iterations/workitems', payload)
+        $http.get('/api/projects/iterations/getwork_items', payload)
            .success(function(data, status, header, config) {
             alert(JSON.stringify(data));
             $scope.idWorkItem = data;
-            if(data.length > 0) {
-              $scope.workItemModel.idWorkItem = $scope.workItems[0];
-            }  
           })   
           .error(function(data, status) {
             alert("ERROR"+ JSON.stringify(data));
-            $log.debug('Error while fetching iterations from server');
+            $log.debug('Error while try fetch work item info from server');
           });
+      }
 
-      };
-        
-    
-     $scope.getWorkItemInfo = function(idWorkItem) {
-       //the server should return a json with work_item info
-
-     }
-
-     $scope.createWorkItem = function(idIteration, nameProject, titleWorkItem, descriptionIter, pointsIter, createdByIter, statusIter, ownerByIter, comentsIter, linksIter) {
+     $scope.create_work_item = function(idIteration, nameProject, titleWorkItem, descriptionIter, pointsIter, statusIter, comentsIter, linksIter) {
        // function add new work_item inside an iteration
 
        var payload = {
-        iteration_number : iditeration,
+        iteration_number : idIteration,
         project_name_id : nameProject,
         work_item_title : titleWorkItem,
         description : descriptionIter,
         points : pointsIter,
-        createdby : createdByIter,
         status : statusIter,
-        ownerby : ownerByIter,
         comments : commentsiIter,
-        links : linksIter
+        links : linksIter        
        }
 
        $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.post('api/projects/iterations/workitems', payload)
+          $http.post('/api/projects/iterations/workitems', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success adding new work item');
               alert("The new work item is added");
@@ -108,19 +117,46 @@ angular.module('Wbpms')
             });
      }
 
-     $scope.deleteWorkItem = function(idWorkItem) {
+     $scope.delete_work_item = function(idWorkItem) {
       // function delete a work_item to a project
-     }
+      var payload = {
+              work_item_id : idWorkItem
+          }
+
+      $log.debug("Sending payload: " + JSON.stringify(payload));
+
+          // send the payload to the server
+          $http.delete('api/projects/iterations/workitems', payload)
+            .success(function(data, status, header, config) {
+              $log.debug('Success remove work item');
+              alert("The work item was deleted");                
+            })
+            .error(function(data, status) {
+              $log.debug('Error while trying to remove a work item');
+            }); 
+        }    
 
      $scope.updateWorkItem = function(idWorkItem, idIteration, idProject, name, description, points, createdBy, owner) {
      // function update a work_item
      }
 
-     $scope.getAllIterationWorkItems = function(idProject, idIteration) {
+     $scope.get_all_iteration_work_items = function(nameProject, idIteration) {
      // the server should return a json array which contains all
      // work_items of an iteration
+        var payload = {
+           project_name : nameProject,
+           iteration_number : idIteration
+        }
 
-
+      $log.debug("Sending payload: " + JSON.stringify(payload));
+        // send the payload to the server
+        $http.post('/api/projects/iterations/getworkitems', payload)
+           .success(function(data, status, header, config) {
+            $scope.workItems = data;
+          })   
+          .error(function(data, status) {
+            alert("ERROR"+ JSON.stringify(data));
+          });
 
      }
 

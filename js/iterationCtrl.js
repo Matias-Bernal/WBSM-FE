@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('IterationCtrl', ['$scope', '$http', '$log','ProjectData',
-    function ($scope, $http, $log, ProjectData) {
+  .controller('IterationCtrl', ['$scope', '$http', '$log','ProjectData','IterationData',
+    function ($scope, $http, $log, ProjectData, IterationData) {
 
        $scope.project = ProjectData;
+       $scope.iterationD = IterationData;
        $scope.iterations = [];
 
       /* $scope.iterations  = [
@@ -38,7 +39,8 @@ angular.module('Wbpms')
       }
 
       $scope.delIteration = {
-            iteration_name : ''
+            project_name : '',
+            iteration_number : ''
         } 
             
       // declaration !AND! call (see parenthesis at end of function)
@@ -50,16 +52,12 @@ angular.module('Wbpms')
         }
         $log.debug("Sending payload: " + JSON.stringify(payload));
         // send the payload to the server
-        $http.get('/api/projects/iterations', payload)
+        $http.post('/api/projects/iterations/getprojectiterations', payload)
            .success(function(data, status, header, config) {
             alert(JSON.stringify(data));
-            $scope.iterations = data;
-            if(data.length > 0) {
-              $scope.iterationModel.idIteration = $scope.iterations[0];
-            }  
+            $scope.iterations = data[0].iterations;
           })   
           .error(function(data, status) {
-            alert("ERROR"+ JSON.stringify(data));
             $log.debug('Error while fetching iterations from server');
           });  
 
@@ -113,20 +111,60 @@ angular.module('Wbpms')
       $scope.delete_iteration = function(nameProject, idIteration) {
       	// deletes an iteration of a project
          var payload = {
-              project_name : delnameProject
+              project_name : nameProject,
+              iteration_number : idIteration
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.delete('api/projects/iterations', payload)
+          $http.post('api/projects/iterations/delete', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove iteration');
-              alert("The Iteration was deleted");                
+              alert("The Iteration was deleted");
+              for(var i =0; i < $scope.iterations.length; i++) {
+                if($scope.iterations[i].iteration_number === delIteration.iteration_number) {
+                  $scope.iterations.splice(i, 1);
+                  break;
+                }
+              }
+
             })
             .error(function(data, status) {
               $log.debug('Error while trying to remove new iteration');
+              alert("Error deleting iteration");
             }); 
         }
+
+      $scope.loadWorkItems = function(nameProject, idIteration){
+
+          // List all work Items of an iteration
+          var payload3 = {
+            project_name : nameProject,
+            iteration_number : idIteration
+          }
+
+          // send the payload to the server
+          $http.post('/api/projects/iterations/getworkitems', payload3)                  
+            .success(function(data, status, header, config) {
+              $scope.workitems = data;
+          })
+            .error(function(data, status) {
+              alert('Error while fetching work Items from server'); 
+          });                
+
+        }
+
+
+
+      $scope.goToWorkItems = function(iteration) {
+        // Go to workItems 
+          $scope.iterationD.id_iteration = iteration.iteration_number,
+          $scope.iterationD.title_iteration = iteration.title,
+          $scope.iterationD.point_iteration = iteration.points,
+          
+          window.location.href = '#/projects/iterations/work_items';          
+    
+        }   
 
   }]);
