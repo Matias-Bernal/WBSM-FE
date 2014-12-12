@@ -33,7 +33,7 @@
                     <th>Email</th>
                     <th>Points</th>
                   </tr>
-                  <tr ng-repeat="member in members" >
+                  <tr ng-repeat="member in members | orderBy:'name'" >
                     <td>
                         <div ng-if="member.owner == 1">
                             <div class="checkbox">

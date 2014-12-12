@@ -36,29 +36,7 @@ angular.module('Wbpms')
           $http.post('/api/projects/getmembers', payload)
 
           .success(function(data, status, header, config) {
-            alert(JSON.stringify(data[0]));
             alert(JSON.stringify(data[0].members));
-            // the server should return a json array which contains all the todos
-            /*for(var i =0; i < data[0].members.length; i++) {
-                if (data[0].members[i].owner == 1){
-                    var member = {
-                    name: data[0].members[i].name,
-                    user: data[0].members[i].user,
-                    owner: true
-                    }
-                    $scope.members.push(member);
-                } 
-                else {
-                   var member = {
-                   name: data[0].members[i].name,
-                   user: data[0].members[i].user,
-                   owner: false 
-                }
-                   $scope.members.push(member);
-                }
-                
-            }
-            alert(JSON.stringify($scope.members));*/
             $scope.members = data[0].members;
           })
           .error(function(data, status) {
@@ -79,27 +57,9 @@ angular.module('Wbpms')
            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/add', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Success: New member <user_email_id> added successfully to <project_name_id>'),
-                alert("The new member is added");
+                $log.debug('Success: New member <user_email_id> added successfully to <project_name_id>');
                 alert(JSON.stringify(data));
-                if (data != null){
-/*                    if (data.owner == 1){
-                        var member = {
-                            name: data.name,
-                            user: data.user,
-                            owner: true
-                        }
-                        $scope.members.push(member);
-                    } else {
-                        var member = {
-                            name: data.name,
-                            user: data.user,
-                            owner: false 
-                        }
-                        $scope.members.push(member);
-                    }*/
-                    $scope.members.push(data);
-                }
+                $scope.members.push(data);
               })
               .error(function(data, status) {
                 //$log.debug(data.error);
@@ -143,7 +103,6 @@ angular.module('Wbpms')
                 user_email_id: eMailUser
             }
             
-            alert(JSON.stringify(payload));
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/remove', payload)
               .success(function(data, status, header, config) {
@@ -151,7 +110,7 @@ angular.module('Wbpms')
                  alert("The new member is removed");
                  // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
-                    if($scope.members[i].eMailMember === payload.user_email_id) {
+                    if($scope.members[i].user === payload.user_email_id) {
                         $scope.members.splice(i, 1);
                     }
                 }

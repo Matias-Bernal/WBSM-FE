@@ -1,14 +1,29 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData',
-    function ($scope, $http, $log,UserData) {
+  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'WorkItemData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, WorkItemData) {
         
         
     $scope.globalSearchUser = [];
     $scope.globalSearchWorkItem = [];
     
     $scope.eMailUserToSearch = UserData;
+    $scope.idProjectToSearch = ProjectData;
+    $scope.iterationToSearch = IterationData;
+    $scope.workItemToSearch = WorkItemData;
+        
+        
+    $scope.goToWorkItems = function(project_name, iteration, wItem) {
+        // Go to WorkItem 
+    
+          $scope.idProjectToSearch.project_name = project_name; 
+          $scope.iterationToSearch.id_iteration = iteration;            
+          $scope.workItemToSearch.id_WorkItem = wItem;           
+
+          window.location.href = '#/projects/iterations/work_items';          
+    
+    }  
         
     
     // declaration !AND! call (see parenthesis at end of function)

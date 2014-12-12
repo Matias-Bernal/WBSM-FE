@@ -4,36 +4,41 @@
     <a href='#/projects' data-toggle="tab"><button type="submit">Back projects</button></a>
 </div>
 
-<!--list to members o workItems search-->
 <div ng-init="init()">
-    <div class="container">
+    <!--list to members o workItems search-->
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table">
+                          <tr>
+                            <th>Users</th>
+                          </tr>
+                          <tr ng-repeat="search in globalSearchUser" >
+                            <td >{{search.idU}}</td> <!--//cuando haga un click te debe llevar a home -->
+                          </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--list to workItem search-->
+    <div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                       <tr>
-                        <th>Users</th>
+                        <th>Work Item</th>
                       </tr>
-                      <tr ng-repeat="search in globalSearchUser" >
-                        <td >{{search.idU}}</td> <!--//cuando haga un click te debe llevar a home -->
+                      <tr ng-repeat="search in globalSearchWorkItem" >
+                        <td>{{search.id}}</td>
+                        <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToWorkItems()"><i class="fa fa-tasks"></i>
+                            </button>
+                        </td>  
                       </tr>
                 </table>
             </div>
-        </div>
-    </div>
-</div>
-
-<!--list to workItem search-->
-<div ng-init="init()">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <table class="table">
-                  <tr>
-                    <th>Id Work Item</th>
-                  </tr>
-                  <tr ng-repeat="search in globalWorkItemSearch" >
-                    <td>{{search.idW}}</td>
-                  </tr>
-            </table>
         </div>
     </div>
 </div>

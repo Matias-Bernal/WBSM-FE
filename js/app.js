@@ -75,3 +75,17 @@ app.factory('IterationData', function(){
       point_iteration : ''
     }
 }); 
+
+app.factory('WorkItemData', function(){
+    return {
+        id_WorkItem: '',
+        title_WorkItem: '',
+        descriptionIter_WorkItem : '',
+        point_WorkItem: '',
+        createdby_WorkItem : '',
+        status_WorkItem : '',
+        ownedBy_WorkItem : '',
+        comments_WorkItem : '',
+        links_WorkItem : ''
+    }
+}); 
