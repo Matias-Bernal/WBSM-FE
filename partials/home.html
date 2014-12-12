@@ -24,7 +24,7 @@
                       <ul class="dropdown" ng-if="iterations.project == project.project_name" ng-repeat="iteration in iterations.iterations">
                         <li><span class="label label-success" ng-if="iterations.title != ''" ng-click="loadWorkItems(project.project_name, iteration.iteration_number)">{{iteration.title}} - {{iteration.points}}</span></li>                      
                           <ul class="dropdown" ng-if="workitems.project == project.project_name && workitems.iteration == iteration.iteration_number" ng-repeat="workitem in workitems.workitems">
-                            <li><span class="label label-warning" ng-if="workitem.name != ''" ng-click="goToWorkItems(project.project_name, workitem.name)">{{workitem.name}} - {{workitem.points}}</span></li>
+                            <li><span class="label label-warning" ng-if="workitem.name != ''" ng-click="goToWorkItems(project.project_name, iteration.iteration_number, iteration.title, iteration.points)">{{workitem.name}} - {{workitem.points}}</span></li>
                           </ul>
                       </ul>        
                   </ul>                     
