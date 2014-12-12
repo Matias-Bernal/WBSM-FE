@@ -4,19 +4,38 @@
         <li><a href='#/home' data-toggle="tab">Home</a></li>
         <li><a href='#/projects' data-toggle="tab">Projects</a></li>
         <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-lg-offset-2">
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select Search <i class="fa fa-search"></i><span class="caret"></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-search"> Search by </i><span class="caret"></button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#/search" ng-click="globalOtherUserSearch(searchs)">Users:</a></li>
+                      <li><a href="#/search" ng-click="search_users(key)">Users:</a></li>
                       <li class="divider"></li>
-                      <li><a href="#/search" ng-click="globalWorkItemSearch(searchs)">WorkItem</a></li>
+                      <li><a href="#/search" ng-click="search_work_items(key)">WorkItem:</a></li>
                     </ul>
                   </div><!-- /btn-group -->
-                  <input type="text" ng-model="searchs" class="form-control" placeholder="Input the object to search">
+                  <input type="text" ng-model="key" class="form-control" placeholder="Search" required>
                 </span>
                 </div><!-- /input-group -->
+              </div><!-- /.col-lg-4 -->
+              <div class="col-lg-1" ng-controller="SessionCtrl">
+                <!-- Split button -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <button type="button" class="btn btn-link"><i class="fa fa-user"> Modify Information </i></button>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <button type="button" class="btn btn-link" ng-click="logout()"><i class="fa fa-power-off"> Sing Out </i></button>
+                    </li>
+                  </ul>
+                </div>
               </div><!-- /.col-lg-4 -->
           </div>
       </ul>

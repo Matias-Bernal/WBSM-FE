@@ -21,7 +21,6 @@ angular.module('Wbpms')
             "values": ["Developer", "Project Manager", "Quality Assurance", "Business Analyst","Other"] 
         };
 
-        $scope.loggedUser = false;
         $scope.forgetPasswordEmail = '';
        
         //Log In info messagges //
@@ -40,6 +39,8 @@ angular.module('Wbpms')
         // declaration !AND! call (see parenthesis at end of function)
         // of a function that fetches the todos from the server
         $scope.init = function() {
+            if($scope.loginModel.email != '')
+                window.location.href = '#/home';
         };
 
         // Function login user.
@@ -120,7 +121,6 @@ angular.module('Wbpms')
                     //Forget Password info messagges //
                     $scope.forgetPasswordSuccessMsgVisible = false;
                     $scope.forgetPasswordErrorMsgVisible = false;
-                    $scope.loggedUser = true;
                     window.location.href = '#/home';
                 })
                 .error(function(data, status) {
@@ -187,6 +187,7 @@ angular.module('Wbpms')
                     //Forget Password info messagges //
                     $scope.forgetPasswordSuccessMsgVisible = false;
                     $scope.forgetPasswordErrorMsgVisible = false;
+                    $scope.clear();
                 })
                 .error(function(data, status) {
                     $log.debug('Error while trying to add new user');
@@ -218,7 +219,7 @@ angular.module('Wbpms')
        }
        
        $scope.logout = function() {
-            $http.post('/api/sessions')
+            $http.post('/api/sessions/logout')
             .success(function(data, status, header, config) {
                 $log.debug('Success logout user');
                 $scope.logInSuccessMsgVisible = false;
@@ -232,7 +233,15 @@ angular.module('Wbpms')
                 //Forget Password info messagges //
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = false;
-                $scope.loggedUser = false;
+                $scope.loginModel.email = '';
+                $scope.loginModel.password = '';
+                $scope.loginModel.name = '';
+                $scope.loginModel.surname = '';
+                $scope.loginModel.gender = '';
+                $scope.loginModel.role = '';
+                $scope.loginModel.changepwd = false;
+                $scope.loginModel.avatar = '';
+                window.location.href = '#/login';
             })
             .error(function(data, status) {
                 $log.debug('Error while trying logout user');
