@@ -10,6 +10,44 @@ angular.module('Wbpms')
 
       $scope.workItems = []; 
 
+      $scope.comments = [
+      {
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 1'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 2'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 3'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 4'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 5'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 6'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 7'
+      },{
+        date :'12/12/2014',
+        author : 'Guille',
+        content : 'Comentario 8'
+      }
+      ];
+
+      $scope.work_items = [];     
+
     /*  $scope.workItems = [
             {
                 idWorkItem:'001',
@@ -43,7 +81,24 @@ angular.module('Wbpms')
            ownedBy : '',
            comments : '',
            links : ''
-      }  
+      } 
+
+      $scope.newWorkItem = {
+            new_idWorkItem : '',
+            new_title : '',
+            new_descriptionIter : '',
+            new_point : '',
+            new_createdby : '',
+            new_status : '',
+            new_ownedBy : '',
+            new_comments : '',
+            new_links : ''
+        };
+
+      $scope.statusWorkItems = {  
+            "values": ["Not started", "Ongoing", "Done"] 
+        };
+   
 
 
       // declaration !AND! call (see parenthesis at end of function)
@@ -87,12 +142,12 @@ angular.module('Wbpms')
           });
       }
 
-     $scope.create_work_item = function(idIteration, nameProject, titleWorkItem, descriptionIter, pointsIter, statusIter, comentsIter, linksIter) {
+     $scope.create_work_item = function(titleWorkItem, descriptionIter, pointsIter, statusIter, commentsIter, linksIter) {
        // function add new work_item inside an iteration
 
        var payload = {
-        iteration_number : idIteration,
-        project_name_id : nameProject,
+        iteration_number : $scope.iteration.id_iteration,
+        project_name_id : $scope.project.project_name,
         work_item_title : titleWorkItem,
         description : descriptionIter,
         points : pointsIter,
@@ -102,7 +157,7 @@ angular.module('Wbpms')
        }
 
        $log.debug("Sending payload: " + JSON.stringify(payload));
-
+        alert(JSON.stringify(payload));
           // send the payload to the server
           $http.post('/api/projects/iterations/workitems', payload)
             .success(function(data, status, header, config) {
@@ -160,8 +215,16 @@ angular.module('Wbpms')
 
      }
 
-     $scope.addComment = function(date, idWorkItem, content, author) {
+     $scope.addComment = function(_content) {
      //  function add a comment to a work_item
+        var comment = {
+            date :'12/12/2014',
+            author : 'Guille',
+            content : _content
+        };
+
+        $scope.comments.push(comment);
+
      }
 
      $scope.getAllWorkItemComments = function(idWorkItem) {
@@ -182,6 +245,8 @@ angular.module('Wbpms')
     // a certain work_item
      } 
 
-        
+     $scope.goToWorkItem = function(work_item){
+        alert("Newell's Old Boys!!!!");
     }
-  ]);
+  }
+]);
