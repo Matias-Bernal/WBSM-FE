@@ -97,3 +97,29 @@ app.factory('WorkItemData', function(){
         links_WorkItem : ''
     }
 }); 
+
+app.factory('SearchMemberData', function(){
+    return {
+      email : '',
+      name : '',
+      surname : '',
+      gender : '',
+      role : '',
+      avatar: ''
+
+    }
+}); 
+
+app.factory('SearchWorkItemData', function(){
+    return {
+        id_WorkItem: '',
+        title_WorkItem: '',
+        descriptionIter_WorkItem : '',
+        point_WorkItem: '',
+        createdby_WorkItem : '',
+        status_WorkItem : '',
+        ownedBy_WorkItem : '',
+        comments_WorkItem : '',
+        links_WorkItem : ''
+    }
+}); 
