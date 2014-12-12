@@ -33,8 +33,16 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/work_items.html',
         controller: 'WorkItemCtrl'
       })
+      .when('/projects/iterations/work_items/view', {
+        templateUrl: 'partials/view_work_item.html',
+        controller: 'WorkItemCtrl'
+      })
       .when('/projects/members', {
         templateUrl: 'partials/members.html',
+        controller: 'MemberCtrl'
+      })
+      .when('/projects/members/view', {
+        templateUrl: 'partials/view_member.html',
         controller: 'MemberCtrl'
       })
       .when('/search', {
@@ -76,6 +84,19 @@ app.factory('IterationData', function(){
     }
 }); 
 
+app.factory('WorkItemData', function(){
+    return {
+        id_WorkItem: '',
+        title_WorkItem: '',
+        descriptionIter_WorkItem : '',
+        point_WorkItem: '',
+        createdby_WorkItem : '',
+        status_WorkItem : '',
+        ownedBy_WorkItem : '',
+        comments_WorkItem : '',
+        links_WorkItem : ''
+    }
+}); 
 app.factory('WorkItemData', function(){
     return {
         id_WorkItem: '',

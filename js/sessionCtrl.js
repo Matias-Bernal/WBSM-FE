@@ -101,6 +101,8 @@ angular.module('Wbpms')
                     $scope.loginModel.gender = data.gender;
                     $scope.loginModel.changepwd = data.changepwd;
 
+                    alert(data.gender);
+
 /*                    if(data.avatarpath===''){
                         if(data.gender === 'Male')
                             $scope.loginModel.avatar = 'img/male.png';
