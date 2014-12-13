@@ -32,10 +32,8 @@ angular.module('Wbpms')
     }  
     
     $scope.goToMembers = function(_member) {
-        // Go to WorkItem 
-    
+        // Go to Members 
           $scope.memberToShow = _member;               
-
           window.location.href = '#/projects/iterations/view_member';          
     
     }  
@@ -61,11 +59,6 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/search/users', payload)
             .success(function(data, status, header, config) {
-            // the server should return a json array which contains the uri redirection
-                alert(JSON.stringify(data));
-                alert(JSON.stringify(data[0].matches));
-             //window.location.href = '#/home';
-            //$scope.globalSearchUser.search.push(data)
                 $scope.globalSearchUser= data[0].matches;
                 $scope.showMember = true;
                 $scope.showWorkItem = false;
@@ -80,7 +73,7 @@ angular.module('Wbpms')
              .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri to redirection
             alert('find the workItem');
-            alert(JSON.stringify(data));
+            alert(JSON.stringify(data[0].matches));
             $scope.globalSearchWorkItem = data[0].matches;
              $scope.showMember = false;
              $scope.showWorkItem = true;

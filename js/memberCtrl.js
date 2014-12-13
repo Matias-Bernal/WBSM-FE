@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' , 'ProjectData' , 'IterationData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData) {
+  .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' , 'ProjectData' , 'IterationData','SearchMemberData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData,SearchMemberData) {
         
+        $scope.searcMember = SearchMemberData
         $scope.iteration = IterationData;
         $scope.project = ProjectData;
         $scope.eMailUser = UserData;
@@ -134,10 +135,12 @@ angular.module('Wbpms')
                 .success(function(data, status, header, config) {
                 $log.debug('New owner <owner> added successfully to <id_project>');
                 alert("Exito");
-                    if($scope.members.owner == false) {
-                        $scope.members.owner = true;
+                for(var i =0; i < $scope.members.length; i++){
+                    if($scope.members[i].owner == false) {
+                        $scope.members[i].owner = true;
                         alert("Promote owner");
                     };
+                };
  
                 })
                 .error(function(data, status) {
@@ -156,11 +159,13 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/downgrade', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Downgrade owner <owner> successfully to <id_project>')
-                    if($scope.members.owner == true) {
-                        $scope.members = false;
+                $log.debug('Downgrade owner <owner> successfully to <id_project>');
+                 for(var i =0; i < $scope.members.length; i++){
+                    if($scope.members[0].owner == true) {
+                        $scope.members[i].owner = false;
                         alert("Downgrader owner");
                     }; 
+                 };
               })
           .error(function(data, status) {
             alert("error in downgrade owner");
