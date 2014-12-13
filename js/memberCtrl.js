@@ -4,11 +4,12 @@ angular.module('Wbpms')
   .controller('MemberCtrl', ['$scope', '$http', '$log', 'UserData' , 'ProjectData' , 'IterationData','SearchMemberData',
     function ($scope, $http, $log, UserData, ProjectData, IterationData,SearchMemberData) {
         
-        $scope.searcMember = SearchMemberData
+        
         $scope.iteration = IterationData;
         $scope.project = ProjectData;
         $scope.eMailUser = UserData;
         $scope.members = [];
+        $scope.searcMember = SearchMemberData
         
         $scope.listEmail = {
             project_email : ''
@@ -41,7 +42,6 @@ angular.module('Wbpms')
             $scope.members = data[0].members;
           })
           .error(function(data, status) {
-            alert("error");
             $log.debug(data.error);
           });   
       }
@@ -80,7 +80,6 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/getmembers', payload)
               .success(function(data, status, header, config) {
-                alert("exito");
                 $log.debug('Member added successfully from project'); 
                 // the server should return a json array which contains all the todos
                 if ($scope.members.owner === 0){
@@ -107,8 +106,7 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/remove', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Member Member removed successfully from project'); 
-                 alert("The new member is removed");
+                $log.debug('Member <Member> removed successfully from project'); 
                  // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
                     if($scope.members[i].user === payload.user_email_id) {
@@ -117,7 +115,6 @@ angular.module('Wbpms')
                 }
               })
               .error(function(data, status) {
-                alert("The new member is not removed");
                 $log.debug(data.error);
               });
         }
@@ -134,17 +131,16 @@ angular.module('Wbpms')
             $http.post('/api/projects/members/promote', payload)
                 .success(function(data, status, header, config) {
                 $log.debug('New owner <owner> added successfully to <id_project>');
-                alert("Exito");
                 for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].owner == false) {
-                        $scope.members[i].owner = true;
-                        alert("Promote owner");
+                    if($scope.members[i].user == eMailUser) {
+                        if (!$scope.members[i].owner){
+                            $scope.members[i].owner = true;
+                        }
                     };
                 };
  
                 })
                 .error(function(data, status) {
-                    alert("error in Promote owner");
                     $log.debug(data.error);     
                 });
         }
@@ -161,14 +157,14 @@ angular.module('Wbpms')
               .success(function(data, status, header, config) {
                 $log.debug('Downgrade owner <owner> successfully to <id_project>');
                  for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[0].owner == true) {
-                        $scope.members[i].owner = false;
-                        alert("Downgrader owner");
-                    }; 
-                 };
+                    if($scope.members[i].user == eMailUser) {
+                        if ($scope.members[i].owner){
+                            $scope.members[i].owner = false;
+                        }
+                    };
+                };
               })
           .error(function(data, status) {
-            alert("error in downgrade owner");
             $log.debug(data.error);   
           });
         }
