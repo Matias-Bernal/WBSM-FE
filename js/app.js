@@ -61,7 +61,7 @@ app.factory('UserData', function(){
       password : '',
       name : '',
       surname : '',
-      gender : '',
+      gender : false,
       role : '',
       changepwd : false,
       avatar: ''

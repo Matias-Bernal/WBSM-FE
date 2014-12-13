@@ -12,7 +12,7 @@ angular.module('Wbpms')
             new_user_confirm_password : '',
             new_user_name : '',
             new_user_surname : '',
-            new_user_gender : '',
+            new_user_gender : false,
             new_user_role : '',
             new_user_avatar: ''
         };
@@ -50,7 +50,7 @@ angular.module('Wbpms')
             $scope.newUser.new_user_confirm_password = '',
             $scope.newUser.new_user_name = '';
             $scope.newUser.new_user_surname = '';
-            $scope.newUser.new_user_gender = '';
+            $scope.newUser.new_user_gender = false;
             $scope.newUser.new_user_role = '';
         }
 
@@ -101,16 +101,11 @@ angular.module('Wbpms')
                     $scope.loginModel.gender = data.gender;
                     $scope.loginModel.changepwd = data.changepwd;
 
-                    alert(data.gender);
-
-/*                    if(data.avatarpath===''){
-                        if(data.gender === 'Male')
-                            $scope.loginModel.avatar = 'img/male.png';
-                        else
-                            $scope.loginModel.avatar = 'img/female.png';
-                    }else{
-                        $scope.loginModel.avatar = data.avatarpath;
-                    }*/
+                    alert(JSON.stringify(data));
+                    if(data.gender)
+                        $scope.loginModel.avatar = 'img/male.png';
+                    else
+                        $scope.loginModel.avatar = 'img/female.png';
                     
                     $scope.logInSuccessMsgVisible = true;
                     $scope.logInErrorMsgVisible = false;
@@ -156,7 +151,7 @@ angular.module('Wbpms')
 
         $scope.checkSingUp = function(_newUser){
             if(_newUser.new_user_email !== '' && _newUser.new_user_password !== '' && _newUser.new_user_password.length >= 8
-                && _newUser.new_user_confirm_password === _newUser.new_user_password && _newUser.new_user_name !== '' && _newUser.new_user_surname !== '' && _newUser.new_user_gender !== '')
+                && _newUser.new_user_confirm_password === _newUser.new_user_password && _newUser.new_user_name !== '' && _newUser.new_user_surname !== '')
                 return true;
             else
                 return false;
