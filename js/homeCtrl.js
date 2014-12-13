@@ -117,7 +117,7 @@ angular.module('Wbpms')
     
           $scope.proyecto.project_name = project_name; 
 
-          window.location.href = '#/projects/members';          
+          window.location.href = '#/projects/members/view';          
     
         }  
         
