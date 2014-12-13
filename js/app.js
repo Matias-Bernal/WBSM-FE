@@ -117,9 +117,7 @@ app.factory('SearchWorkItemData', function(){
         title_WorkItem: '',
         descriptionIter_WorkItem : '',
         point_WorkItem: '',
-        createdby_WorkItem : '',
         status_WorkItem : '',
-        ownedBy_WorkItem : '',
         comments_WorkItem : '',
         links_WorkItem : ''
     }
