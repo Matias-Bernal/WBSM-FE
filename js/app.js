@@ -98,6 +98,7 @@ app.factory('WorkItemData', function(){
     }
 }); 
 
+
 app.factory('SearchMemberData', function(){
     return {
       email : '',

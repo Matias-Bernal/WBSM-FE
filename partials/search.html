@@ -15,7 +15,10 @@
                             <th>Users</th>
                           </tr>
                           <tr ng-repeat="search in globalSearchUser" >
-                            <td >{{search.idU}}</td> <!--//cuando haga un click te debe llevar a home -->
+                            <td >{{search.email}}</td> <!--//cuando haga un click te debe llevar a home -->
+                              <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToMembers()"><i class="fa fa-tasks"></i>
+                            </button>
+                        </td>  
                           </tr>
                     </table>
                 </div>
@@ -32,7 +35,7 @@
                         <th>Work Item</th>
                       </tr>
                       <tr ng-repeat="search in globalSearchWorkItem" >
-                        <td>{{search.id}}</td>
+                        <td>{{search.idW}}</td>
                         <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToWorkItems()"><i class="fa fa-tasks"></i>
                             </button>
                         </td>  

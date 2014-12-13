@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'WorkItemData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData, WorkItemData) {
+  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'WorkItemData', 'SearchMemberData', 'SearchWorkItemData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, WorkItemData, SearchMemberData, SearchWorkItemData) {
         
         
     $scope.globalSearchUser = [];
@@ -12,7 +12,8 @@ angular.module('Wbpms')
     $scope.idProjectToSearch = ProjectData;
     $scope.iterationToSearch = IterationData;
     $scope.workItemToSearch = WorkItemData;
-        
+    $scope.memberToShow = SearchMemberData;
+    $scope.workItemToShow = SearchWorkItemData;
         
     $scope.goToWorkItems = function(project_name, iteration, wItem) {
         // Go to WorkItem 
@@ -22,6 +23,15 @@ angular.module('Wbpms')
           $scope.workItemToSearch.id_WorkItem = wItem;           
 
           window.location.href = '#/projects/iterations/work_items';          
+    
+    }  
+    
+    $scope.goToMembers = function(_member) {
+        // Go to WorkItem 
+    
+          $scope.memberToShow = _member;               
+
+          window.location.href = '#/projects/iterations/view_member';          
     
     }  
         
