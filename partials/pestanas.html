@@ -13,9 +13,9 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#/search" ng-click="search_users(key)">Users:</a></li>
+                      <li><button type="button" class="btn btn-link" ng-click="search(key, 'user')"><i class="fa fa-users">Users:</i></button></li>
                       <li class="divider"></li>
-                      <li><a href="#/search" ng-click="search_work_items(key)">WorkItem:</a></li>
+                      <li><button type="button" class="btn btn-link" ng-click="search(key, 'workItem')"><i class="fa fa-cubes">WorkItem:</i></button></li>
                     </ul>
                   </div><!-- /btn-group -->
                   <input type="text" ng-model="key" class="form-control" placeholder="Search" required>

@@ -68,18 +68,16 @@
     <!--Modal Add member-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="form-signin" role="form" id="1181323992">
+            <form class="form-adder" role="form" data-toggle="validator" id="1181323992">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">Add member</h4>  
                     </div>
                     <div class="modal-body">
-                        <form class="form-adder" role="form" data-toggle="validator">
                             <div class="form-group">
-                                 <label for="recipient-name" class="control-label" >Email:</label>
-                                <input type="text" ng-model="adderEmail" class="form-control" id="recipient-name"  placeholder="Email@" required autofocus="">
+                                 <label for="inputEmail" class="control-label" >Email:</label>
+                                <input type="email" id="inputEmail" ng-model="adderEmail" class="form-control" id="recipient-name"  placeholder="Email@" autofocus="" required>
                             </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>

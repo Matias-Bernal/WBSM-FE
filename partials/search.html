@@ -10,27 +10,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <table class="table">
+                    <table class="table" ng-if="showMember">
                           <tr>
-                            <th>Users</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Home</th>
                           </tr>
                           <tr ng-repeat="search in globalSearchUser" >
-                            <td >{{search.email}}</td> <!--//cuando haga un click te debe llevar a home -->
-                              <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToMembers()"><i class="fa fa-tasks"></i>
+                            <td>{{search.name}}</td> 
+                            <td>{{search.surname}}</td>
+                            <td>{{search.email}}</td>
+                              <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToMembers()"><i class="fa fa-tasks"></i> <!--//cuando haga un click te debe llevar a home -->
                             </button>
-                        </td>  
+                            </td>  
                           </tr>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--list to workItem search-->
-    <div>
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <table class="table">
+                    <table class="table" ng-if="showWorkItem">
                       <tr>
                         <th>Work Item</th>
                       </tr>
@@ -41,6 +37,7 @@
                         </td>  
                       </tr>
                 </table>
+                </div>
             </div>
         </div>
     </div>

@@ -122,3 +122,10 @@ app.factory('SearchWorkItemData', function(){
         links_WorkItem : ''
     }
 }); 
+
+app.factory('SearchKey', function(){
+    return {
+      keyword:'',
+      key_type: ''
+    }
+}); 
