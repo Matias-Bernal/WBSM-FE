@@ -14,7 +14,7 @@
         </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-1">
+              <div class="col-md-10 col-md-offset-1" style="height:300px; overflow-y:scroll;">
                 <table class="table">
                   <tr>
                     <th>Id</th>
@@ -25,6 +25,11 @@
                     <td>{{workItem.number}}</td>
                     <td>{{workItem.name}}</td>
                     <td>{{workItem.points}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" ng-click="delete_work_item(workItem.number)">
+                            <i class="fa fa-times"></i>                           
+                        </button>                         
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -47,7 +52,7 @@
                                   <span>Title:</span>
                               </div>
                               <div class="col-lg-4">    
-                                  <input type="text" class="form-control" id="recipient-name"  placeholder="Title of Work Item"  required autofocus="">
+                                  <input type="text" class="form-control" id="title" ng-model= "title" placeholder="Title of Work Item"  required autofocus="">
                               </div>
   
                               <div class="col-lg-2">
@@ -64,7 +69,7 @@
                                   <span>Points:</span>
                               </div>
                               <div class="col-lg-4">    
-                                  <input type="text" class="form-control" id="recipient-name" required autofocus="">
+                                  <input type="text" class="form-control" id="recipient-name" ng-model="points" required autofocus="">
                               </div>
   
                               
@@ -72,7 +77,7 @@
                                   <span>Owned By:</span>
                               </div>  
                               <div class="col-lg-4">
-                                  <input type="ownerWorkItem" id="owner" class="form-control" ng-model="project.owner" ng-readonly="project.owner">
+                                  <input type="text" id="owner" class="form-control" ng-model="usuario.name" ng-readonly="usuario.name"></input>
                               </div>
                               
                           </div>  <!--end div row points and owned by-->
@@ -82,14 +87,14 @@
                                   <span>Description:</span>
                               </div>    
                               <div class="col-lg-4">
-                                     <input type="text" class="form-control" id="recipient-name" required autofocus="">
+                                     <input type="usuario" class="form-control" id="recipient-name" ng-model="description" required autofocus="">
                               </div>    
                                 
                               <div class="col-lg-2">
                                   <span>Iteration:</span>
                               </div>  
                               <div class="col-lg-4">
-                                  <input type="iteration" id="iter" class="form-control" ng-model="iteration.title_iteration" ng-readonly="iteration.title_iteration">
+                                  <input type="iteration" id="iter" class="form-control" ng-model="iteration.title_iteration" ng-readonly="iteration.title_iteration"></input>
                               </div>
                               
                           </div>
@@ -104,18 +109,10 @@
                                   <div class="col-lg-2">
                                     <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="add_comment(comentario);"><i class="fa fa-plus-circle"></i></button>
                                   </div>        
-                                  <br>
-                                  <div class="col-lg-12" style="overflow-y:scroll;">
+                                  <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
                                     <table class="table-comments" style="height:200px;">
-                                      <tr>
-                                        <th width="300">Date</th>
-                                        <th width="300">Author</th>
-                                        <th width="300">Content</th>
-                                      </tr>
                                       <tr ng-repeat="comment in comments" >
-                                        <td>{{comment.date}}</td>
-                                        <td>{{comment.author}}</td>
-                                        <td>{{comment.content}}</td>
+                                        <td>{{comment}}</td>
                                       </tr>
                                     </table>
                                   </div>
@@ -125,20 +122,16 @@
                                 <span>Links:</span>
                                 <div class="row">
                                   <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="recipient-name">
+                                      <select class="form-control" ng-model="newWorkItem.new_links" ng-options="link.name for link in workItems"></select>
                                   </div>  
                                   <div class="col-lg-2">
-                                    <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="add_links(newUser);"><i class="fa fa-plus-circle"></i></button>
+                                    <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="add_link(newWorkItem.new_links);"><i class="fa fa-plus-circle"></i></button>
                                   </div>        
-                                  <br>
-                                  <div class="col-lg-12" style="overflow-y:scroll;">
+                                  <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
                                     <table class="table-links" style="height:200px;">
-                                      <tr>
-                                        <th>Links</th>
-                                      </tr>
-                                      <tr ng-repeat="work_item in work_items" >
-                                        <td ng-click="goToWorkItem(work_item)">{{work_item.work_item_title}}</td>
-                                      </tr>
+                                      <tr ng-repeat="link in linkss" >
+                                        <td>{{link.name}}</td>
+                                      </tr>  
                                     </table>
                                   </div>
                                 </div>
@@ -146,7 +139,7 @@
                           </div>
 
                     <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" ng-click="create_work_item(project.project_name_id, iteration.iteration_number)" data-dismiss="modal">Done</button>
+                            <button type="submit" class="btn btn-primary" ng-click="create_work_item(title, description, points, newWorkItem.new_status)" data-dismiss="modal">Done</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>  
                     </div>
                 </div>
@@ -178,6 +171,36 @@
             </div>
         </div>
     </div>
+    <!-- Modal Delete Work Item -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Delete Work Item</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <form class="form-signin" role="form" id="1181323998">
+                                    <h5> Number of Work Item </h5>
+                                        <input type="nameProject" id="inputWorkItem" class="form-control" ng-model="delWorkItem.work_item_id" ng-readonly="delWorkItem.work_item_id">
+                                    <br>
+                                    <br>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="delete_work_item(delWorkItem.work_item_id)">Done</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                </form>                                 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 
 </article>    
 <div ng-include="'partials/footer.html'"></div>

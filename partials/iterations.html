@@ -1,21 +1,20 @@
 <div ng-include="'partials/header.html'"></div>
 <div ng-include="'partials/pestanas.html'"></div>    
 <article ng-init="init()">    
-   <div > 
+   <div> 
         <div class="container">
-              <div class="col-md-10 col-md-offset-1">
-                <h2>Project: {{project.project_name}} - Iterations</h2>
-                <h4>Project Description line 01</h4>
-                <h4>Project Description line 02</h4>
-           <div class="row">  
-                <div class="col-md-10 col-lg-offset-10">
-                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button>
-                </div> 
-            </div>
-        </div>
-
+                <div class="col-lg-10 col-md-offset-1">
+                    <h2>Project: {{project.project_name}} - Iterations</h2>                
+                    <div class="row">  
+                        <div class="col-md-10 col-lg-offset-10">
+                            <button type="button" class="btn btn-primary" aria-label="Left Align" ng-click="create_iteration(project.project_name)">
+                                    <i class="fa fa-plus-circle"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
             <div class="row">
-              <div class="col-md-10 col-md-offset-1" style="width:1000px; height:300px; overflow-y:scroll;">
+              <div class="col-lg-2" style="width:1200px; height:500px; overflow-y:scroll;">
               <div class="col-md-10 col-md-offset-1">
                 <table class="table">
                   <tr>
@@ -43,7 +42,7 @@
                     <td>{{iterationT.title}}</td>
                     <td>{{iterationT.points}}</td>
                     <td>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" ng-click="setDelete(iterationT.iteration_number)">
                             <i class="fa fa-times"></i> 
                         </button>                         
                     </td>
@@ -98,14 +97,14 @@
                             <div class="col-lg-4">
                                 <form class="form-signin" role="form" id="1181323999">
                                     <h5> Project Name </h5>
-                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="delIteration.project_name" placeholder="Project Name" required="" autofocus=""
+                                        <input type="nameProject" id="inputNameProject" class="form-control" ng-model="project.project_name" ng-readonly="project.project_name"
                                         ></input>
                                     <h5> Iteration Number </h5>
-                                        <input type="nameIteration" id="inputNameIteration" class="form-control" ng-model="delIteration.iteration_number" placeholder="Iteration Number" required="" autofocus=""></input> 
+                                        <input type="nameIteration" id="inputNameIteration" class="form-control" ng-model="delIteration.iteration_number" readonly="delIteration.iteration_number"></input> 
                                     <br>
                                     <br>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="delete_iteration(delIteration.project_name, delIteration.iteration_number)">Done</button>
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" data-dismiss="modal" ng-click="delete_iteration(delIteration.iteration_number)">Done</button>
                                         </div>
                                         <div class="col-lg-6">
                                             <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>

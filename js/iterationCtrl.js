@@ -63,28 +63,6 @@ angular.module('Wbpms')
 
       }
 
-     /* 
-      $scope.getAllProjectIterations = function() {
-      	 //shows all iterations of a project
-      	  var payload = {
-          project_name : $scope.project.project_name
-          }
-
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-
-        //alert(JSON.stringify(data)); 
-          // send the payload to the server
-          $http.get('/api/projects/iterations', payload)
-             .success(function(data, status, header, config) {
-              $log.debug('Success fetching iterations from server');
-              $scope.iterations = data[0].iterations;
-              alert(JSON.stringify(data));  
-                })   
-            .error(function(data, status) {
-              $log.debug('Error while fetching iterations from server');
-            });  
-      }  */
-
       $scope.create_iteration = function(nameProject) {  	
         //function add a iteration to the project
         var payload = {
@@ -108,22 +86,22 @@ angular.module('Wbpms')
 
       }
 
-      $scope.delete_iteration = function(nameProject, idIteration) {
+      $scope.delete_iteration = function(idIteration) {
       	// deletes an iteration of a project
          var payload = {
-              project_name : nameProject,
+              project_name : $scope.project.project_name,
               iteration_number : idIteration
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
 
           // send the payload to the server
-          $http.post('api/projects/iterations/delete', payload)
+          $http.post('/api/projects/iterations/delete', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove iteration');
               alert("The Iteration was deleted");
               for(var i =0; i < $scope.iterations.length; i++) {
-                if($scope.iterations[i].iteration_number === delIteration.iteration_number) {
+                if($scope.iterations[i].iteration_number === idIteration) {
                   $scope.iterations.splice(i, 1);
                   break;
                 }
@@ -165,6 +143,14 @@ angular.module('Wbpms')
           
           window.location.href = '#/projects/iterations/work_items';          
     
-        }   
+        }
+
+        $scope.setDelete = function(idIteration) {
+        // Set project name to Delete
+
+          $scope.delIteration.iteration_number = idIteration;
+
+        }
+   
 
   }]);

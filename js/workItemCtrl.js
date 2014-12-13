@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('WorkItemCtrl', ['$scope', '$http', '$log','ProjectData', 'IterationData',
-    function ($scope, $http, $log, ProjectData, IterationData) {
+  .controller('WorkItemCtrl', ['$scope', '$http', '$log','UserData', 'ProjectData', 'IterationData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData) {
+
+      $scope.usuario = UserData;
 
       $scope.project = ProjectData;
 
@@ -10,8 +12,8 @@ angular.module('Wbpms')
 
       $scope.workItems = []; 
 
-      $scope.comments = [
-      {
+      $scope.comments = [];
+     /* {
         date :'12/12/2014',
         author : 'Guille',
         content : 'Comentario 1'
@@ -44,9 +46,20 @@ angular.module('Wbpms')
         author : 'Guille',
         content : 'Comentario 8'
       }
-      ];
+      ]; */
 
-      $scope.work_items = [];     
+      $scope.linkss = [];
+
+      /*{ work_item_id : 'work item 04'
+      },{
+        work_item_id : 'work item 05'
+      },{
+        work_item_id : 'work item 06'
+      }
+      ]; */
+
+
+     // $scope.work_items = [];     
 
     /*  $scope.workItems = [
             {
@@ -95,10 +108,26 @@ angular.module('Wbpms')
             new_links : ''
         };
 
+        $scope.workTemp = {
+          number : '',
+          name : '',
+          points : ''
+
+        }
+
+        $scope.delWorkItem = {
+          work_item_id : ''
+        }
+
       $scope.statusWorkItems = {  
             "values": ["Not started", "Ongoing", "Done"] 
         };
-   
+
+    /*  $scope.work_items = {
+              "values" : workItems
+            };   */
+
+      
 
 
       // declaration !AND! call (see parenthesis at end of function)
@@ -115,6 +144,7 @@ angular.module('Wbpms')
            .success(function(data, status, header, config) {
             alert(JSON.stringify(data));
             $scope.workItems = data;
+            
           })   
           .error(function(data, status) {
             alert("ERROR"+ JSON.stringify(data));
@@ -145,6 +175,7 @@ angular.module('Wbpms')
      $scope.create_work_item = function(titleWorkItem, descriptionIter, pointsIter, statusIter, commentsIter, linksIter) {
        // function add new work_item inside an iteration
 
+
        var payload = {
         iteration_number : $scope.iteration.id_iteration,
         project_name_id : $scope.project.project_name,
@@ -152,22 +183,31 @@ angular.module('Wbpms')
         description : descriptionIter,
         points : pointsIter,
         status : statusIter,
-        comments : commentsiIter,
-        links : linksIter        
+        comments : $scope.comments,
+        links : $scope.linkss        
        }
 
-       $log.debug("Sending payload: " + JSON.stringify(payload));
-        alert(JSON.stringify(payload));
-          // send the payload to the server
+       // send the payload to the server
           $http.post('/api/projects/iterations/workitems', payload)
             .success(function(data, status, header, config) {
-              $log.debug('Success adding new work item');
               alert("The new work item is added");
-              $scope.workItems.push(data);
+              alert(JSON.stringify(data));
+              var payload2 = {
+                work_item_id : data.new_id
+              }
+              $http.post('/api/projects/iterations/getwork_item', payload2)
+                .success(function(data, status, header, config) {
+                  alert(JSON.stringify(data));
+                  $scope.workItems.push(data);
+                })
+                .error(function(data, status) {
+                  alert("ERROR al buscar workitem");
+                  $log.debug('Error while trying to add new work item');
+                });
             })          
 
             .error(function(data, status) {
-              alert("ERROR");
+              alert("ERROR al agregar workitem");
               $log.debug('Error while trying to add new work item');
             });
      }
@@ -178,75 +218,110 @@ angular.module('Wbpms')
               work_item_id : idWorkItem
           }
 
-      $log.debug("Sending payload: " + JSON.stringify(payload));
-
+          
           // send the payload to the server
-          $http.delete('api/projects/iterations/workitems', payload)
+          $http.post('/api/projects/iterations/workitems/delete_workitem', payload)
             .success(function(data, status, header, config) {
-              $log.debug('Success remove work item');
-              alert("The work item was deleted");                
+              alert("The work item was deleted");
+              for(var i =0; i < $scope.workItems.length; i++) {
+                if($scope.workItems[i].work_item_id === delWorkItem.work_item_id) {
+                  $scope.workItems.splice(i, 1);
+                  break;
+                }
+              }
+
             })
             .error(function(data, status) {
-              $log.debug('Error while trying to remove a work item');
+             alert("Error deleting work item");
             }); 
+
         }    
 
      $scope.updateWorkItem = function(idWorkItem, idIteration, idProject, name, description, points, createdBy, owner) {
      // function update a work_item
      }
 
-     $scope.get_all_iteration_work_items = function(nameProject, idIteration) {
-     // the server should return a json array which contains all
-     // work_items of an iteration
-        var payload = {
-           project_name : nameProject,
-           iteration_number : idIteration
-        }
+     
+     $scope.add_comment = function(_content) {
+     //  function add a comment to a work_item
+        
+        $scope.comments.push(_content);
 
-      $log.debug("Sending payload: " + JSON.stringify(payload));
+     }
+
+     $scope.get_all_work_item_comments = function(idWorkItem) {
+     // the server should return a json array with all comments about
+     // a certain work_item
+        var payload = {
+          work_item_id : idWorkItem
+        }  
+
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+        alert(JSON.stringify(payload));
         // send the payload to the server
-        $http.post('/api/projects/iterations/getworkitems', payload)
+        $http.post('/api/projects/iterations/workitems/getcomments', payload)
            .success(function(data, status, header, config) {
-            $scope.workItems = data;
+            $scope.comments = data[0].comments;
           })   
           .error(function(data, status) {
             alert("ERROR"+ JSON.stringify(data));
           });
 
-     }
+     } 
 
-     $scope.addComment = function(_content) {
-     //  function add a comment to a work_item
-        var comment = {
-            date :'12/12/2014',
-            author : 'Guille',
-            content : _content
-        };
-
-        $scope.comments.push(comment);
-
-     }
-
-     $scope.getAllWorkItemComments = function(idWorkItem) {
-     // the server should return a json array with all comments about
-     // a certain work_item  
-     }
-
-     $scope.addLink = function(idWorkItemSource, idWorkItemDetination) {
+     $scope.add_link = function(link) {
      // function add new link between two work_items
+        $scope.linkss.push(link);
      }
 
      $scope.removeLink = function(idWorkItemSource, idWorkItemDetination) {
      // function delete an existing link between two work_items
      }
 
-     $scope.getAllWorkItemLinks = function(idWorkItem) {
+ /*    $scope.getAllWorkItemLinks = function(idWorkItem) {
     // the server should return a json array with all links about
     // a certain work_item
-     } 
+        var payload = {
+          work_item_id : idWorkItem
+        }  
+
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+        alert(JSON.stringify(payload));
+        // send the payload to the server
+        $http.post('/api/projects/iterations/workitems/getlinks', payload)
+           .success(function(data, status, header, config) {
+            $scope.linkss = data[0].linkss;
+          })   
+          .error(function(data, status) {
+            alert("ERROR"+ JSON.stringify(data));
+          });
+
+     }  */
+
+  /* $scope.get_all_work_item_links = function() {
+    var payload = {
+           project_name : $scope.project.project_name,
+           iteration_number : $scope.iteration.id_iteration
+        }
+        $log.debug("Sending payload: " + JSON.stringify(payload));
+        // send the payload to the server
+        $http.post('/api/projects/iterations/getworkitems', payload)
+           .success(function(data, status, header, config) {
+            alert(JSON.stringify(data));
+            $scope.workItems = data;
+            
+          })   
+          .error(function(data, status) {
+            alert("ERROR"+ JSON.stringify(data));
+          });
+
+   } */
+
 
      $scope.goToWorkItem = function(work_item){
         alert("Newell's Old Boys!!!!");
     }
+
+
   }
 ]);
