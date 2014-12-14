@@ -109,7 +109,7 @@ angular.module('Wbpms')
                 $log.debug('Member <Member> removed successfully from project'); 
                  // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
-                    if($scope.members[i].user === payload.user_email_id) {
+                    if($scope.members[i].email === payload.user_email_id) {
                         $scope.members.splice(i, 1);
                     }
                 }

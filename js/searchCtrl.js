@@ -34,7 +34,7 @@ angular.module('Wbpms')
     $scope.goToMembers = function(_member) {
         // Go to Members 
           $scope.memberToShow = _member;               
-          window.location.href = '#/projects/iterations/view_member';          
+          window.location.href = '#/projects/members/view';          
     
     }  
     

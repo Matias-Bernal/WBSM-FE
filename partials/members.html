@@ -51,10 +51,10 @@
                         </div>
                     </td>
                     <td>{{member.name}}</td>
-                    <td>{{member.user}}</td>
+                    <td>{{member.email}}</td>
                     <td>{{project.points}}</td>
                     <td>
-                        <button type="button" ng-disabled="{{project.owner==0}}" class="btn btn-default" data-toggle="modal" data-target="#exampleModal2" ng-click="setDeleteUser(member.user)">
+                        <button type="button" ng-disabled="{{project.owner==0}}" class="btn btn-default" data-toggle="modal" data-target="#exampleModal2" ng-click="setDeleteUser(member.email)">
                             <i class="fa fa-times"></i>                           
                         </button>                         
                     </td>
