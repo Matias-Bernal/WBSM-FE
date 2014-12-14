@@ -21,7 +21,7 @@
                             <td>{{search.name}}</td> 
                             <td>{{search.surname}}</td>
                             <td>{{search.email}}</td>
-                              <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToMembers(search)"><i class="fa fa-tasks"></i> <!--//cuando haga un click te debe llevar a home -->
+                              <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToMembers(search)"><i class="fa fa-users"></i> <!--//cuando haga un click te debe llevar a home -->
                             </button>
                             </td>  
                           </tr>
@@ -31,8 +31,8 @@
                         <th>Work Item</th>
                       </tr>
                       <tr ng-repeat="search in globalSearchWorkItem" >
-                        <td>{{search.idW}}</td>
-                        <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToWorkItems()"><i class="fa fa-tasks"></i>
+                        <td>{{search.work_item_id}}</td>
+                        <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" type="submit" ng-click="goToWorkItems(work_item_id)"><i class="fa fa-cubes"></i>
                             </button>
                         </td>  
                       </tr>

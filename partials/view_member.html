@@ -7,8 +7,8 @@
     <div class= "col-md-1 col-md-offset-1">
       <img src="img/male.png" class="img-thumbnail" style="float">
       </div> 
-        <h4>{{usuario.name}} {{usuario.surname}} <br><br>
-        {{usuario.email}}</h4>
+        <h4>{{memberToShow.name}} {{memberToShow.surname}} <br><br>
+        {{searchMember.email}}</h4>
       </div>
       <div class="container">
         <div class="col-lg-8">
@@ -17,7 +17,7 @@
 			       <div class="panel-heading">
 			         <h4>Open Items + Not Done</h4>
 			       </div>
- <!--            <div class="panel-body" style="width:730px; height:200px; overflow-y:scroll;">
+             <div class="panel-body" style="width:730px; height:200px; overflow-y:scroll;">
               <div class="btn-group-vertical" role="group" aria-label="...">
                 <div>
                   <ul ng-repeat="project in projects">
@@ -28,7 +28,7 @@
                             <li><span class="label label-warning" ng-if="workitem.name != ''" ng-click="goToWorkItems(project.project_name, iteration.iteration_number, iteration.title, iteration.points)">{{workitem.name}} - {{workitem.points}}</span></li>
                           </ul>
                       </ul>        
-                  </ul>   -->                  
+                  </ul>                     
                 </div>
               </div>
              </div>

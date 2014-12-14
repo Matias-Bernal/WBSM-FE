@@ -9,7 +9,7 @@ angular.module('Wbpms')
         $scope.project = ProjectData;
         $scope.eMailUser = UserData;
         $scope.members = [];
-        $scope.searcMember = SearchMemberData
+        $scope.searchMember = SearchMemberData
         
         $scope.listEmail = {
             project_email : ''
@@ -132,7 +132,7 @@ angular.module('Wbpms')
                 .success(function(data, status, header, config) {
                 $log.debug('New owner <owner> added successfully to <id_project>');
                 for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].user == eMailUser) {
+                    if($scope.members[i].email == eMailUser) {
                         if (!$scope.members[i].owner){
                             $scope.members[i].owner = true;
                         }
@@ -157,7 +157,7 @@ angular.module('Wbpms')
               .success(function(data, status, header, config) {
                 $log.debug('Downgrade owner <owner> successfully to <id_project>');
                  for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].user == eMailUser) {
+                    if($scope.members[i].email == eMailUser) {
                         if ($scope.members[i].owner){
                             $scope.members[i].owner = false;
                         }

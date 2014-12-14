@@ -20,12 +20,12 @@ angular.module('Wbpms')
     $scope.showWorkItem = false;
     
     
-    $scope.goToWorkItems = function(project_name, iteration, wItem) {
+    $scope.goToWorkItems = function(_wItem) {
         // Go to WorkItem 
     
-          $scope.idProjectToSearch.project_name = project_name; 
-          $scope.iterationToSearch.id_iteration = iteration;            
-          $scope.workItemToSearch.id_WorkItem = wItem;           
+        /*  $scope.idProjectToSearch.project_name = project_name; 
+          $scope.iterationToSearch.id_iteration = iteration;   */         
+          $scope.workItemToShow = _wItem;           
 
           window.location.href = '#/projects/iterations/work_items';          
     

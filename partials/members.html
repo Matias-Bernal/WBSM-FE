@@ -38,14 +38,14 @@
                         <div ng-if="member.owner == 1">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="memberEmail" data-toggle="modal" ng-checked="{{member.owner == 1}}" ng-disabled="{{project.owner==0}}" ng-click="setDeleteUser(member.user)" data-target="#exampleModal3">
+                                    <input type="checkbox" ng-model="memberEmail" data-toggle="modal" ng-checked="{{member.owner == 1}}" ng-disabled="{{project.owner==0}}" ng-click="setDeleteUser(member.email)" data-target="#exampleModal3">
                                 </label>
                             </div>
                         </div>
                         <div ng-if="member.owner==0">
                             <div class="checkbox" >
                                 <label>
-                                    <input type="checkbox" ng-model="memberEmail" data-toggle="modal" ng-disabled="{{project.owner==0}}" ng-click="setDeleteUser(member.user)" data-target="#exampleModal4">
+                                    <input type="checkbox" ng-model="memberEmail" data-toggle="modal" ng-disabled="{{project.owner==0}}" ng-click="setDeleteUser(member.email)" data-target="#exampleModal4">
                                 </label>
                             </div>
                         </div>
