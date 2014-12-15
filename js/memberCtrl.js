@@ -57,7 +57,7 @@ angular.module('Wbpms')
               $http.post('/api/projects/getmembers', payload)
 
               .success(function(data, status, header, config) {
-                if ($scope.members.owner === 0)
+                if ($scope.members.owner == 0)
                         $scope.members.owner = false
                 else 
                         $scope.members.owner = true
@@ -130,7 +130,7 @@ angular.module('Wbpms')
             $http.post('/api/projects/getmembers', payload)
               .success(function(data, status, header, config) {
                 // the server should return a json array which contains all the todos
-                if ($scope.members.owner === 0)
+                if ($scope.members.owner == 0)
                     $scope.members.owner = false
                 else 
                     $scope.members.owner = true;
@@ -212,7 +212,7 @@ angular.module('Wbpms')
             $http.post('/api/projects/members/promote', payload)
                 .success(function(data, status, header, config) {
                     for(var i =0; i < $scope.members.length; i++){
-                        if($scope.members[i].email === eMailUser) 
+                        if($scope.members[i].email == eMailUser) 
                             if ($scope.members[i].owner = false)
                                 $scope.members[i].owner = true;
                     };
@@ -252,7 +252,7 @@ angular.module('Wbpms')
             $http.post('/api/projects/members/downgrade', payload)
               .success(function(data, status, header, config) {
                  for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].email === eMailUser) 
+                    if($scope.members[i].email == eMailUser) 
                         if ($scope.members[i].owner = true)
                             $scope.members[i].owner = false;
                  };

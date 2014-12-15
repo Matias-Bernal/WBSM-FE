@@ -58,7 +58,6 @@ angular.module('Wbpms')
                 keyword: $scope.SerchKeyData.keyword
         }
         if ($scope.SerchKeyData.key_type == 'user') {
-            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/search/users', payload)
             .success(function(data, status, header, config) {
                 $scope.globalSearchUser= data[0].matches;
@@ -69,11 +68,9 @@ angular.module('Wbpms')
                 $log.debug(data.error);
             }); 
         } else {
-            $log.debug("Sending payload: " + JSON.stringify(payload));
              $http.post('/api/search/workitems', payload)
              .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri to redirection
-            alert('find the workItem');
             $scope.globalSearchWorkItem = data[0].matches;
              $scope.showMember = false;
              $scope.showWorkItem = true;

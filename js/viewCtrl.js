@@ -43,8 +43,6 @@ angular.module('Wbpms')
                   user_email_id : $scope.memberToShow.email
               }
 
-              // send the payload to the server
-              alert(JSON.stringify(payload));
               $http.post('/api/users/getprojects', payload)                  
                 .success(function(data, status, header, config) {
                   alert(JSON.stringify(data[0].projects));
