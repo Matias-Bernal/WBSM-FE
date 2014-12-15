@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'SearchMemberData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData, SearchMemberData) {
+  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'ViewHomeData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, ViewHomeData) {
 	
         //Global User Data
         $scope.usuario = UserData;  
@@ -14,7 +14,7 @@ angular.module('Wbpms')
         $scope.iteracion = IterationData;  
 
         //Global Search Member Data        
-        $scope.searchData = SearchMemberData;
+        $scope.searchData = ViewHomeData;
 
         $scope.projects = [];    
 

@@ -129,3 +129,11 @@ app.factory('SearchKey', function(){
       key_type: ''
     }
 }); 
+
+app.factory('ViewHomeData', function(){
+    return {
+      email : '',
+      name : '',
+      surname : ''
+    }
+}); 
