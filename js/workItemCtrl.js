@@ -40,16 +40,6 @@ angular.module('Wbpms')
             new_links : ''
       };
 
-      
-      $scope.modifyWorkItem = {
-            modify_title : '',
-            modify_descriptionIter : '',
-            modify_point : '',
-            modify_status : '',
-            modify_comments : '',
-            modify_links : ''
-      };        
-
       $scope.delWorkItem = {
         work_item_id : '',
         work_item_number : ''
@@ -90,16 +80,14 @@ angular.module('Wbpms')
           work_item_id : idWorkItem
         }
 
-      $log.debug("Sending payload: " + JSON.stringify(payload));
-        // send the payload to the server
-        $http.get('/api/projects/iterations/getwork_items', payload)
+      // send the payload to the server
+        $http.post('/api/projects/iterations/getwork_item', payload)
            .success(function(data, status, header, config) {
             alert(JSON.stringify(data));
-            $scope.idWorkItem = data;
+            //$scope.idWorkItem = data;
           })   
           .error(function(data, status) {
             alert("ERROR"+ JSON.stringify(data));
-            $log.debug('Error while try fetch work item info from server');
           });
       }
 
@@ -222,13 +210,6 @@ angular.module('Wbpms')
       $scope.delWorkItem.work_item_id = idWorkItem;
       $scope.delWorkItem.work_item_number = numberWorkItem;
     }
-
-    $scope.setModify = function(project_name) {
-        // Set project name to Delete
-
-          $scope.newNameProject.old_project_name = project_name;
-
-        } 
 
 
   }

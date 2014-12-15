@@ -29,10 +29,10 @@
                       <i class="fa fa-times"></i>                           
                   </button>                         
                 </td>
-                <td width="100">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalModify" ng-click="setModify(workItem.id, workItem.number)">
-                        <i class="fa fa-edit"></i>
-                    </button>                                          
+                <td>
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalInfo" ng-click="get_work_item_info(workItem.id)">
+                      <i class="fa fa-info-circle"></i>                           
+                  </button>                         
                 </td>
               </tr>
             </table>
@@ -79,7 +79,7 @@
                               <span>Owned By:</span>
                           </div>  
                           <div class="col-lg-4">
-                              <input type="text" id="owner" class="form-control" ng-model="usuario.name" ng-readonly="usuario.name">
+                              <input type="text" id="owner" class="form-control" ng-model="usuario.name" ng-readonly="usuario.name"> <!--</input> -->
                           </div>
                           
                       </div>  <!--end div row points and owned by-->
