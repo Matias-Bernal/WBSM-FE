@@ -76,7 +76,7 @@ angular.module('Wbpms')
           // send the payload to the server
           $http.post('/api/projects/iterations/getworkitems', payload3)                  
             .success(function(data, status, header, config) {
-              $scope.workitems.workitems = data;
+              $scope.workitems.workitems = data[0].workitems;
               $scope.workitems.project = project_name;                            
               $scope.workitems.iteration = iteration_number;                                          
           })
