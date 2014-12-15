@@ -54,7 +54,6 @@ angular.module('Wbpms')
               var payload = {
                   project_name_id: $scope.project.project_name
               }
-              $log.debug("Sending payload: " + JSON.stringify(payload));
               $http.post('/api/projects/getmembers', payload)
 
               .success(function(data, status, header, config) {
@@ -65,7 +64,16 @@ angular.module('Wbpms')
                 $scope.members = data[0].members;
               })
               .error(function(data, status) {
-                $log.debug(data.error);
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = true; 
               });
         }
         
@@ -78,7 +86,14 @@ angular.module('Wbpms')
 
             $http.post('/api/projects/members/add', payload)
               .success(function(data, status, header, config) {
-                $scope.members.push(data);
+                var data2 = {
+                    name: data[0].name,
+                    surname: data[0].surname,
+                    email: data[0].email,
+                    points: data[0].points,
+                    owner: data[0].owner
+                }; 
+                $scope.members.push(data2); //filter the success: to send in data
                 $scope.addSuccessMsgVisible = true;
                 $scope.addErrorMsgVisible = false;
                 $scope.promoteSuccessMsgVisible = false;

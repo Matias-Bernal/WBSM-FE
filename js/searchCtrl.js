@@ -39,16 +39,13 @@ angular.module('Wbpms')
           $scope.memberToShow.gender = gender;
           $scope.memberToShow.role = role;
           $scope.memberToShow.avatar = avatar;
-          alert(JSON.stringify($scope.memberToShow.email));
           window.location.href = '#/projects/members/view';          
     
     }  
     
      $scope.searches = function(key, key_type){
-        alert('usa controlador')
         $scope.SerchKeyData.keyword = key;
         $scope.SerchKeyData.key_type = key_type;
-         alert(JSON.stringify($scope.SerchKeyData));
         window.location.href = '#/search';
      
     }
@@ -60,18 +57,15 @@ angular.module('Wbpms')
         var payload = {
                 keyword: $scope.SerchKeyData.keyword
         }
-        alert(JSON.stringify(payload));
         if ($scope.SerchKeyData.key_type == 'user') {
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/search/users', payload)
             .success(function(data, status, header, config) {
-                alert(JSON.stringify(data[0].matches));
                 $scope.globalSearchUser= data[0].matches;
                 $scope.showMember = true;
                 $scope.showWorkItem = false;
             })
             .error(function(data, status) {
-                alert(JSON.stringify(data));
                 $log.debug(data.error);
             }); 
         } else {
@@ -80,7 +74,6 @@ angular.module('Wbpms')
              .success(function(data, status, header, config) {
             // the server should return a json array which contains the uri to redirection
             alert('find the workItem');
-            alert(JSON.stringify(data[0].matches));
             $scope.globalSearchWorkItem = data[0].matches;
              $scope.showMember = false;
              $scope.showWorkItem = true;
