@@ -25,19 +25,22 @@ angular.module('Wbpms')
         // of a function that fetches the projects from the server
         $scope.init = function() {
         // Get all projects of a User
-          
-          var payload = {
-              user_email_id : $scope.usuario.email
-          }
 
-          // send the payload to the server
-          $http.post('/api/users/getprojects', payload)                  
-            .success(function(data, status, header, config) {
-              $scope.projects = data[0].projects;   
-            })  
-            .error(function(data, status) {
-              alert('Error while fetching projects from server');
-            }); 
+          if($scope.usuario.email === '')
+              window.location.href = '#/login';
+          else        
+          
+              var payload = {
+                  user_email_id : $scope.usuario.email
+              }
+
+              // send the payload to the server
+              $http.post('/api/users/getprojects', payload)                  
+                .success(function(data, status, header, config) {
+                  $scope.projects = data[0].projects;   
+                })  
+                .error(function(data, status) {
+                }); 
         
         }    
 
@@ -55,7 +58,6 @@ angular.module('Wbpms')
               $scope.iterations.project = project_name;              
             })  
             .error(function(data, status) {
-              alert('Error while fetching iterations from server');
             });                
 
         }
@@ -76,7 +78,6 @@ angular.module('Wbpms')
               $scope.workitems.iteration = iteration_number;                                          
           })
             .error(function(data, status) {
-              alert('Error while fetching work Items from server'); 
           });                
 
         }     
@@ -95,7 +96,6 @@ angular.module('Wbpms')
               $scope.members.project = project_name;
           })
             .error(function(data, status) {
-              alert('Error while fetching members from server');
           });                
 
         }   

@@ -18,7 +18,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-1" style="width:1000px; height:300px; overflow-y:scroll;">
+              <div class="col-md-10 col-md-offset-1" style="width:1000px; height:250px; overflow-y:scroll;">
                 <table class="table-project">
                   <tr>
                     <th width="300">Project</th>
@@ -50,6 +50,33 @@
               </div>
               </div>
         </div> <!-- end of container --> 
+
+    <!-- div infomation-->
+        <div class="container">
+            <div class="row">
+                <div id="information" class="col-lg-7 col-lg-offset-2">
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="addErrorMsgVisible">
+                        <strong>Error adding project!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="addSuccessMsgVisible">
+                        <strong>The Project was added!</strong>
+                    </div>
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="renameErrorMsgVisible">
+                        <strong>Error renaming project!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="renameSuccessMsgVisible">
+                        <strong>The Project was renamed!</strong>
+                    </div>  
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="removeErrorMsgVisible">
+                        <strong>Error deleting project!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="removeSuccessMsgVisible">
+                        <strong>The Project was deleted!</strong>
+                    </div>                                        
+                </div>
+            </div>
+        </div>
+
     </div>
     
     <!-- Modal Create Project -->
