@@ -45,7 +45,7 @@
                   <ul ng-repeat="project in projects">
                     <li><span class="label label-info" ng-model="nameproject" ng-click="loadMembers(project.project_name)">{{project.project_name}} - {{project.points}}</span></li>                      
                       <ul class="dropdown" ng-if="members.project == project.project_name" ng-repeat="member in members.members">
-                        <li><span class="label label-success" ng-if="member.name != ''"  ng-click="goToMembers(project.project_name)">{{member.name}} - {{member.points}}</span></li>
+                        <li><span class="label label-success" ng-if="member.name != ''"  ng-click="goToMembers(project.project_name, member.email, member.name, member.surname)">{{member.name}} - {{member.points}}</span></li>
                       </ul>        
                   </ul>                     
                 </div>

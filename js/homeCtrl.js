@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData) {
+  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'SearchMemberData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, SearchMemberData) {
 	
         //Global User Data
         $scope.usuario = UserData;  
@@ -11,7 +11,10 @@ angular.module('Wbpms')
         $scope.proyecto = ProjectData;  
 
         //Global Iteration Data
-        $scope.iteracion = IterationData;          
+        $scope.iteracion = IterationData;  
+
+        //Global Search Member Data        
+        $scope.searchData = SearchMemberData;
 
         $scope.projects = [];    
 
@@ -112,10 +115,14 @@ angular.module('Wbpms')
     
         }  
 
-        $scope.goToMembers = function(project_name) {
+        $scope.goToMembers = function(project_name, memberEmail, memberName, memberSurname) {
         // Go to Members 
     
           $scope.proyecto.project_name = project_name; 
+
+          $scope.searchData.email = memberEmail;
+          $scope.searchData.name = memberName;
+          $scope.searchData.surname = memberSurname;
 
           window.location.href = '#/projects/members/view';          
     
