@@ -3,12 +3,11 @@
 <article ng-init="init()">
 <div>   
   <div class="row">
-    <!--<div class= "col-md-1 col-md-offset-1">
-      <img src={{usuario.avatar}} class="img-thumbnail" style="float">
-      </div> -->
-        <h4>{{searchData.name}} {{searchData.surname}} <br><br>
-        {{searchData.email}}</h4>
-      </div>
+    <div class= "col-md- col-md-offset-2">
+      <img src={{memberToShow.avatar}} class="img-thumbnail" style="float">
+        <h4>{{memberToShow.name}} {{memberToShow.surname}} <br><br>
+        {{memberToShow.email}}</h4>
+    </div>
       <div class="container">
         <div class="col-lg-8">
           <h2>My Work Open Items</h2>
@@ -55,7 +54,7 @@
         </div>        
       </div>	
   </div>
-</div>
+</div > 
 
 </article>    
 <div ng-include="'partials/footer.html'"></div>

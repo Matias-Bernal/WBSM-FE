@@ -20,27 +20,31 @@ angular.module('Wbpms')
     $scope.showWorkItem = false;
     
     
-    $scope.goToWorkItems = function(_wItem) {
+    $scope.goToWorkItems = function(work_item_id, project_id, iteration_id ) {
         // Go to WorkItem 
     
-        /*  $scope.idProjectToSearch.project_name = project_name; 
-          $scope.iterationToSearch.id_iteration = iteration;   */         
-          $scope.workItemToShow = _wItem;           
+          $scope.idProjectToSearch.project_name = project_id; 
+          $scope.iterationToSearch.id_iteration = iteration_id;        
+          $scope.workItemToShow = work_item_id;           
 
           window.location.href = '#/projects/iterations/work_items';          
     
-    }  
+    } 
     
-    $scope.goToMembers = function(searchs.name, searchs.surname, searchs.email) {
+    $scope.goToMembers = function(name, surname, email, gender, role, avatar) {
         // Go to Members 
-          $scope.memberToShow.name = searchs.name;     
-          $scope.memberToShow.surname = searchs.surname;
-          $scope.memberToShow.email = searchs.email;
+          $scope.memberToShow.name = name;   
+          $scope.memberToShow.surname = surname;
+          $scope.memberToShow.email = email;
+          $scope.memberToShow.gender = gender;
+          $scope.memberToShow.role = role;
+          $scope.memberToShow.avatar = avatar;
+          alert(JSON.stringify($scope.memberToShow.email));
           window.location.href = '#/projects/members/view';          
     
     }  
     
-     $scope.search = function(key, key_type){
+     $scope.searches = function(key, key_type){
         alert('usa controlador')
         $scope.SerchKeyData.keyword = key;
         $scope.SerchKeyData.key_type = key_type;
@@ -61,6 +65,7 @@ angular.module('Wbpms')
             $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/search/users', payload)
             .success(function(data, status, header, config) {
+                alert(JSON.stringify(data[0].matches));
                 $scope.globalSearchUser= data[0].matches;
                 $scope.showMember = true;
                 $scope.showWorkItem = false;

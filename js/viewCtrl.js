@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('ViewCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'SearchMemberData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData, SearchMemberData) {
+  .controller('ViewCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'SearchMemberData', 'ViewHomeData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, SearchMemberData, ViewHomeData) {
 	
         //Global User Data
         $scope.usuario = UserData;  
@@ -14,7 +14,9 @@ angular.module('Wbpms')
         $scope.iteracion = IterationData;  
 
         //Global Search Member Data        
-        $scope.searchData = SearchMemberData;
+        $scope.memberToShow = SearchMemberData;
+        
+        $scope.viewMemberHomeData = ViewHomeData;
 
         $scope.projects = [];    
 
@@ -26,6 +28,7 @@ angular.module('Wbpms')
         
     
             
+        
 
         // declaration !AND! call (see parenthesis at end of function)
         // of a function that fetches the projects from the server
@@ -37,12 +40,14 @@ angular.module('Wbpms')
           else        
           
               var payload = {
-                  user_email_id : $scope.searchData.email
+                  user_email_id : $scope.memberToShow.email
               }
 
               // send the payload to the server
+              alert(JSON.stringify(payload));
               $http.post('/api/users/getprojects', payload)                  
                 .success(function(data, status, header, config) {
+                  alert(JSON.stringify(data[0].projects));
                   $scope.projects = data[0].projects;   
                 })  
                 .error(function(data, status) {

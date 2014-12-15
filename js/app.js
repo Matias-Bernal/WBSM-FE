@@ -107,7 +107,6 @@ app.factory('SearchMemberData', function(){
       gender : '',
       role : '',
       avatar: ''
-
     }
 }); 
 
