@@ -20,14 +20,14 @@ angular.module('Wbpms')
     $scope.showWorkItem = false;
     
     
-    $scope.goToWorkItems = function(work_item_id, project_id, iteration_id ) {
+    $scope.goToWorkItems = function(work_item_id) {
         // Go to WorkItem 
-    
+    /*
           $scope.idProjectToSearch.project_name = project_id; 
-          $scope.iterationToSearch.id_iteration = iteration_id;        
-          $scope.workItemToShow = work_item_id;           
+          $scope.iterationToSearch.id_iteration = iteration_id; */       
+          $scope.workItemToShow.id_WorkItem = work_item_id;     
 
-          window.location.href = '#/projects/iterations/work_items';          
+          window.location.href = '#/projects/iterations/getwork_item';          
     
     } 
     

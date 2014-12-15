@@ -25,6 +25,22 @@ angular.module('Wbpms')
             eMailMember :'',
             owner: false
         }
+        
+        //Add member messagges //
+        $scope.addSuccessMsgVisible = false;
+        $scope.addErrorMsgVisible = false;
+        // promote owner messagges //
+        $scope.promoteSuccessMsgVisible = false;
+        $scope.promoteErrorMsgVisible = false;
+        //Remove member messagges //
+        $scope.removeSuccessMsgVisible = false;
+        $scope.removeErrorMsgVisible = false;  
+        //Downgrade owner messagges //
+        $scope.downgradeSuccessMsgVisible = false;
+        $scope.downgradeErrorMsgVisible = false;  
+        //get member messagges//
+        $scope.getSuccessMsgVisible = false;
+        $scope.getErrorMsgVisible = false; 
 
     
       // declaration !AND! call (see parenthesis at end of function)
@@ -42,7 +58,6 @@ angular.module('Wbpms')
               $http.post('/api/projects/getmembers', payload)
 
               .success(function(data, status, header, config) {
-                alert(JSON.stringify(data[0].members));
                 if ($scope.members.owner === 0)
                         $scope.members.owner = false
                 else 
@@ -55,25 +70,37 @@ angular.module('Wbpms')
         }
         
          //Function add a member in the project list
-        $scope.add_member_to_projects = function(idProject,eMailUser) {
-            alert($scope.idProject);
-            alert($scope.eMailUser);   
+        $scope.add_member_to_projects = function(idProject,eMailUser) {  
             var payload = {
                 project_name_id: idProject,
                 user_email_id: eMailUser
             }
-            
-           $log.debug("Sending payload: " + JSON.stringify(payload));
+
             $http.post('/api/projects/members/add', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Success: New member <user_email_id> added successfully to <project_name_id>');
-                alert(JSON.stringify(data));
                 $scope.members.push(data);
+                $scope.addSuccessMsgVisible = true;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = false; 
               })
               .error(function(data, status) {
-                //$log.debug(data.error);
-                 alert("The new member is not added");
-                $log.debug('Error while trying to add new member to the project');
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = true;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = false; 
               });
             
         }
@@ -84,21 +111,38 @@ angular.module('Wbpms')
             var payload = {
                 project_name_id: $scope.project.project_name
             }
-            alert(JSON.stringify(payload));
-            $log.debug("Sending payload: " + JSON.stringify(payload));
+            
             $http.post('/api/projects/getmembers', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Member added successfully from project'); 
                 // the server should return a json array which contains all the todos
                 if ($scope.members.owner === 0)
                     $scope.members.owner = false
                 else 
-                    $scope.members.owner = true
+                    $scope.members.owner = true;
                 $scope.members = data[0].members;
+                
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = true;
+                $scope.getErrorMsgVisible = false; 
               })
               .error(function(data, status) {
-                alert("error");
-                $log.debug(data.error);
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = true; 
               }); 
         }
         
@@ -110,18 +154,35 @@ angular.module('Wbpms')
                 user_email_id: eMailUser
             }
             
-            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/remove', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Member <Member> removed successfully from project'); 
                  // find the element in the data array and remove it
                 for(var i =0; i < $scope.members.length; i++) {
                     if($scope.members[i].email === payload.user_email_id) 
                         $scope.members.splice(i, 1);
                 }
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = true;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = false; 
               })
               .error(function(data, status) {
-                $log.debug(data.error);
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = true;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = false; 
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = false; 
               });
         }
         
@@ -133,19 +194,36 @@ angular.module('Wbpms')
                 user_email_id: eMailUser
             }
              
-            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/promote', payload)
                 .success(function(data, status, header, config) {
-                $log.debug('New owner <owner> added successfully to <id_project>');
-                for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].email === eMailUser) 
-                        if ($scope.members[i].owner = false)
-                            $scope.members[i].owner = true;
-                };
+                    for(var i =0; i < $scope.members.length; i++){
+                        if($scope.members[i].email === eMailUser) 
+                            if ($scope.members[i].owner = false)
+                                $scope.members[i].owner = true;
+                    };
+                    $scope.addSuccessMsgVisible = false;
+                    $scope.addErrorMsgVisible = false;
+                    $scope.promoteSuccessMsgVisible = true;
+                    $scope.promoteErrorMsgVisible = false;
+                    $scope.removeSuccessMsgVisible = false;
+                    $scope.removeErrorMsgVisible = false;  
+                    $scope.downgradeSuccessMsgVisible = false;
+                    $scope.downgradeErrorMsgVisible = false; 
+                    $scope.getSuccessMsgVisible = false;
+                    $scope.getErrorMsgVisible = false; 
  
                 })
                 .error(function(data, status) {
-                    $log.debug(data.error);     
+                    $scope.addSuccessMsgVisible = false;
+                    $scope.addErrorMsgVisible = false;
+                    $scope.promoteSuccessMsgVisible = false;
+                    $scope.promoteErrorMsgVisible = true;
+                    $scope.removeSuccessMsgVisible = false;
+                    $scope.removeErrorMsgVisible = false;  
+                    $scope.downgradeSuccessMsgVisible = false;
+                    $scope.downgradeErrorMsgVisible = false;   
+                    $scope.getSuccessMsgVisible = false;
+                    $scope.getErrorMsgVisible = false; 
                 });
         }
         
@@ -156,18 +234,35 @@ angular.module('Wbpms')
                 project_name_id: idProject,
                 user_email_id: eMailUser
             }
-            $log.debug("Sending payload: " + JSON.stringify(payload));
             $http.post('/api/projects/members/downgrade', payload)
               .success(function(data, status, header, config) {
-                $log.debug('Downgrade owner <owner> successfully to <id_project>');
                  for(var i =0; i < $scope.members.length; i++){
                     if($scope.members[i].email === eMailUser) 
                         if ($scope.members[i].owner = true)
                             $scope.members[i].owner = false;
                  };
+                 $scope.addSuccessMsgVisible = false;
+                 $scope.addErrorMsgVisible = false;
+                 $scope.promoteSuccessMsgVisible = false;
+                 $scope.promoteErrorMsgVisible = false;
+                 $scope.removeSuccessMsgVisible = false;
+                 $scope.removeErrorMsgVisible = false;  
+                 $scope.downgradeSuccessMsgVisible = true;
+                 $scope.downgradeErrorMsgVisible = false; 
+                 $scope.getSuccessMsgVisible = false;
+                 $scope.getErrorMsgVisible = false; 
               })
-          .error(function(data, status) {
-            $log.debug(data.error);   
+             .error(function(data, status) {
+                $scope.addSuccessMsgVisible = false;
+                $scope.addErrorMsgVisible = false;
+                $scope.promoteSuccessMsgVisible = false;
+                $scope.promoteErrorMsgVisible = false;
+                $scope.removeSuccessMsgVisible = false;
+                $scope.removeErrorMsgVisible = false;  
+                $scope.downgradeSuccessMsgVisible = false;
+                $scope.downgradeErrorMsgVisible = true;   
+                $scope.getSuccessMsgVisible = false;
+                $scope.getErrorMsgVisible = false; 
           });
         }
     }

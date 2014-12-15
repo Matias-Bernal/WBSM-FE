@@ -65,6 +65,46 @@
         </div> <!-- end of container --> 
     </div>
     
+     <!-- div infomation-->
+        <div class="container">
+            <div class="row">
+                <div id="information" class="col-lg-7 col-lg-offset-2">
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="addErrorMsgVisible">
+                        <strong>Error adding Member!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="addSuccessMsgVisible">
+                        <strong>The Project was added!</strong>
+                    </div>
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="promoteErrorMsgVisible">
+                        <strong>Error promote Member!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="promoteSuccessMsgVisible">
+                        <strong>The Member was promote!</strong>
+                    </div>  
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="removeErrorMsgVisible">
+                        <strong>Error deleting Member!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="removeSuccessMsgVisible">
+                        <strong>The Member was deleted!</strong>
+                    </div>    
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="getErrorMsgVisible">
+                        <strong>Error Get Members!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="getSuccessMsgVisible">
+                        <strong>The members was obtained!</strong>
+                    </div>    
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="downgradeErrorMsgVisible">
+                        <strong>Error downgrader Member!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="downgradeSuccessMsgVisible">
+                        <strong>The Member was downgrade!</strong>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
     <!--Modal Add member-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -82,7 +82,7 @@ angular.module('Wbpms')
           }
 
           // send the payload to the server
-          $http.post('/api/projects/iterations/getworkitems', payload3)                  
+          $http.post('/api/projects/iterations/getwork_item', payload3)                  
             .success(function(data, status, header, config) {
               $scope.workitems.workitems = data;
               $scope.workitems.project = project_name;                            
@@ -110,7 +110,7 @@ angular.module('Wbpms')
           });                
 
         }   
-
+/*
         $scope.goToWorkItems = function(project_name, iteration_number, title, points) {
         // Go to Work Items 
     
@@ -121,7 +121,7 @@ angular.module('Wbpms')
 
           window.location.href = '#/projects/iterations/work_items';          
     
-        }  
+        }  */
 
         $scope.goToMembers = function(project_name, memberEmail, memberName, memberSurname) {
         // Go to Members 
