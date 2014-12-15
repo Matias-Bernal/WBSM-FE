@@ -50,6 +50,19 @@ angular.module('Wbpms')
         second_workItem : ''
       }
 
+      $scope.modifyWorkItem = {
+        workitem : {},
+        comments : [],
+        links : []
+      };
+
+
+      $scope.infoWorkItem = {
+        workitem : {},
+        comments : [],
+        links : []
+      };
+
       $scope.statusWorkItems = {  
             "values": ["Not started", "Ongoing", "Done"] 
       };
@@ -71,8 +84,7 @@ angular.module('Wbpms')
 
           if($scope.usuario.email === '')
               window.location.href = '#/login';
-          else        
-
+          else
               var payload = {
                  project_name : $scope.project.project_name,
                  iteration_number : $scope.iteration.id_iteration
@@ -81,35 +93,53 @@ angular.module('Wbpms')
               // send the payload to the server
               $http.post('/api/projects/iterations/getworkitems', payload)
                  .success(function(data, status, header, config) {
-                  data.pop(); // lo hago porque me estaba tomando un elemento de mas que era el succes, con esto elimino el primer elemento de la lista data
-                  $scope.workItems = data;
-                  
+                  $scope.workItems = data[0].workitems;
                 })   
                 .error(function(data, status) {
                 });
-
       }
         
     
-     $scope.get_work_item_info = function(idWorkItem) {
+     $scope.setInfo = function(_workItem) {
        //the server should return a json with work_item info
        var payload = {
-          work_item_id : idWorkItem
+          work_item_id : _workItem.id
         }
 
       // send the payload to the server
         $http.post('/api/projects/iterations/getwork_item', payload)
            .success(function(data, status, header, config) {
-            //$scope.idWorkItem = data;          
+              $scope.infoWorkItem.workitem = data;
+              $http.post('/api/projects/iterations/workitems/getcomments', payload)
+                .success(function(data, status, header, config) {
+                  $scope.infoWorkItem.comments = data.comments;
+                  $http.post('/api/projects/iterations/workitems/getlinks', payload)
+                    .success(function(data, status, header, config) { 
+                      $scope.infoWorkItem.links = [];
+                      for(var j =0; j < data.links.length; j++) {
+                        for(var i =0; i < $scope.workItems.length; i++) {
+                          if($scope.workItems[i].id == data.links[j].work_item_id) {
+                            $scope.infoWorkItem.links.push($scope.workItems[i]);
+                            break;
+                          }
+                        }
+                      }
+                    })   
+                    .error(function(data, status) {
+                      alert(JSON.stringify(data));
+                    });
+                })   
+                .error(function(data, status) {
+                  alert(JSON.stringify(data));
+                });
           })   
           .error(function(data, status) {
+            alert(JSON.stringify(data));
           });
       }
 
      $scope.create_work_item = function(titleWorkItem, descriptionIter, pointsIter, statusIter, commentsIter, linksIter) {
        // function add new work_item inside an iteration
-
-
        var payload = {
         iteration_number : $scope.iteration.id_iteration,
         project_name_id : $scope.project.project_name,
@@ -120,63 +150,45 @@ angular.module('Wbpms')
         comments : $scope.comments,
         links : $scope.linkss        
        }
-
        // send the payload to the server
-          $http.post('/api/projects/iterations/workitems', payload)
-            .success(function(data, status, header, config) {
-
-              var payload2 = {
-                work_item_id : data.new_id
-              }
-              $http.post('/api/projects/iterations/getwork_item', payload2)
-                .success(function(data, status, header, config) {
+        $http.post('/api/projects/iterations/workitems', payload)
+          .success(function(data, status, header, config) {
+            alert(JSON.stringify(data));
+            var payload2 = {
+              work_item_id : data.new_id
+            }
+            $http.post('/api/projects/iterations/getwork_item', payload2)
+              .success(function(data, status, header, config) {
                   $scope.workItems.push(data);
-                })
-                .error(function(data, status) {
-                });
-
-              var payload3 = {
-                work_item_id : workItems.id,
-                comment : $scope.comments
-              }
-              $http.post('/api/projects/iterations/workitems/comments', payload3)
-                .success(function(data, status, header, config) {
-                })
-                .error(function(data, status) {
-                });
-
-              var payload4 = {
-                id_work_item_source : workItems.id,
-                id_work_item_destination : $scope.linkss
-              }
-              $http.post('/api/projects/iterations/workitems/links', payload4)
-                .success(function(data, status, header, config) {
-                })
-                .error(function(data, status) {
-                });                
-
-
-              $scope.addSuccessMsgVisible = true;
-              $scope.addErrorMsgVisible = false;
-              $scope.renameSuccessMsgVisible = false;
-              $scope.renameErrorMsgVisible = false;
-              $scope.removeSuccessMsgVisible = false;
-              $scope.removeErrorMsgVisible = false;                 
-            })          
-
-            .error(function(data, status) {
-              $scope.addSuccessMsgVisible = false;
-              $scope.addErrorMsgVisible = true;
-              $scope.renameSuccessMsgVisible = false;
-              $scope.renameErrorMsgVisible = false;
-              $scope.removeSuccessMsgVisible = false;
-              $scope.removeErrorMsgVisible = false;                 
-            });
+                  $scope.addSuccessMsgVisible = true;
+                  $scope.addErrorMsgVisible = false;
+                  $scope.renameSuccessMsgVisible = false;
+                  $scope.renameErrorMsgVisible = false;
+                  $scope.removeSuccessMsgVisible = false;
+                  $scope.removeErrorMsgVisible = false; 
+              })
+              .error(function(data, status) {
+                  $scope.addSuccessMsgVisible = false;
+                  $scope.addErrorMsgVisible = true;
+                  $scope.renameSuccessMsgVisible = false;
+                  $scope.renameErrorMsgVisible = false;
+                  $scope.removeSuccessMsgVisible = false;
+                  $scope.removeErrorMsgVisible = false; 
+              })
+          })          
+          .error(function(data, status) {
+            $scope.addSuccessMsgVisible = false;
+            $scope.addErrorMsgVisible = true;
+            $scope.renameSuccessMsgVisible = false;
+            $scope.renameErrorMsgVisible = false;
+            $scope.removeSuccessMsgVisible = false;
+            $scope.removeErrorMsgVisible = false;                 
+          });
      }
 
      $scope.delete_work_item = function(idWorkItem) {
 
-      var payload = {
+          var payload = {
               work_item_id : idWorkItem //delWorkItem.work_item_id
           }
 
@@ -206,7 +218,7 @@ angular.module('Wbpms')
               $scope.removeErrorMsgVisible = true;                
             }); 
 
-        }    
+      }    
 
      $scope.updateWorkItem = function(idWorkItem, idIteration, idProject, name, description, points, createdBy, owner) {
      // function update a work_item
@@ -215,9 +227,15 @@ angular.module('Wbpms')
      
      $scope.add_comment = function(_content) {
      //  function add a comment to a work_item
-        
-        $scope.comments.push(_content);
+      var comment = {
+        text: _content
+      }
+      $scope.comments.push(comment);
+     }
 
+     $scope.add_comment_modify = function(_content) {
+     //  function add a comment to a work_item
+      $scope.modifyWorkItem.comments.push(_content);
      }
 
      $scope.get_all_work_item_comments = function(idWorkItem) {
@@ -240,18 +258,33 @@ angular.module('Wbpms')
 
      $scope.add_link = function(link) {
      // function add new link between two work_items
-        $scope.linkss.push(link);
+        var new_link = {
+          work_item_2: link.id
+        }
+        $scope.linkss.push(new_link);
+     }
+
+     $scope.add_link_modify = function(link) {
+     // function add new link between two work_items
+        $scope.modifyWorkItem.links.push(link);
+     }
+
+     $scope.deleteLinkModify = function(link) {
+     // function add new link between two work_items
+        for(var i =0; i < $scope.modifyWorkItem.links.length; i++) {
+          if($$scope.modifyWorkItem.links[i] == link) 
+            $$scope.modifyWorkItem.links.splice(i, 1);
+        }
      }
 
      $scope.removeLink = function(idWorkItemSource, idWorkItemDetination) {
       // function delete an existing link between two work_items
-
      }
 
-    $scope.setDelete = function(idWorkItem, numberWorkItem) {
+    $scope.setDelete = function(_workItem) {
       // Set number work Item to Delete
-      $scope.delWorkItem.work_item_id = idWorkItem;
-      $scope.delWorkItem.work_item_number = numberWorkItem;
+      $scope.delWorkItem.work_item_id = _workItem.id;
+      $scope.delWorkItem.work_item_number = _workItem.number;
     }
 
 
@@ -260,5 +293,35 @@ angular.module('Wbpms')
        $scope.delLink.second_workItem = secondWorkItem;
    }
 
+   $scope.setModify = function(_workItem) {
+      $scope.modifyWorkItem.workitem = _workItem;
+      alert(JSON.stringify(_workItem));
+      //the server should return a json with work_item info
+      var payload = {
+        work_item_id : _workItem.id
+      }
+      $http.post('/api/projects/iterations/workitems/getcomments', payload)
+        .success(function(data, status, header, config) {
+          $scope.modifyWorkItem.comments = data.comments;
+          $http.post('/api/projects/iterations/workitems/getlinks', payload)
+            .success(function(data, status, header, config) {
+              $scope.modifyWorkItem.links = [];
+              for(var j =0; j < data.links.length; j++) {
+                for(var i =0; i < $scope.workItems.length; i++) {
+                  if($scope.workItems[i].id == data.links[j].work_item_id) {
+                    $scope.modifyWorkItem.links.push($scope.workItems[i]);
+                    break;
+                  }
+                }
+              }
+            })   
+            .error(function(data, status) {
+              alert(JSON.stringify(data));
+            });
+        })   
+        .error(function(data, status) {
+          alert(JSON.stringify(data));
+        });
+    }
   }
 ]);

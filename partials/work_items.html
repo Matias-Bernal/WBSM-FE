@@ -8,7 +8,7 @@
                 <h3>Iteration: {{iteration.title_iteration}} - Work Items</h3>
               </div>                 
               <div class="col-md-10 col-lg-offset-10">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal8">+</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addWorkItem">+</button>
               </div>
         </div>     
        
@@ -21,17 +21,22 @@
                 <th>Points</th>
               </tr>
               <tr ng-repeat="workItem in workItems" >
-                <td>{{workItem.number}}</td>
+                <td>{{workItem.id}}</td>
                 <td>{{workItem.name}}</td>
                 <td>{{workItem.points}}</td>
                 <td>
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalDelete" ng-click="setDelete(workItem.id, workItem.number)">
-                      <i class="fa fa-times"></i>                           
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoWorkItem" ng-click="setInfo(workItem)">
+                      <i class="fa fa-info-circle"></i>                           
                   </button>                         
                 </td>
                 <td>
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalInfo" ng-click="get_work_item_info(workItem.id)">
-                      <i class="fa fa-info-circle"></i>                           
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modifyWorkItem" ng-click="setModify(workItem)">
+                      <i class="fa fa-pencil"></i>                           
+                  </button>                         
+                </td>
+                <td>
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#deleteWorkItem" ng-click="setDelete(workItem)">
+                      <i class="fa fa-trash"></i>                           
                   </button>                         
                 </td>
               </tr>
@@ -70,7 +75,7 @@
     
 
   <!--Modal add Work Item -->
-  <div class="modal bs-example-modal-lg" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal bs-example-modal-lg" id="addWorkItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <div class="modal-header">
@@ -141,7 +146,7 @@
                                 <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
                                   <table class="table-comments" style="height:200px;">
                                     <tr ng-repeat="comment in comments" >
-                                      <td>{{comment}}</td>
+                                      <td>{{comment.text}}</td>
                                     </tr>
                                   </table>
                                 </div>
@@ -159,7 +164,7 @@
                                 <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
                                   <table class="table-links" style="height:200px;">
                                     <tr ng-repeat="link in linkss" >
-                                      <td>{{link.name}}</td>
+                                      <td>{{link.work_item_2.name}}</td>
 
                                       <td align="right">
                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalDeleteLink" ng-click="setDeleteLink(workItem.id, delLink.second_workItem)">
@@ -183,33 +188,101 @@
       </div>
   </div>
 
-<!--Modal Modify Information of Work-->
-  <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+  <!--Modal Information of Work-->
+  <div class="modal bs-example-modal-lg" id="infoWorkItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel">Work Item Information(Under Construction)</h4>  
+                  <h4 class="modal-title" id="exampleModalLabel">Work Item Information</h4>  
               </div>
               <div class="modal-body">
-                <div class="row">
-                          <div class="col-lg-1">
-                              <span class="input">Title</span>
+                  <form class="form-signin" role="form">
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Title:</span>
                           </div>
-                          <div class="col-lg-6">
-                              <input type="text" class="form-control" placeholder="Work Item Example" required="" autofocus="">
+                          <div class="col-lg-4">    
+                              <input type="text" class="form-control" id="title" ng-model= "infoWorkItem.workitem.name" ng-readonly="infoWorkItem.workitem.name">
                           </div>
-                </div>  
-              </div>
+  
+                          <div class="col-lg-2">
+                              <span>Status:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <select class="form-control" ng-model="infoWorkItem.workitem.status" ng-options="status for status in statusWorkItems.values" ng-disabled="true"></select>
+                          </div>
+                      </div> <!--end div row title and status-->
+                      <br>
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Points:</span>
+                          </div>
+                          <div class="col-lg-4">    
+                              <input type="text" class="form-control" id="recipient-name" ng-model="infoWorkItem.workitem.points" ng-readonly="infoWorkItem.workitem.points">
+                          </div> 
+                          <div class="col-lg-2">
+                              <span>Owned By:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <input type="text" id="owner" class="form-control" ng-model="infoWorkItem.workitem.created_by" ng-readonly="infoWorkItem.workitem.created_by"> <!--</input> -->
+                          </div>
+                          
+                      </div>  <!--end div row points and owned by-->
+                      <br>
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Description:</span>
+                          </div>    
+                          <div class="col-lg-4">
+                                 <input type="usuario" class="form-control" id="recipient-name" ng-model="infoWorkItem.workitem.description" ng-readonly="infoWorkItem.workitem.description">
+                          </div>    
+                            
+                          <div class="col-lg-2">
+                              <span>Iteration:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <input type="iteration" id="iter" class="form-control" ng-model="iteration.title_iteration" ng-readonly="iteration.title_iteration"> <!-- </input> -->
+                          </div>
+                          
+                      </div>
+                      <br>
+                      <div class="row">
+                            <div class="col-lg-6">
+                              <span>Comments:</span>
+                              <div class="row">        
+                                <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
+                                  <table class="table-comments" style="height:200px;">
+                                    <tr ng-repeat="comment in infoWorkItem.comments" >
+                                      <td>{{comment.content}}</td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <span>Links:</span>
+                              <div class="row">       
+                                <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
+                                  <table class="table-links" style="height:200px;">
+                                    <tr ng-repeat="link in infoWorkItem.links" >
+                                      <td>{{link.name}}</td>
+                                    </tr>  
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                      </div> 
+                  </form>
+              </div> 
               <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">Done</button>
-                 <button type="button" class="btn btn-danger" data-dismiss="modal" data-target="#exampleModal5" >X</button>                    
+                  <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Done</button>
               </div>
           </div>
       </div>
   </div>
 
-    <!-- Modal Delete Work Item -->
-  <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- Modal Delete Work Item -->
+  <div class="modal fade" id="deleteWorkItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -219,17 +292,17 @@
                   <div class="container">
                       <div class="row">
                           <div class="col-lg-4">
-                              <form class="form-signin" role="form" id="185">
+                              <form class="form-signin" role="form">
                                   <h5> Number Work Item </h5>
                                       <input type="text" id="inputDelWork" class="form-control" ng-model="delWorkItem.work_item_number" ng-readonly="delWorkItem.work_item_number">
                                   <br>
                                   <br>
-                                      <div class="col-lg-6">
-                                          <button class="btn btn-lg btn-primary btn-block" ng-click="delete_work_item(delWorkItem.work_item_id)" data-dismiss="modal">Done</button>
-                                      </div>
-                                      <div class="col-lg-6">
-                                          <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
-                                      </div>
+                                  <div class="col-lg-6">
+                                      <button class="btn btn-lg btn-primary btn-block" ng-click="delete_work_item(delWorkItem.work_item_id)" data-dismiss="modal">Done</button>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <button class="btn btn-lg btn-danger btn-block" type="button" data-dismiss="modal">Cancel</button>
+                                  </div>
                               </form>                                 
                           </div>                           
                       </div>
@@ -238,6 +311,117 @@
           </div>
       </div>
   </div>   
+
+  <!--Modal Modify Work Item -->
+  <div class="modal bs-example-modal-lg" id="modifyWorkItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLabel">Modify Work Item</h4>  
+              </div>
+            
+              <div class="modal-body">
+                  <form class="form-signin" ng-submit="modify_work_item(modifyWorkItem)" role="form">
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Title:</span>
+                          </div>
+                          <div class="col-lg-4">    
+                              <input type="text" class="form-control" id="title" ng-model= "modifyWorkItem.workitem.name" placeholder="Title of Work Item"  required autofocus="">
+                          </div>
+  
+                          <div class="col-lg-2">
+                              <span>Status:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <select class="form-control" ng-model="modifyWorkItem.workitem.status" ng-options="status for status in statusWorkItems.values"></select>
+                          </div>
+                      </div> <!--end div row title and status-->
+                      <br>
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Points:</span>
+                          </div>
+                          <div class="col-lg-4">    
+                              <input type="text" class="form-control" id="recipient-name" ng-model="modifyWorkItem.workitem.points" placeholder="maximum value for points is 100">
+                          </div> 
+                          <div class="col-lg-2">
+                              <span>Owned By:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <input type="text" id="owner" class="form-control" ng-model="modifyWorkItem.workitem.created_by" ng-readonly="modifyWorkItem.workitem.created_by"> <!--</input> -->
+                          </div>
+                          
+                      </div>  <!--end div row points and owned by-->
+                      <br>
+                      <div class="row">
+                          <div class="col-lg-2">
+                              <span>Description:</span>
+                          </div>    
+                          <div class="col-lg-4">
+                                 <input type="usuario" class="form-control" id="recipient-name" ng-model="modifyWorkItem.workitem.description" required autofocus="">
+                          </div>    
+                            
+                          <div class="col-lg-2">
+                              <span>Iteration:</span>
+                          </div>  
+                          <div class="col-lg-4">
+                              <input type="iteration" id="iter" class="form-control" ng-model="iteration.title_iteration" ng-readonly="iteration.title_iteration"> <!-- </input> -->
+                          </div>
+                          
+                      </div>
+                      <br>
+                      <div class="row">
+                            <div class="col-lg-6">
+                              <span>Comment:</span>
+                              <div class="row">
+                                <div class="col-lg-10">
+                                  <input type="text" ng-model="comentario" class="form-control" id="recipient-name">
+                                </div>  
+                                <div class="col-lg-2">
+                                  <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="add_comment_modify(comentario);"><i class="fa fa-plus-circle"></i></button>
+                                </div>        
+                                <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
+                                  <table class="table-comments" style="height:200px;">
+                                    <tr ng-repeat="comment in modifyWorkItem.comments" >
+                                      <td>{{comment.content}}</td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <span>Links:</span>
+                              <div class="row">
+                                <div class="col-lg-10">
+                                  <select class="form-control" ng-model="newWorkItem.new_links" ng-options="link.name for link in workItems"></select>
+                                </div>  
+                                <div class="col-lg-2">
+                                  <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="add_link_modify(newWorkItem.new_links);"><i class="fa fa-plus-circle"></i></button>
+                                </div>        
+                                <div class="col-lg-12" style="height:200px; overflow-y:scroll;">
+                                  <table class="table-links" style="height:200px;">
+                                    <tr ng-repeat="link in modifyWorkItem.links" >
+                                      <td>{{link.name}}</td>
+                                      <td>
+                                        <button type="button" class="btn btn-default" ng-click="deleteLinkModify(link)"><i class="fa fa-times"></i></button>             
+                                      </td>
+                                    </tr>  
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                      </div> 
+
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>  
+                      </div>
+                  </form>
+              </div>  
+          </div>
+      </div>
+  </div>
 
 </article>    
 <div ng-include="'partials/footer.html'"></div>

@@ -17,12 +17,17 @@ angular.module('Wbpms')
             new_user_avatar: ''
         };
         
-        $scope.roles = {  
+        $scope.roles = {
+            "value": $scope.loginModel.role, 
             "values": ["Developer", "Project Manager", "Quality Assurance", "Business Analyst","Other"] 
         };
 
+        $scope.changepassword = {
+            new_password : '',
+            confirm_password : ''
+        }
+
         $scope.forgetPasswordEmail = '';
-       
         //Log In info messagges //
         $scope.logInSuccessMsgVisible = false;
         $scope.logInErrorMsgVisible = false;
@@ -100,13 +105,10 @@ angular.module('Wbpms')
                     $scope.loginModel.role = data.role;
                     $scope.loginModel.gender = data.gender;
                     $scope.loginModel.changepwd = data.changepwd;
-
-                    alert(JSON.stringify(data));
-                    if(data.gender)
+                    if(data.gender == "male")
                         $scope.loginModel.avatar = 'img/male.png';
                     else
                         $scope.loginModel.avatar = 'img/female.png';
-                    
                     $scope.logInSuccessMsgVisible = true;
                     $scope.logInErrorMsgVisible = false;
                     //Sign Up info messagges //
@@ -288,6 +290,86 @@ angular.module('Wbpms')
                 //Forget Password info messagges //
                 $scope.forgetPasswordSuccessMsgVisible = false;
                 $scope.forgetPasswordErrorMsgVisible = true;
+            });
+       }
+
+       $scope.updateUser = function(){
+            var payload = {
+                name : $scope.loginModel.name,
+                surname : $scope.loginModel.surname,
+                role : $scope.loginModel.role,
+                photo : $scope.loginModel.avatar
+            }
+            $http.post('/api/users/update', payload)
+            .success(function(data, status, header, config) {
+                $log.debug('Success modifed user');
+                alert("User Information Update");
+
+            })
+            .error(function(data, status) {
+                $log.debug('Error while trying modifed user');
+                alert("Error System Can't Update Information");
+            });
+       }
+
+
+
+       $scope.checkupdatePasswordUser = function(_changepassword){
+            if(_changepassword.new_password == _changepassword.confirm_password && _changepassword.new_password !== '' && _changepassword.new_password.length >= 8)
+                return true;
+            else
+                return false;
+        }
+
+        $scope.updatePasswordUser = function(_changepassword){
+            if($scope.checkupdatePasswordUser(_changepassword)){
+                var payload = {
+                    email : $scope.loginModel.email,
+                    new_password: _changepassword.new_password
+                }
+                $http.post('/api/users/changepassword', payload)
+                .success(function(data, status, header, config) {
+                    $log.debug('Success modifed user');
+                    alert("User Password Update")
+
+                })
+                .error(function(data, status) {
+                    $log.debug('Error while trying modifed password user');
+                });
+            }else{
+                alert("Error System Can't Update Password");
+            }
+       }
+
+        $scope.deleteUser = function(){   
+            $http.post('/api/users/delete')
+            .success(function(data, status, header, config) {
+                $log.debug('Success modifed user');
+                alert("User Delete")
+                $scope.logInSuccessMsgVisible = false;
+                $scope.logInErrorMsgVisible = false;
+                //Sign Up info messagges //
+                $scope.signUpSuccessMsgVisible = false;
+                $scope.signUpErrorMsgVisible = false;
+                //Log Out info messagges //
+                $scope.logOutSuccessMsgVisible = true;
+                $scope.logOutErrorMsgVisible = false;
+                //Forget Password info messagges //
+                $scope.forgetPasswordSuccessMsgVisible = false;
+                $scope.forgetPasswordErrorMsgVisible = false;
+                $scope.loginModel.email = '';
+                $scope.loginModel.password = '';
+                $scope.loginModel.name = '';
+                $scope.loginModel.surname = '';
+                $scope.loginModel.gender = '';
+                $scope.loginModel.role = '';
+                $scope.loginModel.changepwd = false;
+                $scope.loginModel.avatar = '';
+                window.location.href = '#/login';
+
+            })
+            .error(function(data, status) {
+                $log.debug('Error while trying delete user');
             });
        }
     }
