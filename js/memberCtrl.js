@@ -15,6 +15,14 @@ angular.module('Wbpms')
             project_email : ''
         }        
         
+       /* $scope.searchShowMember = function(memberToShow){
+            
+            $scope.searchMember.name = memberToShow.name;
+            $scope.searchMember.surname = memberToShow.surname;
+            $scope.searchMember.email = memberToShow.eMailMember;
+            $scope.searchMember.gender = memberToShow.gender;
+            
+        }*/
         $scope.setDeleteUser = function(eMail) {
         // Set project user to Delete
             $scope.listEmail.project_email = eMail;
@@ -39,6 +47,11 @@ angular.module('Wbpms')
 
           .success(function(data, status, header, config) {
             alert(JSON.stringify(data[0].members));
+            if ($scope.members.owner === 0){
+                    $scope.members.owner = false
+                } else {
+                    $scope.members.owner = true
+                };
             $scope.members = data[0].members;
           })
           .error(function(data, status) {
@@ -132,8 +145,8 @@ angular.module('Wbpms')
                 .success(function(data, status, header, config) {
                 $log.debug('New owner <owner> added successfully to <id_project>');
                 for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].email == eMailUser) {
-                        if (!$scope.members[i].owner){
+                    if($scope.members[i].email === eMailUser) {
+                        if ($scope.members[i].owner = false){
                             $scope.members[i].owner = true;
                         }
                     };
@@ -157,8 +170,8 @@ angular.module('Wbpms')
               .success(function(data, status, header, config) {
                 $log.debug('Downgrade owner <owner> successfully to <id_project>');
                  for(var i =0; i < $scope.members.length; i++){
-                    if($scope.members[i].email == eMailUser) {
-                        if ($scope.members[i].owner){
+                    if($scope.members[i].email === eMailUser) {
+                        if ($scope.members[i].owner = true){
                             $scope.members[i].owner = false;
                         }
                     };
