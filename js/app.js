@@ -43,7 +43,7 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/projects/members/view', {
         templateUrl: 'partials/view_member.html',
-        controller: 'MemberCtrl'
+        controller: 'ViewCtrl'
       })
       .when('/search', {
         templateUrl: 'partials/search.html',

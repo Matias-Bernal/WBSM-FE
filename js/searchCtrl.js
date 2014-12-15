@@ -31,9 +31,11 @@ angular.module('Wbpms')
     
     }  
     
-    $scope.goToMembers = function(_member) {
+    $scope.goToMembers = function(searchs.name, searchs.surname, searchs.email) {
         // Go to Members 
-          $scope.memberToShow = _member;               
+          $scope.memberToShow.name = searchs.name;     
+          $scope.memberToShow.surname = searchs.surname;
+          $scope.memberToShow.email = searchs.email;
           window.location.href = '#/projects/members/view';          
     
     }  
