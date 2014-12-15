@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('IterationCtrl', ['$scope', '$http', '$log','ProjectData','IterationData',
-    function ($scope, $http, $log, ProjectData, IterationData) {
+  .controller('IterationCtrl', ['$scope', '$http', '$log','ProjectData','IterationData', 'UserData',
+    function ($scope, $http, $log, ProjectData, IterationData, UserData) {
 
        $scope.project = ProjectData;
        $scope.iterationD = IterationData;
        $scope.iterations = [];
+
+       //Global User Data
+       $scope.usuario = UserData;         
 
       /* $scope.iterations  = [
             {
@@ -42,24 +45,35 @@ angular.module('Wbpms')
             project_name : '',
             iteration_number : ''
         } 
+
+
+      //Add project messagges //
+      $scope.addSuccessMsgVisible = false;
+      $scope.addErrorMsgVisible = false;
+      //Remove project messagges //
+      $scope.removeSuccessMsgVisible = false;
+      $scope.removeErrorMsgVisible = false;          
             
       // declaration !AND! call (see parenthesis at end of function)
       // of a function that fetches the iterations from the server
       $scope.init = function() { 
         //Get all iterations of a project
-        var payload = {
-          project_name : $scope.project.project_name
-        }
-        $log.debug("Sending payload: " + JSON.stringify(payload));
-        // send the payload to the server
-        $http.post('/api/projects/iterations/getprojectiterations', payload)
-           .success(function(data, status, header, config) {
-            alert(JSON.stringify(data));
-            $scope.iterations = data[0].iterations;
-          })   
-          .error(function(data, status) {
-            $log.debug('Error while fetching iterations from server');
-          });  
+
+          if($scope.usuario.email === '')
+              window.location.href = '#/login';
+          else              
+              var payload = {
+                project_name : $scope.project.project_name
+              }
+              $log.debug("Sending payload: " + JSON.stringify(payload));
+              // send the payload to the server
+              $http.post('/api/projects/iterations/getprojectiterations', payload)
+                 .success(function(data, status, header, config) {
+                  $scope.iterations = data[0].iterations;
+                })   
+                .error(function(data, status) {
+                  $log.debug('Error while fetching iterations from server');
+                });  
 
       }
 
@@ -75,14 +89,19 @@ angular.module('Wbpms')
           $http.post('/api/projects/iterations', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success adding new iteration');
-              alert("The new Iteration is added");
               $scope.iterations.push(data);
+              $scope.addSuccessMsgVisible = true;
+              $scope.addErrorMsgVisible = false;
+              $scope.removeSuccessMsgVisible = false;
+              $scope.removeErrorMsgVisible = false;                                        
             })          
 
-            .error(function(data, status) {
-              alert("ERROR");
-              $log.debug('Error while trying to add new iteration');
-            });
+            .error(function(data, status) {  
+              $scope.addSuccessMsgVisible = false;
+              $scope.addErrorMsgVisible = true;
+              $scope.removeSuccessMsgVisible = false;
+              $scope.removeErrorMsgVisible = false;                          
+            });  
 
       }
 
@@ -99,18 +118,22 @@ angular.module('Wbpms')
           $http.post('/api/projects/iterations/delete', payload)
             .success(function(data, status, header, config) {
               $log.debug('Success remove iteration');
-              alert("The Iteration was deleted");
               for(var i =0; i < $scope.iterations.length; i++) {
                 if($scope.iterations[i].iteration_number === idIteration) {
                   $scope.iterations.splice(i, 1);
                   break;
                 }
               }
-
+              $scope.addSuccessMsgVisible = false;
+              $scope.addErrorMsgVisible = false;
+              $scope.removeSuccessMsgVisible = true;
+              $scope.removeErrorMsgVisible = false;                            
             })
             .error(function(data, status) {
-              $log.debug('Error while trying to remove new iteration');
-              alert("Error deleting iteration");
+              $scope.addSuccessMsgVisible = false;
+              $scope.addErrorMsgVisible = false;
+              $scope.removeSuccessMsgVisible = false;
+              $scope.removeErrorMsgVisible = true;                 
             }); 
         }
 
@@ -128,7 +151,6 @@ angular.module('Wbpms')
               $scope.workitems = data;
           })
             .error(function(data, status) {
-              alert('Error while fetching work Items from server'); 
           });                
 
         }

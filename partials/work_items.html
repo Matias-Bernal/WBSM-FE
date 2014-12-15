@@ -13,7 +13,7 @@
         </div>     
        
         <div class="row">
-          <div class="col-md-10 col-md-offset-1" style="height:300px; overflow-y:scroll;">
+          <div class="col-md-10 col-md-offset-1" style="height:250px; overflow-y:scroll;">
             <table class="table">
               <tr>
                 <th>Id</th>
@@ -39,6 +39,33 @@
           </div>
         </div>
       </div>  <!-- end of container -->
+
+    <!-- div infomation-->
+        <div class="container">
+            <div class="row">
+                <div id="information" class="col-lg-7 col-lg-offset-2">
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="addErrorMsgVisible">
+                        <strong>Error creating work item!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="addSuccessMsgVisible">
+                        <strong>The Work Itewm was created!</strong>
+                    </div>
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="renameErrorMsgVisible">
+                        <strong>Error changing work item!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="renameSuccessMsgVisible">
+                        <strong>The Work Item was changed!</strong>
+                    </div>  
+                    <div class="alert alert-danger" id="alert-danger" role="alert" data-ng-if="removeErrorMsgVisible">
+                        <strong>Error deleting work item!</strong>
+                    </div>
+                    <div class="alert alert-success" role="alert" data-ng-if="removeSuccessMsgVisible">
+                        <strong>The Work Item was deleted!</strong>
+                    </div>                                        
+                </div>
+            </div>
+        </div>
+
   </div>  
     
 
@@ -133,6 +160,12 @@
                                   <table class="table-links" style="height:200px;">
                                     <tr ng-repeat="link in linkss" >
                                       <td>{{link.name}}</td>
+
+                                      <td align="right">
+                                       <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalDeleteLink" ng-click="setDeleteLink(workItem.id, delLink.second_workItem)">
+                                           <i class="fa fa-times"></i>                           
+                                       </button>                         
+                                      </td>
                                     </tr>  
                                   </table>
                                 </div>
