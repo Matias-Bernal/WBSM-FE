@@ -9,31 +9,7 @@ angular.module('Wbpms')
        $scope.iterations = [];
 
        //Global User Data
-       $scope.usuario = UserData;         
-
-      /* $scope.iterations  = [
-            {
-                idIteration:'001',
-                title:'Iteration 001',
-                point:'00/00'
-            },
-            {
-                idIteration:'002',
-                title:'Iteration 002',
-                point:'00/00'
-            },
-            {
-                idIteration:'003',
-                title:'Iteration 003',
-                point:'00/00'
-            },
-            {
-                idIteration:'004',
-                title:'Iteration 004',
-                point:'00/00'
-            }    
-        ]; */
-        
+       $scope.usuario = UserData;
         
       $scope.iterationModel = {
            idIteration: '',
@@ -84,7 +60,6 @@ angular.module('Wbpms')
           }     
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
           $http.post('/api/projects/iterations', payload)
             .success(function(data, status, header, config) {
@@ -113,7 +88,6 @@ angular.module('Wbpms')
           }
 
           $log.debug("Sending payload: " + JSON.stringify(payload));
-
           // send the payload to the server
           $http.post('/api/projects/iterations/delete', payload)
             .success(function(data, status, header, config) {

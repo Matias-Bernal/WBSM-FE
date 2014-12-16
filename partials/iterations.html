@@ -25,7 +25,7 @@
                         </label>
                         </div>
                     </th> -->
-                    <th>Id</th>
+                    <th>Number</th>
                     <th>Title</th>
                     <th>Points</th>
                   </tr>
@@ -40,14 +40,14 @@
                     <td>{{iterationT.iteration_number}}</td>
                     <td>{{iterationT.title}}</td>
                     <td>{{iterationT.points}}</td>
-                    <td>
+                    <td ng-if="iterationT.iteration_number != 0">
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" ng-click="setDelete(iterationT.iteration_number)">
                             <i class="fa fa-times"></i> 
                         </button>                         
                     </td>
-                    <td width="100"><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(iterationT)">
+                    <td width="100">
+                        <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="goToWorkItems(iterationT)">
                             <i class="fa fa-cubes"></i>
-
                         </button>
                     </td>
                  </tr>

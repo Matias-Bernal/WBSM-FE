@@ -13,13 +13,20 @@ angular.module('Wbpms')
         
         $scope.listEmail = {
             project_email : ''
-        }        
+        }
+
+        $scope.updateMember = {};
         
         
         $scope.setDeleteUser = function(eMail) {
         // Set project user to Delete
             $scope.listEmail.project_email = eMail;
         }
+
+       $scope.setUpdateMemeber = function(_member) {
+            $scope.updateMember = _member;
+        }
+
         $scope.newUser = {
             name: '',
             eMailMember :'',

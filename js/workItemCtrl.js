@@ -164,7 +164,6 @@ angular.module('Wbpms')
         // send the payload to the server
         $http.post('/api/projects/iterations/workitems', payload)
           .success(function(data, status, header, config) {
-            alert(JSON.stringify(data));
             var payload2 = {
               work_item_id : data.new_id
             }
