@@ -24,10 +24,16 @@ angular.module('Wbpms')
 
         $scope.workitems = [];        
 
-        $scope.members = [];          
-        
-    
-            
+        $scope.members = [];  
+
+        $scope.Miembro = {
+            email: '',
+            name: '',
+            surname: '',
+            avatar: ''
+        };   
+
+        $scope.globalSearchUser = [];      
         
 
         // declaration !AND! call (see parenthesis at end of function)
@@ -35,23 +41,87 @@ angular.module('Wbpms')
         $scope.init = function() {
         // Get all projects of a User
 
-          if($scope.usuario.email === '')
+          if($scope.usuario.email === '') {
               window.location.href = '#/login';
-          else        
-          
-              var payload = {
-                  user_email_id : $scope.memberToShow.email
-              }
+          } else if ($scope.viewMemberHomeData.email != '') { 
 
-              $http.post('/api/users/getprojects', payload)                  
-                .success(function(data, status, header, config) {
-                  alert(JSON.stringify(data[0].projects));
-                  $scope.projects = data[0].projects;   
-                })  
-                .error(function(data, status) {
-                }); 
+
+                    var payload5 = {
+                            keyword: $scope.viewMemberHomeData.email
+                    }
+                    $http.post('/api/search/users', payload5)
+                    .success(function(data, status, header, config) {
+                        $scope.globalSearchUser= data[0].matches;
+
+                        $scope.Miembro.email= $scope.globalSearchUser[0].email;
+                        $scope.Miembro.name= $scope.globalSearchUser[0].name;
+                        $scope.Miembro.surname= $scope.globalSearchUser[0].surname;
+
+                        if($scope.globalSearchUser[0].gender === "1")
+                            $scope.Miembro.avatar = 'img/male.png';
+                        else 
+                            $scope.Miembro.avatar = 'img/female.png';
+
+                    })
+                    .error(function(data, status) {
+                        $log.debug(data.error);
+                    });             
+
+                    $scope.Miembro.email = $scope.viewMemberHomeData.email;
+                    $scope.Miembro.name = $scope.viewMemberHomeData.name;   
+                    $scope.Miembro.surname = $scope.viewMemberHomeData.surname;
+
+                    var payload = {
+                        email : $scope.viewMemberHomeData.email
+                    }
+
+                    $http.post('/api/users/info', payload)                  
+                      .success(function(data, status, header, config) {
+                        $scope.projects = data[0].projects;   
+                      })  
+                      .error(function(data, status) {
+                      }); 
+                  } else if ($scope.memberToShow.email != '') {   
+
+                              var payload5 = {
+                                      keyword: $scope.memberToShow.email
+                              }
+                              $http.post('/api/search/users', payload5)
+                              .success(function(data, status, header, config) {
+                                  $scope.globalSearchUser= data[0].matches;
+
+                                  $scope.Miembro.email= $scope.globalSearchUser[0].email;
+                                  $scope.Miembro.name= $scope.globalSearchUser[0].name;
+                                  $scope.Miembro.surname= $scope.globalSearchUser[0].surname;
+
+                                  if($scope.globalSearchUser[0].gender === "1")
+                                      $scope.Miembro.avatar = 'img/male.png';
+                                  else
+                                      $scope.Miembro.avatar = 'img/female.png'
+
+                              })
+                              .error(function(data, status) {
+                                  $log.debug(data.error);
+                              });                     
+
+                            
+                            $scope.Miembro.email = $scope.memberToShow.email;
+                            $scope.Miembro.name = $scope.memberToShow.name;
+                            $scope.Miembro.surname = $scope.memberToShow.surname;
+                
+                            var payload = {
+                                email : $scope.memberToShow.email
+                            }
+
+                            $http.post('/api/users/info', payload)                  
+                              .success(function(data, status, header, config) {
+                                $scope.projects = data[0].projects;   
+                              })  
+                              .error(function(data, status) {
+                              }); 
+                          };
         
-        }    
+        }      
 
         $scope.loadIterations = function(project_name){
 
@@ -80,9 +150,9 @@ angular.module('Wbpms')
           }
 
           // send the payload to the server
-          $http.post('/api/projects/iterations/getwork_item', payload3)                  
+          $http.post('/api/projects/iterations/getworkitems', payload3)                  
             .success(function(data, status, header, config) {
-              $scope.workitems.workitems = data;
+              $scope.workitems.workitems = data[0].workitems;
               $scope.workitems.project = project_name;                            
               $scope.workitems.iteration = iteration_number;                                          
           })

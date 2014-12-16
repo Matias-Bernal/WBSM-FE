@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'ViewHomeData',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData, ViewHomeData) {
+  .controller('HomeCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'ViewHomeData', 'SearchMemberData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, ViewHomeData, SearchMemberData) {
 	
         //Global User Data
         $scope.usuario = UserData;  
@@ -15,6 +15,8 @@ angular.module('Wbpms')
 
         //Global Search Member Data        
         $scope.searchData = ViewHomeData;
+
+        $scope.memberToShow = SearchMemberData;
 
         $scope.projects = [];    
 
@@ -31,14 +33,9 @@ angular.module('Wbpms')
 
           if($scope.usuario.email === '')
               window.location.href = '#/login';
-          else        
-          
-              var payload = {
-                  user_email_id : $scope.usuario.email
-              }
-
+          else 
               // send the payload to the server
-              $http.post('/api/users/getprojects', payload)                  
+              $http.post('/api/users/getprojects')                  
                 .success(function(data, status, header, config) {
                   $scope.projects = data[0].projects;   
                 })  
@@ -123,6 +120,13 @@ angular.module('Wbpms')
           $scope.searchData.email = memberEmail;
           $scope.searchData.name = memberName;
           $scope.searchData.surname = memberSurname;
+
+          $scope.memberToShow.name = '';   
+          $scope.memberToShow.surname = '';
+          $scope.memberToShow.email = '';
+          $scope.memberToShow.gender = '';
+          $scope.memberToShow.role = '';
+          $scope.memberToShow.avatar = '';          
 
           window.location.href = '#/projects/members/view';          
     

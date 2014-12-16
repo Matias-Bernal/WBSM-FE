@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Wbpms')
-  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'WorkItemData', 'SearchMemberData', 'SearchWorkItemData', 'SearchKey',
-    function ($scope, $http, $log, UserData, ProjectData, IterationData, WorkItemData, SearchMemberData, SearchWorkItemData, SearchKey) {
+  .controller('SearchCtrl', ['$scope', '$http', '$log', 'UserData', 'ProjectData', 'IterationData', 'WorkItemData', 'SearchMemberData', 'SearchWorkItemData', 'SearchKey', 'ViewHomeData',
+    function ($scope, $http, $log, UserData, ProjectData, IterationData, WorkItemData, SearchMemberData, SearchWorkItemData, SearchKey, ViewHomeData) {
         
         
     $scope.globalSearchUser = [];
@@ -15,6 +15,7 @@ angular.module('Wbpms')
     $scope.memberToShow = SearchMemberData;
     $scope.workItemToShow = SearchWorkItemData;
     $scope.SerchKeyData = SearchKey;
+    $scope.searchData = ViewHomeData;
        
     $scope.showMember = false;
     $scope.showWorkItem = false;
@@ -39,6 +40,11 @@ angular.module('Wbpms')
           $scope.memberToShow.gender = gender;
           $scope.memberToShow.role = role;
           $scope.memberToShow.avatar = avatar;
+
+          $scope.searchData.email = '',
+          $scope.searchData.name = '',
+          $scope.searchData.surname = ''
+
           window.location.href = '#/projects/members/view';          
     
     }  
